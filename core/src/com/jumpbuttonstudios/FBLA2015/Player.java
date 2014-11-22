@@ -1,7 +1,5 @@
 package com.jumpbuttonstudios.FBLA2015;
 
-import net.dermetfan.utils.libgdx.graphics.AnimatedSprite;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,7 +8,10 @@ import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.physics.box2d.World;
+import com.sun.javafx.webkit.theme.Renderer;
 
 public class Player extends GameSprite {
 	float speed = 5f;
@@ -19,9 +20,14 @@ public class Player extends GameSprite {
 	Sprite temp, forward, back, right, left;
 	int facing = 3;
 	boolean drawStill;
+	TiledMapTileLayer collisionLayer;
+	private String blockedKey = "blocked";
+	float scale = 6f;
 
-	public Player(String path, World world) {
+	public Player(String path, World world, TiledMapTileLayer collisionLayer) {
 		super(path, world);
+
+		this.collisionLayer = collisionLayer;
 
 		temp = new Sprite();
 
@@ -49,7 +55,46 @@ public class Player extends GameSprite {
 
 		walkLeft = fillAnimation(1 / 3f, true, "playerwalkright.png", "playerright.png");
 		walkLeft.setPlayMode(PlayMode.LOOP);
-		
+
+	}
+
+	private boolean isCellBlocked(float x, float y) {
+
+		Cell cell = collisionLayer.getCell((int) (x / scale / collisionLayer.getTileWidth()),
+				(int) (y / scale / collisionLayer.getTileHeight()));
+		return cell != null && cell.getTile() != null
+				&& cell.getTile().getProperties().containsKey(blockedKey);
+	}
+
+	public boolean collidesRight() {
+		for (float step = 0; step < getHeight(); step += collisionLayer.getTileHeight() * scale / 2)
+			if (isCellBlocked(getX() + getWidth() + 4, getY() + step))
+				return true;
+		return false;
+	}
+
+	public boolean collidesLeft() {
+		for (float step = 0; step < getHeight(); step += collisionLayer.getTileHeight() * scale / 2)
+			if (isCellBlocked(getX() - 4, getY() + step))
+				return true;
+		return false;
+	}
+
+	public boolean collidesTop() {
+		for (float step = 0; step < getWidth(); step += collisionLayer.getTileWidth() * scale / 2) {
+			
+			if (isCellBlocked(getX() + step, getY() + getHeight()))
+				return true;
+		}
+		return false;
+
+	}
+
+	public boolean collidesBottom() {
+		for (float step = 0; step < getWidth(); step += collisionLayer.getTileWidth() * scale / 2)
+			if (isCellBlocked(getX() + step, getY() - 5))
+				return true;
+		return false;
 	}
 
 	public Animation fillAnimation(float frameTime, boolean flipX, String... paths) {
@@ -76,7 +121,6 @@ public class Player extends GameSprite {
 			temp.setPosition(getX(), getY());
 			set(temp);
 		}
-		
 
 		if (drawStill) {
 			right.setPosition(getX(), getY());
@@ -108,23 +152,35 @@ public class Player extends GameSprite {
 
 		stateTime += delta;
 
+//		System.out.println("W " + collidesTop() + " A " + collidesLeft() + " S " + collidesBottom()
+//				+ " D " + collidesRight());
+
 		if (Gdx.input.isKeyPressed(Keys.W)) {
-			setY(getY() + speed);
+			if (!collidesTop()) {
+				setY(getY() + speed);
+			}
+
 			facing = 1;
 			current = walkForward;
 		}
 		if (Gdx.input.isKeyPressed(Keys.A)) {
-			setX(getX() - speed);
+			if (!collidesLeft()) {
+				setX(getX() - speed);
+			}
 			facing = 2;
 			current = walkLeft;
 		}
 		if (Gdx.input.isKeyPressed(Keys.S)) {
-			setY(getY() - speed);
+			if (!collidesBottom()) {
+				setY(getY() - speed);
+			}
 			current = walkBack;
 			facing = 3;
 		}
 		if (Gdx.input.isKeyPressed(Keys.D)) {
-			setX(getX() + speed);
+			if (!collidesRight()) {
+				setX(getX() + speed);
+			}
 			current = walkRight;
 			facing = 0;
 		}

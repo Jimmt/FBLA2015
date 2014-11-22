@@ -3,17 +3,17 @@ package com.jumpbuttonstudios.FBLA2015;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.math.Rectangle;
 
 public class Map {
 	private TiledMap map;
 	private TmxMapLoader tmxL;
 	private OrthogonalTiledMapRenderer renderer;
 	private OrthographicCamera oc;
-	private boolean[][] collisions;
+	private Rectangle[][] collisions;
 
 	public Map(String path, OrthographicCamera oc) {
 		tmxL = new TmxMapLoader();
@@ -24,12 +24,25 @@ public class Map {
 		renderer = new OrthogonalTiledMapRenderer(map, 6);
 		renderer.setMap(map);
 
-		collisions = new boolean[map.getProperties().get("width", Integer.class)][map
+		collisions = new Rectangle[map.getProperties().get("width", Integer.class)][map
 				.getProperties().get("height", Integer.class)];
 
+		TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(0);
+
+		for (int i = 0; i < collisions[0].length; i++) {
+			for (int j = 0; j < collisions.length; j++) {
+				if (layer.getCell(i, j) != null) {
+					if (layer.getCell(i, j).getTile().getId() == 2) {
+						collisions[i][j] = new Rectangle(i * 6, j * 6, 48, 48);
+					} else {
+						collisions[i][j] = null;
+					}
+				}
+			}
+		}
 	}
 
-	public boolean[][] getCollisions() {
+	public Rectangle[][] getCollisions() {
 		return collisions;
 	}
 
