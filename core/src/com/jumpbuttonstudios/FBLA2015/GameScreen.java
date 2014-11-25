@@ -3,9 +3,12 @@ package com.jumpbuttonstudios.FBLA2015;
 import box2dLight.PointLight;
 import box2dLight.RayHandler;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class GameScreen extends BaseScreen {
 	RayHandler rayHandler;
@@ -16,12 +19,17 @@ public class GameScreen extends BaseScreen {
 
 	public GameScreen(FBLA2015 game) {
 		super(game);
+
+		FitViewport viewport = new FitViewport(Constants.SCLWIDTH, Constants.SCLHEIGHT);
+		stage = new Stage(viewport);
 		
+		
+
 		map = new Map("map.tmx", camera);
-		
-		player = new Player("player.png", world, (TiledMapTileLayer) map.getMap().getLayers().get(0));
-		player.setPosition(812, 0);
+
+		player = new Player("still.png", world);
 		sprites.add(player);
+		stage.addActor(player);
 
 		rayHandler = new RayHandler(world);
 		rayHandler.setCombinedMatrix(camera.combined);
@@ -37,13 +45,6 @@ public class GameScreen extends BaseScreen {
 		batch.begin();
 
 		map.draw(batch);
-
-		camera.position.set(player.getX(), player.getY(), 0);
-
-		for (int i = 0; i < sprites.size; i++) {
-			sprites.get(i).draw(batch);
-			sprites.get(i).update(delta);
-		}
 
 		batch.end();
 

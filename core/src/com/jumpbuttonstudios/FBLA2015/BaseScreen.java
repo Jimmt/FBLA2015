@@ -28,10 +28,9 @@ public class BaseScreen implements Screen {
 
 	public BaseScreen(FBLA2015 game) {
 		this.game = game;
-// FitViewport viewport = new FitViewport(Constants.WIDTH,
-// Constants.HEIGHT);
+		
 		stage = new Stage();
-		camera = new OrthographicCamera(Constants.WIDTH, Constants.HEIGHT);
+		camera = (OrthographicCamera) stage.getCamera();
 
 		world = new World(Vector2.Zero, false);
 
@@ -62,7 +61,7 @@ public class BaseScreen implements Screen {
 
 		world.step(1 / 60f, 5, 5);
 
-		debugRenderer.render(world, camera.combined);
+		debugRenderer.render(world, stage.getCamera().combined);
 	}
 
 	@Override

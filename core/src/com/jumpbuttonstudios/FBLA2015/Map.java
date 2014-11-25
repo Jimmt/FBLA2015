@@ -21,7 +21,7 @@ public class Map {
 
 		this.oc = oc;
 
-		renderer = new OrthogonalTiledMapRenderer(map, 6);
+		renderer = new OrthogonalTiledMapRenderer(map, 1);
 		renderer.setMap(map);
 
 		collisions = new Rectangle[map.getProperties().get("width", Integer.class)][map
