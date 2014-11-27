@@ -32,7 +32,7 @@ public class BaseScreen implements Screen {
 		stage = new Stage();
 		camera = (OrthographicCamera) stage.getCamera();
 
-		world = new World(Vector2.Zero, false);
+		world = new World(new Vector2(0, -9.81f), false);
 
 		skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 

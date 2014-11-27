@@ -12,7 +12,7 @@ public class Arm extends Image {
 		setPosition(x, y);
 		setRotation(rotation);
 		setSize(getWidth() * Constants.SCALE, getHeight() * Constants.SCALE);
-		setOrigin(0.13f, 0.38f);
+		setOrigin(0.16f, 0.22f);
 	}
 
 	@Override

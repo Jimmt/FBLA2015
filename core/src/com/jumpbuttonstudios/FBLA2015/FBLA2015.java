@@ -7,14 +7,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class FBLA2015 extends Game {
-	
+	static CustomSoundManager soundManager;
 
 	@Override
 	public void create() {
+		soundManager = new CustomSoundManager();
+		soundManager.loadSound("gunshot", Gdx.files.internal("gunshot.wav"));
+
 		setScreen(new MenuScreen(this));
-//		setScreen(new SplashScreen(this));
+// setScreen(new SplashScreen(this));
 	}
-	
+
 	@Override
 	public void dispose() {
 		super.dispose();
@@ -23,8 +26,7 @@ public class FBLA2015 extends Game {
 	@Override
 	public void render() {
 		super.render();
-		
-			
+
 	}
 
 	@Override

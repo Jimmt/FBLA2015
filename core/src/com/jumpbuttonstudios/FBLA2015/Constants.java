@@ -8,4 +8,5 @@ public class Constants {
 	public static float SCALE = 1 / 100f;
 	public static float SCLWIDTH = WIDTH * SCALE;
 	public static float SCLHEIGHT = HEIGHT * SCALE;
+	public static float TILE_SIZE = 32f;
 }
