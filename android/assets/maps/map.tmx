@@ -5,7 +5,7 @@
  </tileset>
  <layer name="tiles" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt0cERgjAQhtGtyAYErSD23wNN4MEDw6gkEExmfId33/2/KSImAAAAAAAAADjBpYMbiEhPj5fWt/y7pEc3UuhR6qyNUuixt0ftndYt9CjvUWuvdy302N/jyG6fWuiRb1gYV+6Fbhla/9u7bz2uBXJa6HGsx3LHYYMev+1RS+t/AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAbTOkFm8t
+   eJzt0cEJwDAMBEG14/4bzNeYxMpDJiLMwDVwGwEAAAAAAAAA/NmYxrdG6NHF2kKP3KmP7lrokTvx01MLPXLVf+1a6JGr/C1roUfuzYeVY0+PXvToRQ8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGB1AR0cGsA=
   </data>
  </layer>
  <objectgroup name="box2D" width="100" height="100">
@@ -15,6 +15,16 @@
   </object>
   <object name="stairsleft" type="object" x="960" y="864">
    <polygon points="0,0 0,-128 32,-128 32,-96 64,-96 64,-64 128,-64 128,-32 192,-32 192,0"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="lights" width="100" height="100"/>
+ <objectgroup name="positions" width="100" height="100">
+  <object name="player spawn" x="960" y="640"/>
+  <object name="boss spawn" x="1824" y="576" width="32" height="32"/>
+  <object name="enemy spawn" x="1408" y="640" width="32" height="32">
+   <properties>
+    <property name="" value=""/>
+   </properties>
   </object>
  </objectgroup>
 </map>

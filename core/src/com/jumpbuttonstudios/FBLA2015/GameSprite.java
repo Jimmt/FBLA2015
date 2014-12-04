@@ -19,6 +19,29 @@ public class GameSprite extends Image {
 	public Body body;
 	float width, height;
 
+	public GameSprite(String path, float x, float y, float angle, float scale, World world) {
+		super(new Texture(Gdx.files.internal(path)));
+
+		width = getWidth() * Constants.SCALE * scale;
+		height = getHeight() * Constants.SCALE * scale;
+
+		this.world = world;
+
+		shape = new PolygonShape();
+		shape.setAsBox(width / 2, height / 2);
+		bodyDef = new BodyDef();
+		fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		fixtureDef.filter.groupIndex = -1;
+
+		setSize(width, height);
+		setOrigin(width / 2, height / 2);
+		createBody();
+		body.setTransform(x, y, angle);
+		setRotation(MathUtils.radDeg * body.getTransform().getRotation());
+		setPosition(body.getPosition().x - width / 2, body.getPosition().y - height / 2);
+	}
+	
 	public GameSprite(String path, float x, float y, float angle, World world) {
 		super(new Texture(Gdx.files.internal(path)));
 

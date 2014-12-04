@@ -1,35 +1,52 @@
 package com.jumpbuttonstudios.FBLA2015;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Array;
 
 public class Player extends GameSprite {
-	Body feet;
-	float speed = 5f;
+
+	float speed = 5f, healthMax = 100, health = healthMax;
 	float angle, stateTime, feetWidth;
-	boolean drawStill, canJump;
+	boolean drawStill, facingRight, inAir = true;
+
 	Vector2 centerPosition, mouse, dir;
 	Vector3 coords = new Vector3();
+
 	World world;
+	Body feet;
 	Arm arm;
 	Gun gun;
+	Jetpack jetpack;
+	PlayerInputController controller;
+	AnimatedImage walk;
+	Image still;
 
 	public Player(String path, World world) {
 		super(path, world);
-
+		still = new Image(getDrawable());
+		controller = new PlayerInputController(this, 2);
 		this.world = world;
+
 		arm = new Arm("pistol.png", getX() + 0.2f, getY() + 1.2f, 0);
 		gun = new Gun(0.2f, world, this);
+		jetpack = new Jetpack("jetpack/jetpack.png", this, 3, 3, 2, 1 / 300f);
 
 		PolygonShape feetShape = new PolygonShape();
 		feetWidth = getWidth() / 4;
@@ -42,17 +59,23 @@ public class Player extends GameSprite {
 		feetfd.isSensor = true;
 		feetfd.shape = feetShape;
 		feet.createFixture(feetfd);
-		
+
 		UserData fuserData = new UserData();
 		fuserData.setValue(this);
 		fuserData.setTag("feet");
 		feet.setUserData(fuserData);
-		
+
 		UserData userData = new UserData();
 		userData.setValue(this);
 		userData.setTag("player");
 		body.setUserData(userData);
 
+		walk = new AnimatedImage("Run/WithoutArms.png", 1 / 5f, 150, 200, 11);
+		
+		Filter f = body.getFixtureList().get(0).getFilterData();
+		f.categoryBits = Bits.PLAYER;
+		f.maskBits = (short) (Bits.ENEMY | Bits.MAP);
+		body.getFixtureList().get(0).setFilterData(f);
 	}
 
 	@Override
@@ -60,13 +83,30 @@ public class Player extends GameSprite {
 		super.draw(batch, parentAlpha);
 
 		feet.setTransform(getX() + (getWidth() - feetWidth) / 2 + feetWidth / 2, getY(), 0);
-		arm.draw(batch, parentAlpha);
+		walk.animatedSprite.setPosition(getX() - 0.35f, getY());
+
+		if (drawStill) {
+			setDrawable(still.getDrawable());
+		} else {
+			if (inAir) {
+				setDrawable(still.getDrawable());
+			} else {
+				setDrawable(null);
+				walk.draw(batch, parentAlpha);
+			}
+		}
+		if(!inAir){
+			body.setTransform(body.getTransform().getPosition(), 0);
+		}
+
 		gun.draw(batch, parentAlpha);
 	}
 
 	@Override
 	public void act(float delta) {
 		super.act(delta);
+
+		walk.act(delta);
 
 		stateTime += delta;
 
@@ -75,28 +115,41 @@ public class Player extends GameSprite {
 		getStage().getCamera().position.set(Math.round((getX() + getWidth() / 2) * 100f) / 100f,
 				Math.round((getY() + getHeight() / 2) * 100f) / 100f, 0);
 
-		if (Gdx.input.isButtonPressed(Buttons.LEFT)) {
-			gun.fire(Gdx.input.getX(), Constants.HEIGHT - Gdx.input.getY(), dir);
-		}
 		gun.updateFire(delta);
 
 		checkMouseRotation();
-
+		
 		if (angle > 270 || angle < 90) {
+			facingRight = true;
 			setScaleX(1);
 			arm.setRotation(angle);
 			arm.setScaleY(1);
-			arm.setPosition(getX() + 0.15f, getY() + 0.9f);
+			if (inAir || drawStill) {
+				arm.setPosition(getX() + 0.15f, getY() + 0.9f);
+			} else {
+				arm.setPosition(getX() + 0.15f, getY() + 0.9f);
+			}
+			jetpack.setScaleX(1);
+			jetpack.setPosition(getX() - jetpack.getWidth() / 3,
+					getY() + getHeight() - jetpack.getHeight() * 1.5f);
+
 		} else {
+			facingRight = false;
 			setScaleX(-1);
 			arm.setRotation(angle);
 			arm.setScaleY(-1);
-			arm.setPosition(getX() + 0.3f, getY() + 0.9f);
+			if (inAir || drawStill) {
+				arm.setPosition(getX() + 0.3f, getY() + 0.9f);
+			} else {
+				arm.setPosition(getX() + 0.33f, getY() + 0.9f);
+			}
+			jetpack.setScaleX(-1);
+			jetpack.setPosition(getX() + getWidth() - jetpack.getWidth() / 3 * 2, getY() + getHeight()
+					- jetpack.getHeight() * 1.5f);
 		}
-
-		arm.act(delta);
+		
 		gun.act(delta);
-
+		controller.update(delta);
 	}
 
 	public void checkMouseRotation() {
@@ -110,27 +163,15 @@ public class Player extends GameSprite {
 	}
 
 	public void checkKeys() {
-		if (Gdx.input.isKeyPressed(Keys.W)) {
-			if (canJump) {
-				body.setLinearVelocity(body.getLinearVelocity().x, 2);
-			}
-		}
-		if (Gdx.input.isKeyPressed(Keys.A)) {
-			body.setLinearVelocity(-1, body.getLinearVelocity().y);
-		}
-		if (Gdx.input.isKeyPressed(Keys.S)) {
-			
-		}
-		if (Gdx.input.isKeyPressed(Keys.D)) {
-			body.setLinearVelocity(1, body.getLinearVelocity().y);
-		}
 
 		if (!Gdx.input.isKeyPressed(Keys.W) && !Gdx.input.isKeyPressed(Keys.A)
 				&& !Gdx.input.isKeyPressed(Keys.S) && !Gdx.input.isKeyPressed(Keys.D)) {
 			drawStill = true;
 			body.setLinearVelocity(0, body.getLinearVelocity().y);
 		} else {
+
 			drawStill = false;
+
 		}
 	}
 

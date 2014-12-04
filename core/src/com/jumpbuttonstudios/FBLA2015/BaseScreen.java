@@ -16,19 +16,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class BaseScreen implements Screen {
-	protected Stage stage;
+	protected Stage stage, hudStage;
 	protected Table table;
+	protected HudTable hudTable;
 	protected World world;
 	protected Skin skin;
 	protected Box2DDebugRenderer debugRenderer;
 	protected OrthographicCamera camera;
 	protected Batch batch;
-
 	protected FBLA2015 game;
 
 	public BaseScreen(FBLA2015 game) {
 		this.game = game;
-		
+
 		stage = new Stage();
 		camera = (OrthographicCamera) stage.getCamera();
 
@@ -61,7 +61,9 @@ public class BaseScreen implements Screen {
 
 		world.step(1 / 60f, 5, 5);
 
-		debugRenderer.render(world, stage.getCamera().combined);
+		if (FBLA2015.DEBUG) {
+			debugRenderer.render(world, stage.getCamera().combined);
+		}
 	}
 
 	@Override

@@ -14,6 +14,7 @@ public class Bullet extends GameSprite {
 		userData.setValue(this);
 		userData.setTag("bullet");
 		body.setUserData(userData);
+		body.getFixtureList().get(0).setSensor(true);
 	}
 
 	@Override

@@ -12,21 +12,21 @@ public class GameContactListener implements ContactListener {
 		UserData a = (UserData) contact.getFixtureA().getBody().getUserData();
 		UserData b = (UserData) contact.getFixtureB().getBody().getUserData();
 
+		
+		
 		if (a.value instanceof Bullet) {
 			((Bullet) a.value).delete = true;
 		}
 		if (b.value instanceof Bullet) {
 			((Bullet) b.value).delete = true;
 		}
-		if (a.value instanceof Player && b.value instanceof Map) {
-			if (a.tag.equals("feet")) {
-				((Player) a.value).canJump = true;
-			}
+		if (a.tag.equals("feet") && !b.tag.equals("player")) {
+			((Player) a.value).inAir = false;
+			
 		}
-		if (b.value instanceof Player && a.value instanceof Map) {
-			if (b.tag.equals("feet")) {
-				((Player) b.value).canJump = true;
-			}
+		if (b.tag.equals("feet") && !a.tag.equals("player")) {
+			((Player) b.value).inAir = false;
+			
 		}
 	}
 
@@ -34,16 +34,12 @@ public class GameContactListener implements ContactListener {
 	public void endContact(Contact contact) {
 		UserData a = (UserData) contact.getFixtureA().getBody().getUserData();
 		UserData b = (UserData) contact.getFixtureB().getBody().getUserData();
-		
-		if (a.value instanceof Player && b.value instanceof Map) {
-			if (a.tag.equals("feet")) {
-				((Player) a.value).canJump = false;
-			}
+
+		if (a.tag.equals("feet")) {
+			((Player) a.value).inAir = true;
 		}
-		if (b.value instanceof Player && a.value instanceof Map) {
-			if (b.tag.equals("feet")) {
-				((Player) b.value).canJump = false;
-			}
+		if (b.tag.equals("feet")) {
+			((Player) b.value).inAir = true;
 		}
 	}
 

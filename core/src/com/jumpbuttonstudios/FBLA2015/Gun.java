@@ -27,22 +27,24 @@ public class Gun extends Image {
 		setSize(getWidth() * Constants.SCALE, getHeight() * Constants.SCALE);
 	}
 
-	public void fire(float x, float y, Vector2 direction) {
+	public void fire(float radius, float distance, float volume, Vector2 direction) {
 
-		if (lastFireTime > fireCap) {
-			lastFireTime = 0;
-			
-			FBLA2015.soundManager.play("gunshot");
+		if (direction.len() < distance || distance == 0) {
+			if (lastFireTime > fireCap) {
+				lastFireTime = 0;
 
-			Vector2 coords = new Vector2(parent.getX() + parent.getWidth() / 2
-					+ MathUtils.cosDeg(direction.angle()) * 1.5f, parent.getY()
-					+ parent.getHeight() / 3 * 2 + MathUtils.sinDeg(direction.angle()) * 1.5f);
+				FBLA2015.soundManager.play("gunshot", volume);
 
-			Bullet bullet = new Bullet("bullet.png", coords.x, coords.y, direction.angle()
-					* MathUtils.degRad, world);
+				Vector2 coords = new Vector2(parent.getX() + parent.getWidth() / 2
+						+ MathUtils.cosDeg(direction.angle()) * radius , parent.getY()
+						+ parent.getHeight() / 3 * 2 + MathUtils.sinDeg(direction.angle()) * radius);
 
-			bullet.body.setLinearVelocity(direction.nor().scl(30f));
-			bullets.add(bullet);
+				Bullet bullet = new Bullet("bullet.png", coords.x, coords.y, direction.angle()
+						* MathUtils.degRad, world);
+
+				bullet.body.setLinearVelocity(direction.nor().scl(30f));
+				bullets.add(bullet);
+			}
 		}
 
 	}
