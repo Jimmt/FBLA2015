@@ -5,25 +5,57 @@
  </tileset>
  <layer name="tiles" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt0cEJwDAMBEG14/4bzNeYxMpDJiLMwDVwGwEAAAAAAAAA/NmYxrdG6NHF2kKP3KmP7lrokTvx01MLPXLVf+1a6JGr/C1roUfuzYeVY0+PXvToRQ8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGB1AR0cGsA=
+   eJzt0cENgDAQA8HUQ/8F8uaFkuhyRsxIbsA7BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACprslRa7aHJrVWemhSZ7WHJjV2epxq8qf2uz1OfKVHVhM9sproUdtn9t/EHpW/fWFpuv/oXpruP1J/6dLdQY+n7g56AAAAAAC8uwG0AT7X
   </data>
  </layer>
  <objectgroup name="box2D" width="100" height="100">
-  <object name="ground" type="object" x="960" y="864" width="896" height="128"/>
-  <object name="stairsRight " type="object" x="1568" y="864">
-   <polygon points="0,0 0,-32 32,-32 32,-64 64,-64 64,-96 96,-96 96,-128 128,-128 128,-160 160,-160 160,-192 192,-192 192,-224 288,-224 288,0"/>
+  <object name="ground" type="object" x="160" y="2624">
+   <polygon points="0,0 0,160 1088,160 1088,64 2048,64 2048,-160 2016,-160 2016,0 1664,0 1664,-32 1632,-32 1632,0 1440,0 1440,-32 1312,-32 1312,-64 1280,-64 1280,-96 1248,-96 1248,-128 1216,-128 1216,-160 1184,-160 1184,-192 1152,-192 1152,-224 1120,-224 1120,-256 1088,-256 1088,-288 704,-288 704,0 0,0"/>
   </object>
-  <object name="stairsleft" type="object" x="960" y="864">
-   <polygon points="0,0 0,-128 32,-128 32,-96 64,-96 64,-64 128,-64 128,-32 192,-32 192,0"/>
+  <object name="ground" type="object" x="160" y="2624" width="1088" height="160"/>
+  <object name="ground" type="object" x="864" y="2336" width="384" height="288"/>
+  <object name="ground" type="object" x="1248" y="2368">
+   <polygon points="0,0 0,320 960,320 960,96 928,96 928,256 576,256 576,224 544,224 544,256 352,256 352,224 224,224 224,192 192,192 192,160 160,160 160,128 128,128 128,96 96,96 96,64 64,64 64,32 32,32 32,0 0,0"/>
   </object>
  </objectgroup>
  <objectgroup name="lights" width="100" height="100"/>
  <objectgroup name="positions" width="100" height="100">
-  <object name="player spawn" x="960" y="640"/>
-  <object name="boss spawn" x="1824" y="576" width="32" height="32"/>
-  <object name="enemy spawn" x="1408" y="640" width="32" height="32">
+  <object name="player_spawn" x="192" y="2560" width="32" height="32"/>
+  <object name="enemy_spawn" x="2080" y="2528" width="32" height="32">
    <properties>
-    <property name="" value=""/>
+    <property name="health" value="50"/>
+   </properties>
+  </object>
+  <object name="enemy_spawn" x="2048" y="2528" width="32" height="32">
+   <properties>
+    <property name="health" value="50"/>
+   </properties>
+  </object>
+  <object name="enemy_spawn" x="2016" y="2528" width="32" height="32">
+   <properties>
+    <property name="health" value="50"/>
+   </properties>
+  </object>
+  <object name="enemy_spawn" x="1984" y="2528" width="32" height="32">
+   <properties>
+    <property name="health" value="50"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="comms" width="100" height="100">
+  <object name="comm" x="160" y="2176" width="704" height="448">
+   <properties>
+    <property name="text" value="Welcome to PC-1102849. Use AD to move left/right and W to jetpack."/>
+   </properties>
+  </object>
+  <object name="comm" x="1024" y="2176" width="192" height="160">
+   <properties>
+    <property name="text" value="Keep moving."/>
+   </properties>
+  </object>
+  <object name="comm" x="1408" y="2048" width="192" height="544">
+   <properties>
+    <property name="text" value="Left click to shoot."/>
    </properties>
   </object>
  </objectgroup>

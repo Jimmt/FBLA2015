@@ -12,7 +12,7 @@ public class SplashScreen extends BaseScreen {
 	public SplashScreen(final FBLA2015 game) {
 		super(game);
 
-		Image splash = new Image(new Texture(Gdx.files.internal("fblalogo.png")));
+		Image splash = new Image(new Texture(Gdx.files.internal("ui/fblalogo.png")));
 		Image white = new Image(new Texture(Gdx.files.internal("white.png")));
 		table.setFillParent(true);
 		table.setBackground(white.getDrawable());

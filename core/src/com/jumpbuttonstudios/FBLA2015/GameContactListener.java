@@ -12,8 +12,6 @@ public class GameContactListener implements ContactListener {
 		UserData a = (UserData) contact.getFixtureA().getBody().getUserData();
 		UserData b = (UserData) contact.getFixtureB().getBody().getUserData();
 
-		
-		
 		if (a.value instanceof Bullet) {
 			((Bullet) a.value).delete = true;
 		}
@@ -22,11 +20,23 @@ public class GameContactListener implements ContactListener {
 		}
 		if (a.tag.equals("feet") && !b.tag.equals("player")) {
 			((Player) a.value).inAir = false;
-			
+
 		}
 		if (b.tag.equals("feet") && !a.tag.equals("player")) {
 			((Player) b.value).inAir = false;
-			
+
+		}
+		if (a.value instanceof Enemy && b.value instanceof Bullet) {
+			((Enemy) a.value).hurt(((Bullet) b.value).damage);
+		}
+		if (b.value instanceof Enemy && a.value instanceof Bullet) {
+			((Enemy) b.value).hurt(((Bullet) a.value).damage);
+		}
+		if (a.value instanceof Player && b.value instanceof Bullet) {
+			((Player) a.value).hurt(((Bullet) b.value).damage);
+		}
+		if (b.value instanceof Player && a.value instanceof Bullet) {
+			((Player) b.value).hurt(((Bullet) a.value).damage);
 		}
 	}
 

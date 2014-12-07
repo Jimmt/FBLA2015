@@ -15,9 +15,11 @@ public class Gun extends Image {
 	float lastFireTime = 999f, fireCap;
 	World world;
 	GameSprite parent;
+	float damage;
 
-	public Gun(float fireCap, World world, GameSprite parent) {
+	public Gun(float fireCap, float damage, World world, GameSprite parent) {
 
+		this.damage = damage;
 		this.fireCap = fireCap;
 
 		bullets = new Array<Bullet>();
@@ -40,7 +42,7 @@ public class Gun extends Image {
 						+ parent.getHeight() / 3 * 2 + MathUtils.sinDeg(direction.angle()) * radius);
 
 				Bullet bullet = new Bullet("bullet.png", coords.x, coords.y, direction.angle()
-						* MathUtils.degRad, world);
+						* MathUtils.degRad, damage, world);
 
 				bullet.body.setLinearVelocity(direction.nor().scl(30f));
 				bullets.add(bullet);

@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -37,16 +38,18 @@ public class Player extends GameSprite {
 	PlayerInputController controller;
 	AnimatedImage walk;
 	Image still;
+	Rectangle hitbox;
 
 	public Player(String path, World world) {
 		super(path, world);
+		hitbox = new Rectangle(getX(), getY(), getWidth(), getHeight());
 		still = new Image(getDrawable());
 		controller = new PlayerInputController(this, 2);
 		this.world = world;
 
 		arm = new Arm("pistol.png", getX() + 0.2f, getY() + 1.2f, 0);
-		gun = new Gun(0.2f, world, this);
-		jetpack = new Jetpack("jetpack/jetpack.png", this, 3, 3, 2, 1 / 300f);
+		gun = new Gun(0.2f, 10, world, this);
+		jetpack = new Jetpack("jetpack/jetpack.png", this, 1.0f, 1.0f, 2, 1 / 250f);
 
 		PolygonShape feetShape = new PolygonShape();
 		feetWidth = getWidth() / 4;
@@ -72,10 +75,16 @@ public class Player extends GameSprite {
 
 		walk = new AnimatedImage("Run/WithoutArms.png", 1 / 5f, 150, 200, 11);
 		
+		body.getFixtureList().get(0).setFriction(0.0f);
 		Filter f = body.getFixtureList().get(0).getFilterData();
 		f.categoryBits = Bits.PLAYER;
 		f.maskBits = (short) (Bits.ENEMY | Bits.MAP);
 		body.getFixtureList().get(0).setFilterData(f);
+	}
+	
+	public void hurt(float amount){
+		health -= amount;
+		
 	}
 
 	@Override
@@ -95,6 +104,7 @@ public class Player extends GameSprite {
 				walk.draw(batch, parentAlpha);
 			}
 		}
+		
 		if(!inAir){
 			body.setTransform(body.getTransform().getPosition(), 0);
 		}
@@ -105,7 +115,9 @@ public class Player extends GameSprite {
 	@Override
 	public void act(float delta) {
 		super.act(delta);
-
+		
+		
+		hitbox.set(getX() / Constants.SCALE, getY() / Constants.SCALE, getWidth() / Constants.SCALE, getHeight() / Constants.SCALE);
 		walk.act(delta);
 
 		stateTime += delta;

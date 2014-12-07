@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class Jetpack extends Image {
-	float fuel, fuelMax, regenRate;
+	float fuel, fuelMax, regenRate, lastActiveTime = 999f, activeDelay = 2f;
 	boolean draining;
 	Vector2 power;
 	GameSprite parent;
@@ -50,7 +50,9 @@ public class Jetpack extends Image {
 		if (parent.body.getLinearVelocity().y < 3 && fuel > 0.0f) {
 			draining = true;
 			parent.body.applyLinearImpulse(power, parent.body.getLocalCenter(), false);
+
 		}
+
 	}
 
 	@Override
@@ -59,7 +61,9 @@ public class Jetpack extends Image {
 
 		if (draining) {
 			flame.effect.start();
+			lastActiveTime = 0;
 		} else {
+			lastActiveTime += delta;
 			flame.effect.allowCompletion();
 		}
 
@@ -76,7 +80,7 @@ public class Jetpack extends Image {
 	public void draw(Batch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
 
-		if (fuel < fuelMax && !draining) {
+		if (fuel < fuelMax && !draining && lastActiveTime > 0.5f) {
 			fuel += regenRate;
 		}
 	}

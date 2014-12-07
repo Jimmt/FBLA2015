@@ -4,8 +4,8 @@ import java.util.Iterator;
 
 import net.dermetfan.gdx.physics.box2d.Box2DMapObjectParser;
 import box2dLight.ConeLight;
+import box2dLight.DirectionalLight;
 import box2dLight.PointLight;
-import box2dLight.RayHandler;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -14,11 +14,9 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 
@@ -30,7 +28,7 @@ public class Map extends Actor {
 	private Box2DMapObjectParser parser;
 	private Vector2 playerSpawn;
 	private GameScreen gs;
-	private MapLayer positionsLayer;
+	private MapLayer positionsLayer, commsLayer;
 
 	public Map(String path, GameScreen gs) {
 		tmxL = new TmxMapLoader();
@@ -69,7 +67,12 @@ public class Map extends Actor {
 			if (layer.getName().equals("positions")) {
 				positionsLayer = layer;
 			}
+			if(layer.getName().equals("comms")){
+				commsLayer = layer;
+			}
 		}
+		
+		parseComms();
 
 		Iterator<MapObject> objectIterator = lightsLayer.getObjects().iterator();
 		while (objectIterator.hasNext()) {
@@ -79,13 +82,26 @@ public class Map extends Actor {
 						object.getRectangle().x, object.getRectangle().y, 0, 45);
 			}
 			if (object.getName().equals("point")) {
-				PointLight light = new PointLight(gs.rayHandler, 16, new Color(1, 1, 1, 0.75f),
-						40f, object.getRectangle().x * Constants.SCALE, object.getRectangle().y
+				PointLight light = new PointLight(gs.rayHandler, Integer.valueOf(object
+						.getProperties().get("rays", String.class)), new Color(0.6f, 0.6f, 0.6f, 1f),
+						Integer.valueOf(object.getProperties().get("distance", String.class)),
+						object.getRectangle().x * Constants.SCALE, object.getRectangle().y
 								* Constants.SCALE);
-// light.setXray(true);
+
+//				light.setXray(true);
 			}
+
 		}
 
+	}
+	
+	public void parseComms(){
+		Iterator<MapObject> commsIterator = commsLayer.getObjects().iterator();
+		while (commsIterator.hasNext()) {
+			RectangleMapObject object = (RectangleMapObject) commsIterator.next();
+			gs.comms.add(object);
+
+		}
 	}
 
 	public void parsePositions() {
@@ -93,16 +109,16 @@ public class Map extends Actor {
 		while (positionsIterator.hasNext()) {
 			RectangleMapObject object = (RectangleMapObject) positionsIterator.next();
 
-			if (object.getName().equals("player spawn")) {
+			if (object.getName().equals("player_spawn")) {
 				playerSpawn = new Vector2(object.getRectangle().x * Constants.SCALE,
 						object.getRectangle().y * Constants.SCALE);
 			}
-			if (object.getName().equals("enemy spawn")) {
-					gs.createEnemy(object.getRectangle().x * Constants.SCALE,
-							object.getRectangle().y * Constants.SCALE);
-				
+			if (object.getName().equals("enemy_spawn")) {
+				gs.createEnemy(object.getRectangle().x * Constants.SCALE, object.getRectangle().y
+						* Constants.SCALE, Float.parseFloat(object.getProperties().get("health", String.class)));
+
 			}
-			if (object.getName().equals("boss spawn")) {
+			if (object.getName().equals("boss_spawn")) {
 
 			}
 		}

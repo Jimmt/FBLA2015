@@ -1,8 +1,8 @@
 package com.jumpbuttonstudios.FBLA2015;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 
 public class HudTable extends Table {
 	JetpackBar jetpackBar;
@@ -17,14 +17,17 @@ public class HudTable extends Table {
 		Table infoTable = new Table(skin);
 
 		healthBar = new HealthBar(player);
-		infoTable.add("HP");
 		infoTable.add(healthBar);
 		infoTable.row();
 		jetpackBar = new JetpackBar(player);
-		infoTable.add(new Image(player.jetpack.getDrawable()));
 		infoTable.add(jetpackBar);
+		
+		Table coinsTable = new Table(skin);
 
 		add(infoTable).expand().top().right();
+		add(coinsTable).left().top();
+		row();
+
 
 	}
 
