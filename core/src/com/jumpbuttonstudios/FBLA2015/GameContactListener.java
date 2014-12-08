@@ -27,10 +27,14 @@ public class GameContactListener implements ContactListener {
 
 		}
 		if (a.value instanceof Enemy && b.value instanceof Bullet) {
-			((Enemy) a.value).hurt(((Bullet) b.value).damage);
+			if (((Bullet) b.value).friendly) {
+				((Enemy) a.value).hurt(((Bullet) b.value).damage);
+			}
 		}
 		if (b.value instanceof Enemy && a.value instanceof Bullet) {
-			((Enemy) b.value).hurt(((Bullet) a.value).damage);
+			if (((Bullet) a.value).friendly) {
+				((Enemy) b.value).hurt(((Bullet) a.value).damage);
+			}
 		}
 		if (a.value instanceof Player && b.value instanceof Bullet) {
 			((Player) a.value).hurt(((Bullet) b.value).damage);

@@ -72,7 +72,7 @@ public class PlayerInputController {
 		}
 
 		if (Gdx.input.isButtonPressed(Buttons.LEFT)) {
-			parent.gun.fire(1.5f, 0, 1, parent.dir);
+			parent.gun.fire(1.5f, 0, 1, true, parent.dir);
 		}
 	}
 }

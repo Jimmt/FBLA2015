@@ -8,6 +8,7 @@ public class HudTable extends Table {
 	JetpackBar jetpackBar;
 	HealthBar healthBar;
 	Player player;
+	CoinsBar coinsBar;
 
 	public HudTable(Player player, Skin skin) {
 		super(skin);
@@ -21,11 +22,12 @@ public class HudTable extends Table {
 		infoTable.row();
 		jetpackBar = new JetpackBar(player);
 		infoTable.add(jetpackBar);
+		coinsBar = new CoinsBar(0, skin);
 		
 		Table coinsTable = new Table(skin);
 
+		add(coinsBar).left().top();
 		add(infoTable).expand().top().right();
-		add(coinsTable).left().top();
 		row();
 
 

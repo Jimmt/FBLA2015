@@ -29,7 +29,7 @@ public class Gun extends Image {
 		setSize(getWidth() * Constants.SCALE, getHeight() * Constants.SCALE);
 	}
 
-	public void fire(float radius, float distance, float volume, Vector2 direction) {
+	public void fire(float radius, float distance, float volume, boolean friendly, Vector2 direction) {
 
 		if (direction.len() < distance || distance == 0) {
 			if (lastFireTime > fireCap) {
@@ -41,7 +41,7 @@ public class Gun extends Image {
 						+ MathUtils.cosDeg(direction.angle()) * radius , parent.getY()
 						+ parent.getHeight() / 3 * 2 + MathUtils.sinDeg(direction.angle()) * radius);
 
-				Bullet bullet = new Bullet("bullet.png", coords.x, coords.y, direction.angle()
+				Bullet bullet = new Bullet("bullet.png", friendly, coords.x, coords.y, direction.angle()
 						* MathUtils.degRad, damage, world);
 
 				bullet.body.setLinearVelocity(direction.nor().scl(30f));

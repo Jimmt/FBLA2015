@@ -6,11 +6,14 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class Bullet extends GameSprite {
-	boolean delete;
+	boolean delete, friendly;
 	float damage;
 
-	public Bullet(String path, float x, float y, float angle, float damage, World world) {
+	public Bullet(String path, boolean friendly, float x, float y, float angle, float damage, World world) {
 		super(path, x, y, angle, world);
+		
+		this.friendly = friendly;
+		
 		UserData userData = new UserData();
 		userData.setValue(this);
 		userData.setTag("bullet");
