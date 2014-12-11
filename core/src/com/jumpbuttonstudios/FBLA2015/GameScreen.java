@@ -5,6 +5,7 @@ import box2dLight.PointLight;
 import box2dLight.RayHandler;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -29,9 +30,12 @@ public class GameScreen extends BaseScreen {
 	CommDialog commDialog;
 	boolean hitComm, gameOver;
 	Image black;
+	int byteCoins;
 
 	public GameScreen(FBLA2015 game) {
 		super(game);
+
+		Gun.loadIcon("pistolIcon.png");
 
 		FitViewport viewport = new FitViewport(Constants.SCLWIDTH, Constants.SCLHEIGHT);
 		stage = new Stage(viewport);
@@ -46,12 +50,12 @@ public class GameScreen extends BaseScreen {
 		stage.addActor(player.jetpack);
 		stage.addActor(player.jetpack.flame);
 		stage.addActor(player);
-		stage.addActor(player.arm);
+		stage.addActor(player.gun);
 		map.parsePositions();
 		player.body.setTransform(map.getPlayerSpawn(), 0);
 
 		hudStage = new Stage(hudViewport);
-		hudTable = new HudTable(player, skin);
+		hudTable = new HudTable(player, this, skin);
 		hudTable.setFillParent(true);
 		hudStage.addActor(hudTable);
 
@@ -67,6 +71,14 @@ public class GameScreen extends BaseScreen {
 		commDialog.setPosition(Constants.WIDTH - commDialog.getWidth(), 0);
 		black = new Image(new Texture(Gdx.files.internal("ui/black.png")));
 
+		ShopDialog shopDialog = new ShopDialog("", skin);
+		shopDialog.show(hudStage);
+		shopDialog.setPosition(Constants.WIDTH / 2 - shopDialog.getWidth() / 2, Constants.HEIGHT
+				/ 2 - shopDialog.getHeight() / 2);
+		
+		InputMultiplexer multiplexer = new InputMultiplexer(stage, hudStage);
+		Gdx.input.setInputProcessor(multiplexer);
+
 	}
 
 	public void createEnemy(float x, float y, float health) {
@@ -74,7 +86,7 @@ public class GameScreen extends BaseScreen {
 		enemy.setPlayer(player);
 		stage.addActor(enemy);
 		enemies.add(enemy);
-		
+
 	}
 
 	public void gameOver() {
@@ -112,6 +124,7 @@ public class GameScreen extends BaseScreen {
 				stage.getActors().removeValue(enemies.get(i), false);
 				world.destroyBody(enemies.get(i).body);
 				enemies.removeIndex(i);
+				byteCoins++;
 			}
 		}
 

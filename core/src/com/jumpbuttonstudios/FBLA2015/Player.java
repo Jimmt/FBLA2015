@@ -32,7 +32,6 @@ public class Player extends GameSprite {
 
 	World world;
 	Body feet;
-	Arm arm;
 	Gun gun;
 	Jetpack jetpack;
 	PlayerInputController controller;
@@ -47,8 +46,8 @@ public class Player extends GameSprite {
 		controller = new PlayerInputController(this, 2);
 		this.world = world;
 
-		arm = new Arm("pistol.png", getX() + 0.2f, getY() + 1.2f, 0);
-		gun = new Gun(0.2f, 10, world, this);
+		gun = new Gun("pistol.png", getX() + 0.2f, getY() + 1.2f, 0, 2f, 10, world, this);
+
 		jetpack = new Jetpack("jetpack/jetpack.png", this, 1.0f, 1.0f, 2, 1 / 250f);
 
 		PolygonShape feetShape = new PolygonShape();
@@ -74,17 +73,17 @@ public class Player extends GameSprite {
 		body.setUserData(userData);
 
 		walk = new AnimatedImage("Run/WithoutArms.png", 1 / 5f, 150, 200, 11);
-		
+
 		body.getFixtureList().get(0).setFriction(0.0f);
 		Filter f = body.getFixtureList().get(0).getFilterData();
 		f.categoryBits = Bits.PLAYER;
 		f.maskBits = (short) (Bits.ENEMY | Bits.MAP);
 		body.getFixtureList().get(0).setFilterData(f);
 	}
-	
-	public void hurt(float amount){
+
+	public void hurt(float amount) {
 		health -= amount;
-		
+
 	}
 
 	@Override
@@ -104,8 +103,8 @@ public class Player extends GameSprite {
 				walk.draw(batch, parentAlpha);
 			}
 		}
-		
-		if(!inAir){
+
+		if (!inAir) {
 			body.setTransform(body.getTransform().getPosition(), 0);
 		}
 
@@ -115,9 +114,9 @@ public class Player extends GameSprite {
 	@Override
 	public void act(float delta) {
 		super.act(delta);
-		
-		
-		hitbox.set(getX() / Constants.SCALE, getY() / Constants.SCALE, getWidth() / Constants.SCALE, getHeight() / Constants.SCALE);
+
+		hitbox.set(getX() / Constants.SCALE, getY() / Constants.SCALE,
+				getWidth() / Constants.SCALE, getHeight() / Constants.SCALE);
 		walk.act(delta);
 
 		stateTime += delta;
@@ -127,19 +126,19 @@ public class Player extends GameSprite {
 		getStage().getCamera().position.set(Math.round((getX() + getWidth() / 2) * 100f) / 100f,
 				Math.round((getY() + getHeight() / 2) * 100f) / 100f, 0);
 
-		gun.updateFire(delta);
+			checkMouseRotation();
+			controller.update(delta);
+	
 
-		checkMouseRotation();
-		
 		if (angle > 270 || angle < 90) {
 			facingRight = true;
 			setScaleX(1);
-			arm.setRotation(angle);
-			arm.setScaleY(1);
+			gun.setRotation(angle);
+			gun.setScaleY(1);
 			if (inAir || drawStill) {
-				arm.setPosition(getX() + 0.15f, getY() + 0.9f);
+				gun.setPosition(getX() + 0.15f, getY() + 0.9f);
 			} else {
-				arm.setPosition(getX() + 0.15f, getY() + 0.9f);
+				gun.setPosition(getX() + 0.15f, getY() + 0.9f);
 			}
 			jetpack.setScaleX(1);
 			jetpack.setPosition(getX() - jetpack.getWidth() / 3,
@@ -148,20 +147,20 @@ public class Player extends GameSprite {
 		} else {
 			facingRight = false;
 			setScaleX(-1);
-			arm.setRotation(angle);
-			arm.setScaleY(-1);
+			gun.setRotation(angle);
+			gun.setScaleY(-1);
 			if (inAir || drawStill) {
-				arm.setPosition(getX() + 0.3f, getY() + 0.9f);
+				gun.setPosition(getX() + 0.3f, getY() + 0.9f);
 			} else {
-				arm.setPosition(getX() + 0.33f, getY() + 0.9f);
+				gun.setPosition(getX() + 0.33f, getY() + 0.9f);
 			}
 			jetpack.setScaleX(-1);
-			jetpack.setPosition(getX() + getWidth() - jetpack.getWidth() / 3 * 2, getY() + getHeight()
-					- jetpack.getHeight() * 1.5f);
+			jetpack.setPosition(getX() + getWidth() - jetpack.getWidth() / 3 * 2, getY()
+					+ getHeight() - jetpack.getHeight() * 1.5f);
 		}
-		
+
 		gun.act(delta);
-		controller.update(delta);
+		gun.updateFire(delta);
 	}
 
 	public void checkMouseRotation() {

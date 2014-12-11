@@ -9,10 +9,12 @@ public class HudTable extends Table {
 	HealthBar healthBar;
 	Player player;
 	CoinsBar coinsBar;
+	GameScreen gs;
 
-	public HudTable(Player player, Skin skin) {
+	public HudTable(Player player, GameScreen gs, Skin skin) {
 		super(skin);
 
+		this.gs = gs;
 		this.player = player;
 
 		Table infoTable = new Table(skin);
@@ -36,6 +38,7 @@ public class HudTable extends Table {
 	@Override
 	public void act(float delta) {
 		super.act(delta);
-
+		
+		coinsBar.amount = gs.byteCoins;
 	}
 }

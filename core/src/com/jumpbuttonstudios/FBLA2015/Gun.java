@@ -11,22 +11,35 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
 
 public class Gun extends Image {
+	
+	public static Image icon;
+	
 	Array<Bullet> bullets;
 	float lastFireTime = 999f, fireCap;
 	World world;
 	GameSprite parent;
 	float damage;
+	
+	public static void loadIcon(String path){
+		icon = new Image(new Texture(Gdx.files.internal(path)));
+	}
 
-	public Gun(float fireCap, float damage, World world, GameSprite parent) {
-
+	public Gun(String path, float x, float y, float rotation, float fireCap, float damage,
+			World world, GameSprite parent) {
+		super(new Texture(Gdx.files.internal(path)));
 		this.damage = damage;
 		this.fireCap = fireCap;
+		
+		
 
 		bullets = new Array<Bullet>();
 		this.world = world;
 		this.parent = parent;
 
+		setPosition(x, y);
+		setRotation(rotation);
 		setSize(getWidth() * Constants.SCALE, getHeight() * Constants.SCALE);
+		setOrigin(0.16f, 0.22f);
 	}
 
 	public void fire(float radius, float distance, float volume, boolean friendly, Vector2 direction) {
@@ -38,11 +51,11 @@ public class Gun extends Image {
 				FBLA2015.soundManager.play("gunshot", volume);
 
 				Vector2 coords = new Vector2(parent.getX() + parent.getWidth() / 2
-						+ MathUtils.cosDeg(direction.angle()) * radius , parent.getY()
+						+ MathUtils.cosDeg(direction.angle()) * radius, parent.getY()
 						+ parent.getHeight() / 3 * 2 + MathUtils.sinDeg(direction.angle()) * radius);
 
-				Bullet bullet = new Bullet("bullet.png", friendly, coords.x, coords.y, direction.angle()
-						* MathUtils.degRad, damage, world);
+				Bullet bullet = new Bullet("bullet.png", friendly, coords.x, coords.y,
+						direction.angle() * MathUtils.degRad, damage, world);
 
 				bullet.body.setLinearVelocity(direction.nor().scl(30f));
 				bullets.add(bullet);
