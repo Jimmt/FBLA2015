@@ -5,7 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 
 public class HudTable extends Table {
-	JetpackBar jetpackBar;
 	HealthBar healthBar;
 	Player player;
 	CoinsBar coinsBar;
@@ -22,11 +21,7 @@ public class HudTable extends Table {
 		healthBar = new HealthBar(player);
 		infoTable.add(healthBar);
 		infoTable.row();
-		jetpackBar = new JetpackBar(player);
-		infoTable.add(jetpackBar);
 		coinsBar = new CoinsBar(0, skin);
-		
-		Table coinsTable = new Table(skin);
 
 		add(coinsBar).left().top();
 		add(infoTable).expand().top().right();

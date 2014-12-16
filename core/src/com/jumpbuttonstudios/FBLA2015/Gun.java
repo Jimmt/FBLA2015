@@ -5,47 +5,31 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 
-public class Gun extends Image {
-	
-	public static Image icon;
-	
+public class Gun extends Actor {
+
 	Array<Bullet> bullets;
-	float lastFireTime = 999f, fireCap;
+	float lastFireTime = 999f;
 	World world;
 	GameSprite parent;
-	float damage;
-	
-	public static void loadIcon(String path){
-		icon = new Image(new Texture(Gdx.files.internal(path)));
-	}
+	ItemStats stats;
 
-	public Gun(String path, float x, float y, float rotation, float fireCap, float damage,
-			World world, GameSprite parent) {
-		super(new Texture(Gdx.files.internal(path)));
-		this.damage = damage;
-		this.fireCap = fireCap;
-		
-		
+	public Gun(World world, ItemStats stats, GameSprite parent) {
+
+		this.stats = stats;
 
 		bullets = new Array<Bullet>();
 		this.world = world;
 		this.parent = parent;
-
-		setPosition(x, y);
-		setRotation(rotation);
-		setSize(getWidth() * Constants.SCALE, getHeight() * Constants.SCALE);
-		setOrigin(0.16f, 0.22f);
 	}
 
 	public void fire(float radius, float distance, float volume, boolean friendly, Vector2 direction) {
 
 		if (direction.len() < distance || distance == 0) {
-			if (lastFireTime > fireCap) {
+			if (lastFireTime > stats.getROF()) {
 				lastFireTime = 0;
 
 				FBLA2015.soundManager.play("gunshot", volume);
@@ -55,7 +39,7 @@ public class Gun extends Image {
 						+ parent.getHeight() / 3 * 2 + MathUtils.sinDeg(direction.angle()) * radius);
 
 				Bullet bullet = new Bullet("bullet.png", friendly, coords.x, coords.y,
-						direction.angle() * MathUtils.degRad, damage, world);
+						direction.angle() * MathUtils.degRad, stats.getDamage(), world);
 
 				bullet.body.setLinearVelocity(direction.nor().scl(30f));
 				bullets.add(bullet);

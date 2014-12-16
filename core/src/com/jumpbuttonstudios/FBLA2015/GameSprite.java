@@ -64,8 +64,8 @@ public class GameSprite extends Image {
 		setPosition(body.getPosition().x - width / 2, body.getPosition().y - height / 2);
 	}
 
-	public GameSprite(String path, World world) {
-		this(path, 0, 0, 0, world);
+	public GameSprite(String path, float scale, World world) {
+		this(path, 0, 0, 0, scale, world);
 	}
 
 	public void createBody() {

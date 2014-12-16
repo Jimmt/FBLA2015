@@ -32,7 +32,7 @@ public class BaseScreen implements Screen {
 		stage = new Stage();
 		camera = (OrthographicCamera) stage.getCamera();
 
-		world = new World(new Vector2(0, -9.81f), false);
+		world = new World(new Vector2(0, 0f), false);
 
 		skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
@@ -50,7 +50,8 @@ public class BaseScreen implements Screen {
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+		Gdx.gl.glClearColor(0, 0, 0, 1.0f);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		stage.act(delta);
 		stage.draw();

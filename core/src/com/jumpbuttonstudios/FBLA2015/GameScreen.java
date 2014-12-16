@@ -28,14 +28,15 @@ public class GameScreen extends BaseScreen {
 	GameContactListener contactListener;
 	StageComparator comparator;
 	CommDialog commDialog;
+	ShopDialog shopDialog;
 	boolean hitComm, gameOver;
 	Image black;
 	int byteCoins;
 
 	public GameScreen(FBLA2015 game) {
 		super(game);
-
-		Gun.loadIcon("pistolIcon.png");
+		
+		ItemStats.makeCache();
 
 		FitViewport viewport = new FitViewport(Constants.SCLWIDTH, Constants.SCLHEIGHT);
 		stage = new Stage(viewport);
@@ -44,11 +45,9 @@ public class GameScreen extends BaseScreen {
 		rayHandler = new RayHandler(world);
 		rayHandler.setCombinedMatrix(stage.getCamera().combined);
 
-		player = new Player("still.png", world);
+		player = new Player("ship.png", world);
 		map = new Map("maps/map.tmx", this);
 		stage.addActor(map);
-		stage.addActor(player.jetpack);
-		stage.addActor(player.jetpack.flame);
 		stage.addActor(player);
 		stage.addActor(player.gun);
 		map.parsePositions();
@@ -71,13 +70,15 @@ public class GameScreen extends BaseScreen {
 		commDialog.setPosition(Constants.WIDTH - commDialog.getWidth(), 0);
 		black = new Image(new Texture(Gdx.files.internal("ui/black.png")));
 
-		ShopDialog shopDialog = new ShopDialog("", skin);
-		shopDialog.show(hudStage);
-		shopDialog.setPosition(Constants.WIDTH / 2 - shopDialog.getWidth() / 2, Constants.HEIGHT
-				/ 2 - shopDialog.getHeight() / 2);
-		
-		InputMultiplexer multiplexer = new InputMultiplexer(stage, hudStage);
+		InputMultiplexer multiplexer = new InputMultiplexer(stage, hudStage, player.controller);
 		Gdx.input.setInputProcessor(multiplexer);
+		
+//		shopDialog = new ShopDialog("", hudStage, player, skin);
+//		shopDialog.show(hudStage);
+//		shopDialog.setPosition(Constants.WIDTH / 2 - shopDialog.getWidth() / 2, Constants.HEIGHT
+//				/ 2 - shopDialog.getHeight() / 2);
+		
+		
 
 	}
 
@@ -109,6 +110,12 @@ public class GameScreen extends BaseScreen {
 
 		rayHandler.setCombinedMatrix(stage.getCamera().combined);
 
+		if(shopDialog != null && shopDialog.isVisible()){
+			Gdx.input.setInputProcessor(hudStage);
+		} else {
+			Gdx.input.setInputProcessor(player.controller);
+		}
+		
 		hitComm = false;
 		for (int i = 0; i < comms.size; i++) {
 

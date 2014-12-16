@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -24,55 +25,30 @@ import com.badlogic.gdx.utils.Array;
 public class Player extends GameSprite {
 
 	float speed = 5f, healthMax = 100, health = healthMax;
-	float angle, stateTime, feetWidth;
-	boolean drawStill, facingRight, inAir = true;
+	float angle, stateTime;
 
 	Vector2 centerPosition, mouse, dir;
 	Vector3 coords = new Vector3();
 
 	World world;
-	Body feet;
 	Gun gun;
-	Jetpack jetpack;
+	ItemStats stats = ItemStats.PISTOL;
 	PlayerInputController controller;
-	AnimatedImage walk;
-	Image still;
 	Rectangle hitbox;
 
 	public Player(String path, World world) {
-		super(path, world);
+		super(path, 1, world);
+		
 		hitbox = new Rectangle(getX(), getY(), getWidth(), getHeight());
-		still = new Image(getDrawable());
 		controller = new PlayerInputController(this, 2);
 		this.world = world;
 
-		gun = new Gun("pistol.png", getX() + 0.2f, getY() + 1.2f, 0, 2f, 10, world, this);
-
-		jetpack = new Jetpack("jetpack/jetpack.png", this, 1.0f, 1.0f, 2, 1 / 250f);
-
-		PolygonShape feetShape = new PolygonShape();
-		feetWidth = getWidth() / 4;
-		feetShape.setAsBox(feetWidth, getHeight() / 8);
-		BodyDef feetbd = new BodyDef();
-		feetbd.type = BodyType.DynamicBody;
-		feetbd.gravityScale = 0.0f;
-		feet = world.createBody(feetbd);
-		FixtureDef feetfd = new FixtureDef();
-		feetfd.isSensor = true;
-		feetfd.shape = feetShape;
-		feet.createFixture(feetfd);
-
-		UserData fuserData = new UserData();
-		fuserData.setValue(this);
-		fuserData.setTag("feet");
-		feet.setUserData(fuserData);
+		gun = new Gun(world, stats, this);
 
 		UserData userData = new UserData();
 		userData.setValue(this);
 		userData.setTag("player");
 		body.setUserData(userData);
-
-		walk = new AnimatedImage("Run/WithoutArms.png", 1 / 5f, 150, 200, 11);
 
 		body.getFixtureList().get(0).setFriction(0.0f);
 		Filter f = body.getFixtureList().get(0).getFilterData();
@@ -90,74 +66,25 @@ public class Player extends GameSprite {
 	public void draw(Batch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
 
-		feet.setTransform(getX() + (getWidth() - feetWidth) / 2 + feetWidth / 2, getY(), 0);
-		walk.animatedSprite.setPosition(getX() - 0.35f, getY());
-
-		if (drawStill) {
-			setDrawable(still.getDrawable());
-		} else {
-			if (inAir) {
-				setDrawable(still.getDrawable());
-			} else {
-				setDrawable(null);
-				walk.draw(batch, parentAlpha);
-			}
-		}
-
-		if (!inAir) {
-			body.setTransform(body.getTransform().getPosition(), 0);
-		}
-
 		gun.draw(batch, parentAlpha);
 	}
 
 	@Override
 	public void act(float delta) {
 		super.act(delta);
+		
+		setRotation((body.getTransform().getRotation() - 90 * MathUtils.degRad) * MathUtils.radDeg);
 
 		hitbox.set(getX() / Constants.SCALE, getY() / Constants.SCALE,
 				getWidth() / Constants.SCALE, getHeight() / Constants.SCALE);
-		walk.act(delta);
 
 		stateTime += delta;
-
-		checkKeys();
 
 		getStage().getCamera().position.set(Math.round((getX() + getWidth() / 2) * 100f) / 100f,
 				Math.round((getY() + getHeight() / 2) * 100f) / 100f, 0);
 
 			checkMouseRotation();
 			controller.update(delta);
-	
-
-		if (angle > 270 || angle < 90) {
-			facingRight = true;
-			setScaleX(1);
-			gun.setRotation(angle);
-			gun.setScaleY(1);
-			if (inAir || drawStill) {
-				gun.setPosition(getX() + 0.15f, getY() + 0.9f);
-			} else {
-				gun.setPosition(getX() + 0.15f, getY() + 0.9f);
-			}
-			jetpack.setScaleX(1);
-			jetpack.setPosition(getX() - jetpack.getWidth() / 3,
-					getY() + getHeight() - jetpack.getHeight() * 1.5f);
-
-		} else {
-			facingRight = false;
-			setScaleX(-1);
-			gun.setRotation(angle);
-			gun.setScaleY(-1);
-			if (inAir || drawStill) {
-				gun.setPosition(getX() + 0.3f, getY() + 0.9f);
-			} else {
-				gun.setPosition(getX() + 0.33f, getY() + 0.9f);
-			}
-			jetpack.setScaleX(-1);
-			jetpack.setPosition(getX() + getWidth() - jetpack.getWidth() / 3 * 2, getY()
-					+ getHeight() - jetpack.getHeight() * 1.5f);
-		}
 
 		gun.act(delta);
 		gun.updateFire(delta);
@@ -173,17 +100,5 @@ public class Player extends GameSprite {
 
 	}
 
-	public void checkKeys() {
-
-		if (!Gdx.input.isKeyPressed(Keys.W) && !Gdx.input.isKeyPressed(Keys.A)
-				&& !Gdx.input.isKeyPressed(Keys.S) && !Gdx.input.isKeyPressed(Keys.D)) {
-			drawStill = true;
-			body.setLinearVelocity(0, body.getLinearVelocity().y);
-		} else {
-
-			drawStill = false;
-
-		}
-	}
 
 }

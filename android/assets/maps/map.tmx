@@ -5,7 +5,7 @@
  </tileset>
  <layer name="tiles" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt0cENgDAQA8HUQ/8F8uaFkuhyRsxIbsA7BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACprslRa7aHJrVWemhSZ7WHJjV2epxq8qf2uz1OfKVHVhM9sproUdtn9t/EHpW/fWFpuv/oXpruP1J/6dLdQY+n7g56AAAAAAC8uwG0AT7X
+   eJzt1jESgzAMRUHOk/sfMHUaErD1pQy7M64Rei58HAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAz/M6OQAAk5y9W7xl8q720KTWnR6a1LnbI91kyhzVVnqkdjFljoTVHoldTJghZUeP6n1MmCFlV4/KfXR/P2lnj1/3c3V3E+7EykxPPind//lPJ6H7H9P3b7ruDnp86u6gBwAAAADAd2/2oEvN
   </data>
  </layer>
  <objectgroup name="box2D" width="100" height="100">
@@ -17,6 +17,10 @@
   <object name="ground" type="object" x="1248" y="2368">
    <polygon points="0,0 0,320 960,320 960,96 928,96 928,256 576,256 576,224 544,224 544,256 352,256 352,224 224,224 224,192 192,192 192,160 160,160 160,128 128,128 128,96 96,96 96,64 64,64 64,32 32,32 32,0 0,0"/>
   </object>
+  <object name="ground" type="object" x="2208" y="2432">
+   <polyline points="0,0 224,0 224,32 256,32 256,96 288,96 288,160 320,160 320,224 352,224 352,256 0,256 0,0 224,0"/>
+  </object>
+  <object name="ground" type="object" x="2208" y="2144" width="224" height="32"/>
  </objectgroup>
  <objectgroup name="lights" width="100" height="100"/>
  <objectgroup name="positions" width="100" height="100">
@@ -56,6 +60,18 @@
   <object name="comm" x="1408" y="2048" width="192" height="544">
    <properties>
     <property name="text" value="Left click to shoot."/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="obstacles" width="100" height="100">
+  <object name="laser" x="2304" y="2176" width="32" height="256">
+   <properties>
+    <property name="repeat" value="1"/>
+   </properties>
+  </object>
+  <object name="laser" x="384" y="2272" width="32" height="352">
+   <properties>
+    <property name="repeat" value="1"/>
    </properties>
   </object>
  </objectgroup>

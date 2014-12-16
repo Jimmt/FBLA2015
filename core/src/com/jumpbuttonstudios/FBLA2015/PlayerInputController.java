@@ -1,16 +1,17 @@
 package com.jumpbuttonstudios.FBLA2015;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.utils.TimeUtils;
+import com.badlogic.gdx.math.Vector2;
 
-public class PlayerInputController {
+public class PlayerInputController implements InputProcessor {
 	Player parent;
-	float aTime, dTime;
+	float at, dt, wt, st;
 	float speed;
+	boolean w, a, d, left;
+	float moveAngle = 90;
 
 	public PlayerInputController(Player parent, float speed) {
 		this.parent = parent;
@@ -18,61 +19,107 @@ public class PlayerInputController {
 	}
 
 	public void update(float delta) {
+		parent.body.setTransform(parent.body.getTransform().getPosition(), moveAngle * MathUtils.degRad);
+		if (a) {
+			moveAngle += 3;
+			at += delta;
 
-		if (Gdx.input.isKeyPressed(Keys.W)) {
-			parent.jetpack.activate(delta);
 		} else {
-			parent.jetpack.draining = false;
+			at = 0;
 		}
 
-		if (parent.facingRight) {
-			if (parent.walk.animatedSprite.isFlipX()) {
-				parent.walk.animatedSprite.flipFrames(true, false);
-			}
-		} else {
-			if (!parent.walk.animatedSprite.isFlipX()) {
-				parent.walk.animatedSprite.flipFrames(true, false);
+		if (d) {
+			moveAngle -= 3;
+			dt += delta;
 
-			}
+		} else {
+			dt = 0;
 		}
 
-		if (Gdx.input.isKeyPressed(Keys.A)) {
-			aTime += delta;
-			parent.body.setLinearVelocity(-speed, parent.body.getLinearVelocity().y);
-			if (parent.facingRight) {
-				parent.walk.animatedSprite.getAnimation().setPlayMode(PlayMode.LOOP_REVERSED);
-			} else {
-				parent.walk.animatedSprite.getAnimation().setPlayMode(PlayMode.LOOP);
-			}
-		} else {
-			aTime = 0;
+		if (w) {
+			
+			parent.body.setLinearVelocity(MathUtils.cosDeg(moveAngle) * speed, MathUtils.sinDeg(moveAngle) * speed);
 		}
 
-		if (Gdx.input.isKeyPressed(Keys.D)) {
-			dTime += delta;
-			parent.body.setLinearVelocity(speed, parent.body.getLinearVelocity().y);
-			if (!parent.facingRight) {
-				parent.walk.animatedSprite.getAnimation().setPlayMode(PlayMode.LOOP_REVERSED);
-			} else {
-				parent.walk.animatedSprite.getAnimation().setPlayMode(PlayMode.LOOP);
-			}
-		} else {
-			dTime = 0;
-		}
-
-		if (aTime < dTime && dTime != 0 && aTime != 0) {
+		if (at < dt && dt != 0 && at != 0) {
 			parent.body.setLinearVelocity(-speed, parent.body.getLinearVelocity().y);
 		}
 
-		if (!Gdx.input.isKeyPressed(Keys.A) && !Gdx.input.isKeyPressed(Keys.D)) {
-			parent.drawStill = true;
-			parent.body.setLinearVelocity(0, parent.body.getLinearVelocity().y);
-		} else {
-			parent.drawStill = false;
-		}
-
-		if (Gdx.input.isButtonPressed(Buttons.LEFT)) {
+		if (left) {
 			parent.gun.fire(1.5f, 0, 1, true, parent.dir);
 		}
+
+		if (!w && !a  && !d) {
+			parent.body.setLinearVelocity(0, 0);
+		}
+	}
+
+	@Override
+	public boolean keyDown(int keycode) {
+
+		if (keycode == Keys.W) {
+			w = true;
+		}
+		if (keycode == Keys.A) {
+			a = true;
+		}
+		if (keycode == Keys.D) {
+			d = true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean keyUp(int keycode) {
+		if (keycode == Keys.W) {
+			w = false;
+		}
+		if (keycode == Keys.A) {
+			a = false;
+		}
+		if (keycode == Keys.D) {
+			d = false;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean keyTyped(char character) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		if (button == Buttons.LEFT) {
+			left = true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		if (button == Buttons.LEFT) {
+			left = false;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean touchDragged(int screenX, int screenY, int pointer) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean mouseMoved(int screenX, int screenY) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean scrolled(int amount) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
