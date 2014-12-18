@@ -5,52 +5,143 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 public class PlayerInputController implements InputProcessor {
 	Player parent;
 	float at, dt, wt, st;
 	float speed;
-	boolean w, a, d, left;
-	float moveAngle = 90;
+	boolean w, a, s, d, left;
+	Facing facing;
+	float finalAngle, startAngle = 0;
+	Vector2 target = new Vector2(0, 1), heading = new Vector2();
+
+	enum Facing {
+		LEFT(-1, 0), RIGHT(1, 0), UP(0, 1), DOWN(0, -1);
+
+		private Vector2 direction;
+
+		Facing(float x, float y) {
+			direction = new Vector2(x, y);
+		}
+
+		public Vector2 getDirection() {
+			return direction;
+		}
+	}
 
 	public PlayerInputController(Player parent, float speed) {
 		this.parent = parent;
 		this.speed = speed;
+		facing = Facing.UP;
 	}
 
 	public void update(float delta) {
-		parent.body.setTransform(parent.body.getTransform().getPosition(), moveAngle * MathUtils.degRad);
-		if (a) {
-			moveAngle += 3;
-			at += delta;
+		startAngle = parent.getRotation();
+		finalAngle = parent.body.getTransform().getRotation() * MathUtils.radDeg;
+		
+	
 
+//		target.set(MathUtils.cosDeg(parent.getRotation() - 90), MathUtils.sinDeg(parent.getRotation() - 90));
+//		heading = facing.getDirection();
+//		float cross = target.crs(heading);
+//		System.out.println(target + ":" + heading);
+//		if (cross == -0.0f) {
+//			parent.addAction(Actions.rotateBy(20, 0.01f));
+//			//turn around
+//		}
+//
+//		if (cross == 0.0f) {
+//			
+//			
+//		}
+//
+//		if (cross < 0.0f) {
+//			parent.addAction(Actions.rotateBy(20, 0.01f));
+//			//left
+//		}
+//
+//		if (cross > 0.0f) {
+//	
+//			parent.addAction(Actions.rotateBy(-20, 0.01f));
+//			//right
+//		}
+		
+		if (a) {
+			facing = Facing.LEFT;
+			parent.body.setLinearVelocity(-speed, parent.body.getLinearVelocity().y);
+			at += delta;
+			parent.body.setTransform(parent.body.getTransform().getPosition(), MathUtils.PI / 2);
+			parent.addAction(Actions.rotateBy(-MathUtils.atan2((MathUtils.sinDeg(startAngle - finalAngle)), MathUtils.cosDeg(startAngle - finalAngle)) * 20));
 		} else {
 			at = 0;
 		}
 
 		if (d) {
-			moveAngle -= 3;
+			facing = Facing.RIGHT;
+			parent.body.setLinearVelocity(speed, parent.body.getLinearVelocity().y);
 			dt += delta;
+			parent.body.setTransform(parent.body.getTransform().getPosition(), -MathUtils.PI / 2);
+			parent.addAction(Actions.rotateBy(-MathUtils.atan2((MathUtils.sinDeg(startAngle - finalAngle)), MathUtils.cosDeg(startAngle - finalAngle)) * 20));
 
 		} else {
 			dt = 0;
 		}
 
 		if (w) {
-			
-			parent.body.setLinearVelocity(MathUtils.cosDeg(moveAngle) * speed, MathUtils.sinDeg(moveAngle) * speed);
+			facing = Facing.UP;
+			wt += delta;
+			parent.body.setLinearVelocity(parent.body.getLinearVelocity().x, speed);
+			parent.body.setTransform(parent.body.getTransform().getPosition(), 0);
+			parent.addAction(Actions.rotateBy(-MathUtils.atan2((MathUtils.sinDeg(startAngle - finalAngle)), MathUtils.cosDeg(startAngle - finalAngle)) * 20));
+
+		} else {
+			wt = 0;
+		}
+
+		if (s) {
+			facing = Facing.DOWN;
+			st += delta;
+			parent.body.setLinearVelocity(parent.body.getLinearVelocity().x, -speed);
+			parent.body.setTransform(parent.body.getTransform().getPosition(), -MathUtils.PI);
+			parent.addAction(Actions.rotateBy(-MathUtils.atan2((MathUtils.sinDeg(startAngle - finalAngle)), MathUtils.cosDeg(startAngle - finalAngle)) * 20));
+
+		} else {
+			st = 0;
+		}
+
+		if (w && d) {
+			parent.body.setTransform(parent.body.getTransform().getPosition(), -MathUtils.PI / 4);
+		}
+		if (w && a) {
+			parent.body.setTransform(parent.body.getTransform().getPosition(), MathUtils.PI / 4);
+		}
+		if (s && d) {
+			parent.body.setTransform(parent.body.getTransform().getPosition(),
+					-MathUtils.PI / 4 * 3);
+		}
+		if (s && a) {
+			parent.body
+					.setTransform(parent.body.getTransform().getPosition(), MathUtils.PI / 4 * 3);
 		}
 
 		if (at < dt && dt != 0 && at != 0) {
 			parent.body.setLinearVelocity(-speed, parent.body.getLinearVelocity().y);
 		}
 
+		if (wt < st && st != 0 && wt != 0) {
+			parent.body.setLinearVelocity(parent.body.getLinearVelocity().x, -speed);
+		}
+
 		if (left) {
 			parent.gun.fire(1.5f, 0, 1, true, parent.dir);
 		}
 
-		if (!w && !a  && !d) {
-			parent.body.setLinearVelocity(0, 0);
+		if (!w && !s) {
+			parent.body.setLinearVelocity(parent.body.getLinearVelocity().x, 0);
+		}
+		if (!a && !d) {
+			parent.body.setLinearVelocity(0, parent.body.getLinearVelocity().y);
 		}
 	}
 
@@ -62,6 +153,9 @@ public class PlayerInputController implements InputProcessor {
 		}
 		if (keycode == Keys.A) {
 			a = true;
+		}
+		if (keycode == Keys.S) {
+			s = true;
 		}
 		if (keycode == Keys.D) {
 			d = true;
@@ -76,6 +170,9 @@ public class PlayerInputController implements InputProcessor {
 		}
 		if (keycode == Keys.A) {
 			a = false;
+		}
+		if (keycode == Keys.S) {
+			s = false;
 		}
 		if (keycode == Keys.D) {
 			d = false;

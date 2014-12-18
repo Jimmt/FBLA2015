@@ -18,6 +18,7 @@ public class GameSprite extends Image {
 	FixtureDef fixtureDef;
 	public Body body;
 	float width, height;
+	boolean stdRotate = true;
 
 	public GameSprite(String path, float x, float y, float angle, float scale, World world) {
 		super(new Texture(Gdx.files.internal(path)));
@@ -78,7 +79,9 @@ public class GameSprite extends Image {
 	public void act(float delta) {
 		super.act(delta);
 
+		if(stdRotate){
 		setRotation(MathUtils.radDeg * body.getTransform().getRotation());
+		}
 		setPosition(body.getPosition().x - width / 2, body.getPosition().y - height / 2);
 
 	}

@@ -18,6 +18,7 @@ import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
@@ -38,7 +39,7 @@ public class Player extends GameSprite {
 
 	public Player(String path, World world) {
 		super(path, 1, world);
-		
+
 		hitbox = new Rectangle(getX(), getY(), getWidth(), getHeight());
 		controller = new PlayerInputController(this, 2);
 		this.world = world;
@@ -55,6 +56,8 @@ public class Player extends GameSprite {
 		f.categoryBits = Bits.PLAYER;
 		f.maskBits = (short) (Bits.ENEMY | Bits.MAP);
 		body.getFixtureList().get(0).setFilterData(f);
+		
+		this.stdRotate = false;
 	}
 
 	public void hurt(float amount) {
@@ -72,8 +75,6 @@ public class Player extends GameSprite {
 	@Override
 	public void act(float delta) {
 		super.act(delta);
-		
-		setRotation((body.getTransform().getRotation() - 90 * MathUtils.degRad) * MathUtils.radDeg);
 
 		hitbox.set(getX() / Constants.SCALE, getY() / Constants.SCALE,
 				getWidth() / Constants.SCALE, getHeight() / Constants.SCALE);
@@ -83,11 +84,13 @@ public class Player extends GameSprite {
 		getStage().getCamera().position.set(Math.round((getX() + getWidth() / 2) * 100f) / 100f,
 				Math.round((getY() + getHeight() / 2) * 100f) / 100f, 0);
 
-			checkMouseRotation();
-			controller.update(delta);
+		checkMouseRotation();
+		controller.update(delta);
 
 		gun.act(delta);
 		gun.updateFire(delta);
+		
+		
 	}
 
 	public void checkMouseRotation() {
@@ -99,6 +102,5 @@ public class Player extends GameSprite {
 		angle = dir.angle();
 
 	}
-
 
 }
