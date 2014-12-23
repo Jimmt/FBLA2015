@@ -46,7 +46,7 @@ public class GameScreen extends BaseScreen {
 		rayHandler.setCombinedMatrix(stage.getCamera().combined);
 
 		player = new Player("ship.png", world);
-		map = new Map("maps/map.tmx", this);
+		map = new Map("maps/mapNew.tmx", this);
 		stage.addActor(map);
 		stage.addActor(player);
 		stage.addActor(player.gun);

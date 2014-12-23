@@ -13,14 +13,15 @@ public class Gun extends Actor {
 
 	Array<Bullet> bullets;
 	float lastFireTime = 999f;
+	float bulletSpeed;
 	World world;
 	GameSprite parent;
 	ItemStats stats;
 
-	public Gun(World world, ItemStats stats, GameSprite parent) {
+	public Gun(World world, float bulletSpeed, ItemStats stats, GameSprite parent) {
 
 		this.stats = stats;
-
+		this.bulletSpeed = bulletSpeed;
 		bullets = new Array<Bullet>();
 		this.world = world;
 		this.parent = parent;
@@ -36,12 +37,18 @@ public class Gun extends Actor {
 
 				Vector2 coords = new Vector2(parent.getX() + parent.getWidth() / 2
 						+ MathUtils.cosDeg(direction.angle()) * radius, parent.getY()
-						+ parent.getHeight() / 3 * 2 + MathUtils.sinDeg(direction.angle()) * radius);
+						+ parent.getHeight() / 2 + MathUtils.sinDeg(direction.angle()) * radius);
 
 				Bullet bullet = new Bullet("bullet.png", friendly, coords.x, coords.y,
 						direction.angle() * MathUtils.degRad, stats.getDamage(), world);
 
-				bullet.body.setLinearVelocity(direction.nor().scl(30f));
+				Vector2 temp = parent.body.getLinearVelocity();
+				if(direction.x > 0 && direction.y > 0){
+					bullet.body.setLinearVelocity(direction.nor().scl(bulletSpeed).add(parent.body.getLinearVelocity()));	
+				} else {
+					bullet.body.setLinearVelocity(direction.nor().scl(bulletSpeed));
+				}
+				
 				bullets.add(bullet);
 			}
 		}

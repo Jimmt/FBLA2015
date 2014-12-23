@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32">
+  <image source="tiles.png" width="608" height="544"/>
+ </tileset>
+ <objectgroup name="obstacles" width="100" height="100"/>
+ <objectgroup name="lights" width="100" height="100"/>
+ <objectgroup name="box2D" width="100" height="100">
+  <object name="level" type="object" x="928" y="3104">
+   <polygon points="0,0 32,0 32,-512 448,-512 448,-704 128,-704 128,-1056 96,-1056 96,-672 416,-672 416,-544 0,-544 0,-64"/>
+  </object>
+  <object name="level" type="object" x="960" y="1920">
+   <polygon points="0,0 256,0 256,-32 576,-32 576,0 704,0 704,512 608,512 608,1184 192,1184 192,1152 576,1152 576,480 672,480 672,32 544,32 544,0 288,0 288,32 0,32 0,0"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="positions" width="100" height="100">
+  <object name="player_spawn" x="1024" y="3072" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="comms" width="100" height="100">
+  <object name="comm" x="928" y="2592" width="640" height="512">
+   <properties>
+    <property name="text" value="Use WASD to move your ship."/>
+   </properties>
+  </object>
+  <object name="comm" x="1024" y="1888" width="640" height="544">
+   <properties>
+    <property name="text" value="Use the left mouse button to shoot. You can shoot independently of your move direction."/>
+   </properties>
+  </object>
+  <object name="comm" x="1344" y="2432" width="224" height="160">
+   <properties>
+    <property name="text" value="Keep moving."/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer name="tiles" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt2cENgjAAhtHOAw7hKI7iKIzCKI5iDxqjESFpiX/0vaQnsCH9DsVSCgAAAAAAAAAAAAAAAAAAAAAAAAAAAADAs6GU07gyhm8/5A+p6zktjPtaT2tz1HtmfXLVJvO3n4EHPbLo0e5QyrHXXHq0G/vONXec7i/pkUWPLHpk0SOLHll6rqEe7Ub/P6LokUWPLLcz88vaqPddFn5/up/Vbzmjp4+l97Ce72dsp0cWPbLosZ+675637OEv+/n0bi492nU+I6GRHln0yKJHFj2y6JFFjyx6ZNEjix5Z9MiiRxY9suiRRY8sh8/XunwXAWBfV9QxTxk=
+  </data>
+ </layer>
+</map>

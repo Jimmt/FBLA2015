@@ -15,7 +15,7 @@ public class FBLA2015 extends Game {
 		soundManager = new CustomSoundManager();
 		soundManager.loadSound("gunshot", Gdx.files.internal("gunshot.wav"));
 
-		DEBUG = true;
+//		DEBUG = true;
 		
 		if (DEBUG) {
 			setScreen(new MenuScreen(this));

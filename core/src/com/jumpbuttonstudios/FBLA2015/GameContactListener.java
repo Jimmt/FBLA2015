@@ -7,16 +7,15 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 
 public class GameContactListener implements ContactListener {
 
-
 	@Override
 	public void beginContact(Contact contact) {
 		UserData a = (UserData) contact.getFixtureA().getBody().getUserData();
 		UserData b = (UserData) contact.getFixtureB().getBody().getUserData();
 
-		if (a.value instanceof Bullet) {
+		if (a.value instanceof Bullet && !(b.value instanceof Bullet)) {
 			((Bullet) a.value).delete = true;
 		}
-		if (b.value instanceof Bullet) {
+		if (b.value instanceof Bullet && !(a.value instanceof Bullet)) {
 			((Bullet) b.value).delete = true;
 		}
 		if (a.value instanceof Enemy && b.value instanceof Bullet) {
@@ -30,10 +29,14 @@ public class GameContactListener implements ContactListener {
 			}
 		}
 		if (a.value instanceof Player && b.value instanceof Bullet) {
-			((Player) a.value).hurt(((Bullet) b.value).damage);
+			if (!((Bullet) b.value).friendly) {
+				((Player) a.value).hurt(((Bullet) b.value).damage);
+			}
 		}
 		if (b.value instanceof Player && a.value instanceof Bullet) {
-			((Player) b.value).hurt(((Bullet) a.value).damage);
+			if (!((Bullet) a.value).friendly) {
+				((Player) b.value).hurt(((Bullet) a.value).damage);
+			}
 		}
 	}
 

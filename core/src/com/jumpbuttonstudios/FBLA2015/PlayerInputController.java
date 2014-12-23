@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 public class PlayerInputController implements InputProcessor {
 	Player parent;
 	float at, dt, wt, st;
-	float speed;
+	float speed, angularSpeed;
 	boolean w, a, s, d, left;
 	Facing facing;
 	float finalAngle, startAngle = 0;
@@ -30,9 +30,10 @@ public class PlayerInputController implements InputProcessor {
 		}
 	}
 
-	public PlayerInputController(Player parent, float speed) {
+	public PlayerInputController(Player parent, float speed, float angularSpeed) {
 		this.parent = parent;
 		this.speed = speed;
+		this.angularSpeed = angularSpeed;
 		facing = Facing.UP;
 	}
 
@@ -40,39 +41,12 @@ public class PlayerInputController implements InputProcessor {
 		startAngle = parent.getRotation();
 		finalAngle = parent.body.getTransform().getRotation() * MathUtils.radDeg;
 		
-	
-
-//		target.set(MathUtils.cosDeg(parent.getRotation() - 90), MathUtils.sinDeg(parent.getRotation() - 90));
-//		heading = facing.getDirection();
-//		float cross = target.crs(heading);
-//		System.out.println(target + ":" + heading);
-//		if (cross == -0.0f) {
-//			parent.addAction(Actions.rotateBy(20, 0.01f));
-//			//turn around
-//		}
-//
-//		if (cross == 0.0f) {
-//			
-//			
-//		}
-//
-//		if (cross < 0.0f) {
-//			parent.addAction(Actions.rotateBy(20, 0.01f));
-//			//left
-//		}
-//
-//		if (cross > 0.0f) {
-//	
-//			parent.addAction(Actions.rotateBy(-20, 0.01f));
-//			//right
-//		}
-		
 		if (a) {
 			facing = Facing.LEFT;
 			parent.body.setLinearVelocity(-speed, parent.body.getLinearVelocity().y);
 			at += delta;
 			parent.body.setTransform(parent.body.getTransform().getPosition(), MathUtils.PI / 2);
-			parent.addAction(Actions.rotateBy(-MathUtils.atan2((MathUtils.sinDeg(startAngle - finalAngle)), MathUtils.cosDeg(startAngle - finalAngle)) * 20));
+			parent.addAction(Actions.rotateBy(-MathUtils.atan2((MathUtils.sinDeg(startAngle - finalAngle)), MathUtils.cosDeg(startAngle - finalAngle)) * angularSpeed));
 		} else {
 			at = 0;
 		}
@@ -82,7 +56,7 @@ public class PlayerInputController implements InputProcessor {
 			parent.body.setLinearVelocity(speed, parent.body.getLinearVelocity().y);
 			dt += delta;
 			parent.body.setTransform(parent.body.getTransform().getPosition(), -MathUtils.PI / 2);
-			parent.addAction(Actions.rotateBy(-MathUtils.atan2((MathUtils.sinDeg(startAngle - finalAngle)), MathUtils.cosDeg(startAngle - finalAngle)) * 20));
+			parent.addAction(Actions.rotateBy(-MathUtils.atan2((MathUtils.sinDeg(startAngle - finalAngle)), MathUtils.cosDeg(startAngle - finalAngle)) * angularSpeed));
 
 		} else {
 			dt = 0;
@@ -93,7 +67,7 @@ public class PlayerInputController implements InputProcessor {
 			wt += delta;
 			parent.body.setLinearVelocity(parent.body.getLinearVelocity().x, speed);
 			parent.body.setTransform(parent.body.getTransform().getPosition(), 0);
-			parent.addAction(Actions.rotateBy(-MathUtils.atan2((MathUtils.sinDeg(startAngle - finalAngle)), MathUtils.cosDeg(startAngle - finalAngle)) * 20));
+			parent.addAction(Actions.rotateBy(-MathUtils.atan2((MathUtils.sinDeg(startAngle - finalAngle)), MathUtils.cosDeg(startAngle - finalAngle)) * angularSpeed));
 
 		} else {
 			wt = 0;
@@ -104,7 +78,7 @@ public class PlayerInputController implements InputProcessor {
 			st += delta;
 			parent.body.setLinearVelocity(parent.body.getLinearVelocity().x, -speed);
 			parent.body.setTransform(parent.body.getTransform().getPosition(), -MathUtils.PI);
-			parent.addAction(Actions.rotateBy(-MathUtils.atan2((MathUtils.sinDeg(startAngle - finalAngle)), MathUtils.cosDeg(startAngle - finalAngle)) * 20));
+			parent.addAction(Actions.rotateBy(-MathUtils.atan2((MathUtils.sinDeg(startAngle - finalAngle)), MathUtils.cosDeg(startAngle - finalAngle)) * angularSpeed));
 
 		} else {
 			st = 0;
@@ -134,7 +108,7 @@ public class PlayerInputController implements InputProcessor {
 		}
 
 		if (left) {
-			parent.gun.fire(1.5f, 0, 1, true, parent.dir);
+			parent.gun.fire(0.4f, 0, 1, true, parent.dir);
 		}
 
 		if (!w && !s) {

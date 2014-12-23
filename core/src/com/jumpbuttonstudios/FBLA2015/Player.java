@@ -41,10 +41,10 @@ public class Player extends GameSprite {
 		super(path, 1, world);
 
 		hitbox = new Rectangle(getX(), getY(), getWidth(), getHeight());
-		controller = new PlayerInputController(this, 2);
+		controller = new PlayerInputController(this, 2, 10);
 		this.world = world;
 
-		gun = new Gun(world, stats, this);
+		gun = new Gun(world, 5f, stats, this);
 
 		UserData userData = new UserData();
 		userData.setValue(this);

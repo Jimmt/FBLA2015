@@ -26,7 +26,7 @@ public class Enemy extends GameSprite implements Destroyable {
 
 		this.world = world;
 		direction = new Vector2();
-		gun = new Gun(world, ItemStats.PISTOL, this);
+		gun = new Gun(world, 3f, ItemStats.PISTOL, this);
 		jetpack = new Jetpack("jetpack/jetpack.png", this, 999, -5, 2, 1 / 300f);
 		this.healthMax = healthMax;
 		health = healthMax;
