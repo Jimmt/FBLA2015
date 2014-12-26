@@ -85,6 +85,7 @@ public class Map extends Actor {
 						object.getRectangle().x, object.getRectangle().y, 0, 45);
 			}
 			if (object.getName().equals("point")) {
+
 				PointLight light = new PointLight(gs.rayHandler, Integer.valueOf(object
 						.getProperties().get("rays", String.class)),
 						new Color(0.6f, 0.6f, 0.6f, 1f), Integer.valueOf(object.getProperties()
@@ -96,20 +97,28 @@ public class Map extends Actor {
 
 		}
 
+	}
+
+	public void parseObstacles() {
 		Iterator<MapObject> obstaclesIterator = obstaclesLayer.getObjects().iterator();
 
 		while (obstaclesIterator.hasNext()) {
 			RectangleMapObject object = (RectangleMapObject) obstaclesIterator.next();
 
 			if (object.getName().equals("laser")) {
-				Laser laser = new Laser(object.getRectangle().x * Constants.SCALE,
+				Laser laser = new Laser(gs.player, object.getRectangle().x * Constants.SCALE,
 						object.getRectangle().y * Constants.SCALE, object.getRectangle().width
-								* Constants.SCALE, object.getRectangle().height * Constants.SCALE, Float.valueOf(object.getProperties().get("repeat", String.class)));
+								* Constants.SCALE, object.getRectangle().height * Constants.SCALE,
+						Float.valueOf(object.getProperties().get("repeat", String.class)));
 				gs.stage.addActor(laser);
 
 			}
+			if (object.getName().equals("target")) {
+				Target target = new Target(object.getRectangle().x * Constants.SCALE,
+						object.getRectangle().y * Constants.SCALE, 0, gs.world);
+				gs.stage.addActor(target);
+			}
 		}
-
 	}
 
 	public void parseComms() {

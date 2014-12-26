@@ -18,6 +18,7 @@ public class ParticleEffectActor extends Actor {
 				emitter.getVelocity().getHighMax() * Constants.SCALE);
 	}
 
+
 	@Override
 	public void act(float delta) {
 		super.act(delta);

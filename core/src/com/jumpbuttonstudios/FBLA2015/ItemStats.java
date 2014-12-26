@@ -5,22 +5,32 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public enum ItemStats {
-	PISTOL("pistolIcon.png", 0.2f, 10f), RIFLE("rifleIcon.png", 0.1f, 15f);
+	PISTOL("pistolIcon.png", "bullet.png", 0.2f, 10f, 7f), RIFLE("rifleIcon.png", "bullet.png", 0.1f, 15f, 15f);
 
-	private float rof, damage;
+	private float rof, damage, bulletSpeed;
 	private Image icon;
 	public static ItemStats[] cache;
-	private String path;
+	private String path, bulletPath;
 
-	ItemStats(String path, float rof, float damage) {
+	ItemStats(String path, String bulletPath, float rof, float damage, float bulletSpeed) {
 		this.path = path;
 		this.rof = rof;
+		this.bulletSpeed = bulletSpeed;
+		this.bulletPath = bulletPath;
 		this.damage = damage;
 		icon = new Image(new Texture(Gdx.files.internal(path)));
 	}
 
 	public static void makeCache() {
 		cache = ItemStats.values();
+	}
+	
+	public float getBulletSpeed(){
+		return bulletSpeed;
+	}
+	
+	public String getBulletPath(){
+		return bulletPath;
 	}
 	
 	public String getPath(){

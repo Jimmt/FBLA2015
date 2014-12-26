@@ -3,7 +3,33 @@
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32">
   <image source="tiles.png" width="608" height="544"/>
  </tileset>
- <objectgroup name="obstacles" width="100" height="100"/>
+ <layer name="tiles" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt28FtgzAAhlGPknOT7tBROkpGYZSMklFqJOihEiJAiP+S9yRfW4evFIxJKQAAAAAAAAAAAAAAAAAAwBofpVzPpXRLx0friR9UPbblc8U4t5jsG9Ajix5Z9MiiR5Z6n3Sq476kRX9PVkfXZsbHt/QccW7sS48seuQYrwULrx8n6/N91L/168r7q2uL+R6dHln0yLKhx1eL+R6dHln0yKJHlrqOuNVjexpHv66YWHP0+4j3cXh+9RpTa3Vr8jb0yLKlR/0f9n2eGZ6zLDPVY7jOTL1vMh7r2edgw8/R50Fr9wvXjvr7bi/5YP+UHln0yDJznfh9N1GPHM88h/TYTo8semTRI4seWfTI0h9DPXL0e1F65NAjix5Zhmcq97kx9T2GYZ9kfPbStfws78ReYxY9suiRRY/9/H3/6sHreafHPp78jISN9MiiRxY9suiRRY8semTRI4seWfTIokcWPbLokUWPLHpkuZTp43tZsS/S7pMcw9x3dFrPD8j0A0tMEjg=
+  </data>
+ </layer>
+ <objectgroup name="comms" width="100" height="100">
+  <object name="comm" x="928" y="2592" width="640" height="512">
+   <properties>
+    <property name="text" value="Use WASD to move your ship."/>
+   </properties>
+  </object>
+  <object name="comm" x="768" y="1760" width="160" height="288">
+   <properties>
+    <property name="text" value="Viruses have been spawned ahead for you to test your new capabilities."/>
+   </properties>
+  </object>
+  <object name="comm" x="1024" y="2080" width="640" height="416">
+   <properties>
+    <property name="text" value="Use the left mouse button to shoot. You can shoot independently of your move direction. Try shooting at the targets on the left."/>
+   </properties>
+  </object>
+  <object name="comm" x="928" y="1920" width="736" height="160">
+   <properties>
+    <property name="text" value="Be wary of obstacles like that laser."/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup name="lights" width="100" height="100"/>
  <objectgroup name="box2D" width="100" height="100">
   <object name="level" type="object" x="928" y="3104">
@@ -12,30 +38,27 @@
   <object name="level" type="object" x="960" y="1920">
    <polygon points="0,0 256,0 256,-32 576,-32 576,0 704,0 704,512 608,512 608,1184 192,1184 192,1152 576,1152 576,480 672,480 672,32 544,32 544,0 288,0 288,32 0,32 0,0"/>
   </object>
+  <object name="level" type="object" x="1216" y="1920">
+   <polygon points="0,0 -256,0 -256,-96 -128,-96 -128,-384 -160,-384 -160,-480 -128,-480 -128,-704 -608,-704 -608,-480 -576,-480 -576,-384 -608,-384 -608,-96 -480,-96 -480,160 -192,160 -192,128 -448,128 -448,-128 -576,-128 -576,-352 -544,-352 -544,-512 -576,-512 -576,-672 -160,-672 -160,-512 -192,-512 -192,-352 -160,-352 -160,-128 -288,-128 -288,32 0,32"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="obstacles" width="100" height="100">
+  <object name="laser" x="928" y="1952" width="32" height="96">
+   <properties>
+    <property name="repeat" value="2"/>
+   </properties>
+  </object>
+  <object name="target" x="1056" y="2112" width="32" height="32"/>
+  <object name="target" x="1056" y="2176" width="32" height="32"/>
+  <object name="target" x="1056" y="2240" width="32" height="32"/>
+  <object name="target" x="960" y="2816" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="positions" width="100" height="100">
   <object name="player_spawn" x="1024" y="3072" width="32" height="32"/>
- </objectgroup>
- <objectgroup name="comms" width="100" height="100">
-  <object name="comm" x="928" y="2592" width="640" height="512">
+  <object name="enemy_spawn" x="1312" y="2688" width="32" height="32">
    <properties>
-    <property name="text" value="Use WASD to move your ship."/>
-   </properties>
-  </object>
-  <object name="comm" x="1024" y="1888" width="640" height="544">
-   <properties>
-    <property name="text" value="Use the left mouse button to shoot. You can shoot independently of your move direction."/>
-   </properties>
-  </object>
-  <object name="comm" x="1344" y="2432" width="224" height="160">
-   <properties>
-    <property name="text" value="Keep moving."/>
+    <property name="health" value="50"/>
    </properties>
   </object>
  </objectgroup>
- <layer name="tiles" width="100" height="100">
-  <data encoding="base64" compression="zlib">
-   eJzt2cENgjAAhtHOAw7hKI7iKIzCKI5iDxqjESFpiX/0vaQnsCH9DsVSCgAAAAAAAAAAAAAAAAAAAAAAAAAAAADAs6GU07gyhm8/5A+p6zktjPtaT2tz1HtmfXLVJvO3n4EHPbLo0e5QyrHXXHq0G/vONXec7i/pkUWPLHpk0SOLHll6rqEe7Ub/P6LokUWPLLcz88vaqPddFn5/up/Vbzmjp4+l97Ce72dsp0cWPbLosZ+675637OEv+/n0bi492nU+I6GRHln0yKJHFj2y6JFFjyx6ZNEjix5Z9MiiRxY9suiRRY8sh8/XunwXAWBfV9QxTxk=
-  </data>
- </layer>
 </map>

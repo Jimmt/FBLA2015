@@ -35,7 +35,7 @@ public class GameScreen extends BaseScreen {
 
 	public GameScreen(FBLA2015 game) {
 		super(game);
-		
+
 		ItemStats.makeCache();
 
 		FitViewport viewport = new FitViewport(Constants.SCLWIDTH, Constants.SCLHEIGHT);
@@ -48,6 +48,7 @@ public class GameScreen extends BaseScreen {
 		player = new Player("ship.png", world);
 		map = new Map("maps/mapNew.tmx", this);
 		stage.addActor(map);
+		map.parseObstacles();
 		stage.addActor(player);
 		stage.addActor(player.gun);
 		map.parsePositions();
@@ -72,18 +73,17 @@ public class GameScreen extends BaseScreen {
 
 		InputMultiplexer multiplexer = new InputMultiplexer(stage, hudStage, player.controller);
 		Gdx.input.setInputProcessor(multiplexer);
-		
-//		shopDialog = new ShopDialog("", hudStage, player, skin);
-//		shopDialog.show(hudStage);
-//		shopDialog.setPosition(Constants.WIDTH / 2 - shopDialog.getWidth() / 2, Constants.HEIGHT
-//				/ 2 - shopDialog.getHeight() / 2);
-		
-		
+
+// shopDialog = new ShopDialog("", hudStage, player, skin);
+// shopDialog.show(hudStage);
+// shopDialog.setPosition(Constants.WIDTH / 2 - shopDialog.getWidth() / 2,
+// Constants.HEIGHT
+// / 2 - shopDialog.getHeight() / 2);
 
 	}
 
 	public void createEnemy(float x, float y, float health) {
-		Enemy enemy = new Enemy("robotstill.png", "robotwalk.png", x, y, health, world);
+		Enemy enemy = new Enemy("enemy.png", x, y, health, world);
 		enemy.setPlayer(player);
 		stage.addActor(enemy);
 		enemies.add(enemy);
@@ -110,16 +110,16 @@ public class GameScreen extends BaseScreen {
 
 		rayHandler.setCombinedMatrix(stage.getCamera().combined);
 
-		if(shopDialog != null && shopDialog.isVisible()){
+		if (shopDialog != null && shopDialog.isVisible()) {
 			Gdx.input.setInputProcessor(hudStage);
 		} else {
 			Gdx.input.setInputProcessor(player.controller);
 		}
-		
+
 		hitComm = false;
 		for (int i = 0; i < comms.size; i++) {
 
-			if (comms.get(i).getRectangle().overlaps(player.hitbox)) {
+			if (comms.get(i).getRectangle().overlaps(player.commHitbox)) {
 				commDialog.setText(comms.get(i).getProperties().get("text", String.class));
 				hitComm = true;
 			}
@@ -130,6 +130,11 @@ public class GameScreen extends BaseScreen {
 				enemies.get(i).destroy();
 				stage.getActors().removeValue(enemies.get(i), false);
 				world.destroyBody(enemies.get(i).body);
+
+				for (int j = 0; j < enemies.get(i).gun.bullets.size; j++) {
+					world.destroyBody(enemies.get(i).gun.bullets.get(j).body);
+				}
+
 				enemies.removeIndex(i);
 				byteCoins++;
 			}

@@ -35,28 +35,31 @@ public class Player extends GameSprite {
 	Gun gun;
 	ItemStats stats = ItemStats.PISTOL;
 	PlayerInputController controller;
-	Rectangle hitbox;
+	Rectangle hitbox, commHitbox;
+	ParticleEffectActor streak;
 
 	public Player(String path, World world) {
 		super(path, 1, world);
+		
+		streak = new ParticleEffectActor("effects/streak.p", "");
 
 		hitbox = new Rectangle(getX(), getY(), getWidth(), getHeight());
+		commHitbox = new Rectangle(getX() / Constants.SCALE, getY() / Constants.SCALE, getWidth() / Constants.SCALE, getHeight() / Constants.SCALE);
 		controller = new PlayerInputController(this, 2, 10);
 		this.world = world;
 
-		gun = new Gun(world, 5f, stats, this);
+		gun = new Gun(world, 10f, stats, this);
 
 		UserData userData = new UserData();
 		userData.setValue(this);
 		userData.setTag("player");
 		body.setUserData(userData);
-
 		body.getFixtureList().get(0).setFriction(0.0f);
 		Filter f = body.getFixtureList().get(0).getFilterData();
 		f.categoryBits = Bits.PLAYER;
 		f.maskBits = (short) (Bits.ENEMY | Bits.MAP);
 		body.getFixtureList().get(0).setFilterData(f);
-		
+
 		this.stdRotate = false;
 	}
 
@@ -68,7 +71,11 @@ public class Player extends GameSprite {
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
-
+		
+		streak.effect.setPosition(getX() + getWidth() / 2, getY() + getHeight() / 2);
+		streak.effect.getEmitters().get(0).getAngle().setHigh(getRotation() - 90);
+		streak.effect.getEmitters().get(0).getRotation().setHigh(getRotation());
+		streak.draw(batch, parentAlpha);
 		gun.draw(batch, parentAlpha);
 	}
 
@@ -76,9 +83,10 @@ public class Player extends GameSprite {
 	public void act(float delta) {
 		super.act(delta);
 
-		hitbox.set(getX() / Constants.SCALE, getY() / Constants.SCALE,
-				getWidth() / Constants.SCALE, getHeight() / Constants.SCALE);
-
+		streak.act(delta);
+		hitbox.set(getX(), getY(), getWidth(), getHeight());
+		commHitbox.set(getX() / Constants.SCALE, getY() / Constants.SCALE, getWidth() / Constants.SCALE, getHeight() / Constants.SCALE);
+		
 		stateTime += delta;
 
 		getStage().getCamera().position.set(Math.round((getX() + getWidth() / 2) * 100f) / 100f,
@@ -89,8 +97,7 @@ public class Player extends GameSprite {
 
 		gun.act(delta);
 		gun.updateFire(delta);
-		
-		
+
 	}
 
 	public void checkMouseRotation() {

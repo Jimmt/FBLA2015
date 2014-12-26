@@ -4,13 +4,14 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class Bullet extends GameSprite {
 	boolean delete, friendly;
 	float damage;
 
 	public Bullet(String path, boolean friendly, float x, float y, float angle, float damage, World world) {
-		super(path, x, y, angle, world);
+		super(path, x, y, angle, BodyType.DynamicBody, world);
 		
 		this.friendly = friendly;
 		

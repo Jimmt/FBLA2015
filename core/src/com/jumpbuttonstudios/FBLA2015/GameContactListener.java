@@ -11,6 +11,13 @@ public class GameContactListener implements ContactListener {
 	public void beginContact(Contact contact) {
 		UserData a = (UserData) contact.getFixtureA().getBody().getUserData();
 		UserData b = (UserData) contact.getFixtureB().getBody().getUserData();
+		
+		if(a.tag.equals("target") && b.value instanceof Bullet){
+			((Target) a.value).playParticles();
+		}
+		if(b.tag.equals("target") && a.value instanceof Bullet){
+			((Target) b.value).playParticles();
+		}
 
 		if (a.value instanceof Bullet && !(b.value instanceof Bullet)) {
 			((Bullet) a.value).delete = true;
