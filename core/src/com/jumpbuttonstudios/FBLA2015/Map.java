@@ -14,6 +14,7 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -29,13 +30,17 @@ public class Map extends Actor {
 	private Vector2 playerSpawn;
 	private GameScreen gs;
 	private MapLayer positionsLayer, commsLayer, obstaclesLayer;
+	private TiledMapTileLayer tilesLayer;
+	boolean[][] collisions;
 
 	public Map(String path, GameScreen gs) {
 		tmxL = new TmxMapLoader();
 		map = tmxL.load(path);
+		collisions = new boolean[map.getProperties().get("width", Integer.class)][map
+				.getProperties().get("height", Integer.class)];
 		this.gs = gs;
-		oc = (OrthographicCamera) gs.stage.getCamera();
 
+		oc = (OrthographicCamera) gs.stage.getCamera();
 		renderer = new OrthogonalTiledMapRenderer(map, Constants.SCALE);
 		renderer.setMap(map);
 
@@ -49,7 +54,6 @@ public class Map extends Actor {
 		userData.tag = "map";
 
 		Array<String> keys = parser.getBodies().keys().toArray();
-
 		for (int i = 0; i < keys.size; i++) {
 			parser.getBodies().get(keys.get(i)).setUserData(userData);
 		}
@@ -72,6 +76,26 @@ public class Map extends Actor {
 			}
 			if (layer.getName().equals("obstacles")) {
 				obstaclesLayer = layer;
+			}
+			if (layer.getName().equals("tiles")) {
+				tilesLayer = (TiledMapTileLayer) layer;
+			}
+		}
+		
+		for (int i = 0; i < map.getProperties().get("width", Integer.class); i++) {
+			for (int j = 0; j < map.getProperties().get("height", Integer.class); j++) {
+				TiledMapTileLayer.Cell cell = tilesLayer.getCell(i, j);
+				
+				if (cell != null) {
+					if (tilesLayer.getCell(i, j).getTile().getProperties()
+							.get("type", String.class).equals("floor")) {
+						collisions[i][j] = false;
+					} else {
+						collisions[i][j] = true;
+					}
+				} else {
+					collisions[i][j] = true;
+				}
 			}
 		}
 

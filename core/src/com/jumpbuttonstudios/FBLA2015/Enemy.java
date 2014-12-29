@@ -1,5 +1,6 @@
 package com.jumpbuttonstudios.FBLA2015;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -8,9 +9,10 @@ import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.IntArray;
 
 public class Enemy extends GameSprite implements Destroyable {
-	float healthMax, health, aggroRange = 4;
+	float healthMax, health, aggroRange = 4, optimalFireDistance = 3;
 	Image still;
 	Player player;
 	Gun gun;
@@ -18,10 +20,12 @@ public class Enemy extends GameSprite implements Destroyable {
 	Vector2 direction;
 	World world;
 	EnemyRaycastCallback callback;
+	AStar astar;
+	IntArray path;
 
-	public Enemy(String path, float x, float y, float healthMax, World world) {
-		super(path, x, y, 0, 1, false, BodyType.DynamicBody, world);
-
+	public Enemy(String path, float x, float y, float healthMax, AStar astar, World world) {
+		super(path, x, y, 0, 1, true, BodyType.DynamicBody, world);
+		this.astar = astar;
 		this.world = world;
 		direction = new Vector2();
 		gun = new Gun(world, 3f, ItemStats.PISTOL, this);
@@ -39,7 +43,8 @@ public class Enemy extends GameSprite implements Destroyable {
 		f.categoryBits = Bits.ENEMY;
 		f.maskBits = (short) (Bits.PLAYER | Bits.MAP);
 		body.getFixtureList().get(0).setFilterData(f);
-
+		body.getFixtureList().get(0).setFriction(0.0f);
+		this.path = new IntArray();
 	}
 
 	public void hurt(float amount) {
@@ -78,6 +83,7 @@ public class Enemy extends GameSprite implements Destroyable {
 
 		if (!callback.isHit() && aggro) {
 			gun.fire(1f, 0, 0.1f, false, direction);
+			setRotation(direction.angle() - 90);
 		}
 	}
 
@@ -89,8 +95,17 @@ public class Enemy extends GameSprite implements Destroyable {
 
 	}
 
+
 	public void follow(float delta) {
-		setRotation(direction.angle() - 90);
+		path = astar.getPath((int) (player.getX() / Constants.SCALE / Constants.TILE_SIZE),
+				(int) (player.getY() / Constants.SCALE / Constants.TILE_SIZE),
+				(int) (body.getPosition().x / Constants.SCALE / Constants.TILE_SIZE),
+				(int) (body.getPosition().y / Constants.SCALE / Constants.TILE_SIZE));
+
+		if (path.size >= 4) {
+			Vector2 pathDir = new Vector2(path.get(2) - path.get(0), path.get(3) - path.get(1));
+			body.setLinearVelocity(pathDir.nor());
+		}
 
 	}
 

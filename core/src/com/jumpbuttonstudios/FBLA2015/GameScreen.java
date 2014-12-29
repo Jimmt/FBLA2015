@@ -6,8 +6,11 @@ import box2dLight.RayHandler;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -32,6 +35,8 @@ public class GameScreen extends BaseScreen {
 	boolean hitComm, gameOver;
 	Image black;
 	int byteCoins;
+	AStar astar;
+	ShapeRenderer sr;
 
 	public GameScreen(FBLA2015 game) {
 		super(game);
@@ -47,6 +52,12 @@ public class GameScreen extends BaseScreen {
 
 		player = new Player("ship.png", world);
 		map = new Map("maps/mapNew.tmx", this);
+		astar = new AStar(map.getMap().getProperties().get("width", Integer.class), map.getMap()
+				.getProperties().get("height", Integer.class)) {
+			protected boolean isValid(int x, int y) {
+				return !map.collisions[x][y];
+			}
+		};
 		stage.addActor(map);
 		map.parseObstacles();
 		stage.addActor(player);
@@ -80,10 +91,13 @@ public class GameScreen extends BaseScreen {
 // Constants.HEIGHT
 // / 2 - shopDialog.getHeight() / 2);
 
+		sr = new ShapeRenderer();
+
 	}
 
 	public void createEnemy(float x, float y, float health) {
-		Enemy enemy = new Enemy("enemy.png", x, y, health, world);
+
+		Enemy enemy = new Enemy("enemy.png", x, y, health, astar, world);
 		enemy.setPlayer(player);
 		stage.addActor(enemy);
 		enemies.add(enemy);
@@ -102,6 +116,21 @@ public class GameScreen extends BaseScreen {
 	@Override
 	public void render(float delta) {
 		super.render(delta);
+
+//		sr.setProjectionMatrix(stage.getCamera().combined);
+//		sr.begin(ShapeType.Filled);
+//		sr.setColor(Color.WHITE);
+//		if (enemies.get(0).path.size >= 2) {
+//			for (int i = 0; i < enemies.get(0).path.size; i++) {
+//				if (i + 1 < enemies.get(0).path.size - 1) {
+//					sr.box(enemies.get(0).path.get(i) * Constants.TILE_SIZE * Constants.SCALE,
+//							enemies.get(0).path.get(i + 1) * Constants.TILE_SIZE * Constants.SCALE,
+//							0, 0.05f, 0.05f, 0);
+//				}
+//			}
+//		}
+//		sr.setColor(Color.CYAN);
+//		sr.end();
 
 		stage.getActors().sort(comparator);
 
