@@ -38,7 +38,7 @@ public class GameScreen extends BaseScreen {
 	AStar astar;
 	ShapeRenderer sr;
 
-	public GameScreen(FBLA2015 game) {
+	public GameScreen(FBLA2015 game, String levelName) {
 		super(game);
 
 		ItemStats.makeCache();
@@ -51,7 +51,7 @@ public class GameScreen extends BaseScreen {
 		rayHandler.setCombinedMatrix(stage.getCamera().combined);
 
 		player = new Player("ship.png", world);
-		map = new Map("maps/mapNew.tmx", this);
+		map = new Map("maps/" + levelName + ".tmx", this);
 		astar = new AStar(map.getMap().getProperties().get("width", Integer.class), map.getMap()
 				.getProperties().get("height", Integer.class)) {
 			protected boolean isValid(int x, int y) {

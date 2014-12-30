@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntArray;
 
 public class Enemy extends GameSprite implements Destroyable {
-	float healthMax, health, aggroRange = 4, optimalFireDistance = 3;
+	float healthMax, health, aggroRange = 4, optimalFireDistance = 3, lastKnownAngle;
 	Image still;
 	Player player;
 	Gun gun;
@@ -83,8 +83,10 @@ public class Enemy extends GameSprite implements Destroyable {
 
 		if (!callback.isHit() && aggro) {
 			gun.fire(1f, 0, 0.1f, false, direction);
-			setRotation(direction.angle() - 90);
+
 		}
+
+		setRotation(direction.angle() - 90);
 	}
 
 	@Override
@@ -95,7 +97,6 @@ public class Enemy extends GameSprite implements Destroyable {
 
 	}
 
-
 	public void follow(float delta) {
 		path = astar.getPath((int) (player.getX() / Constants.SCALE / Constants.TILE_SIZE),
 				(int) (player.getY() / Constants.SCALE / Constants.TILE_SIZE),
@@ -104,7 +105,11 @@ public class Enemy extends GameSprite implements Destroyable {
 
 		if (path.size >= 4) {
 			Vector2 pathDir = new Vector2(path.get(2) - path.get(0), path.get(3) - path.get(1));
-			body.setLinearVelocity(pathDir.nor());
+			if (direction.len() > optimalFireDistance) {
+				body.setLinearVelocity(pathDir.nor());
+			} else {
+				body.setLinearVelocity(pathDir.nor().scl(0.75f));
+			}
 		}
 
 	}

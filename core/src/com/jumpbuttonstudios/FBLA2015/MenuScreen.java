@@ -31,7 +31,7 @@ public class MenuScreen extends BaseScreen {
 		start.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				game.setScreen(new GameScreen(game));
+				game.setScreen(new LevelSelectScreen(game));
 
 			}
 		});
