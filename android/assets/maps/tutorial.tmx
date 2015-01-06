@@ -25,7 +25,7 @@
  </tileset>
  <layer name="tiles" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt28FtgzAAhlGPknOT7tBROkpGYZSMklFqJOihEiJAiP+S9yRfW4evFIxJKQAAAAAAAAAAAAAAAAAAwBofpVzPpXRLx0friR9UPbblc8U4t5jsG9Ajix5Z9MiiR5Z6n3Sq476kRX9PVkfXZsbHt/QccW7sS48seuQYrwULrx8n6/N91L/168r7q2uL+R6dHln0yLKhx1eL+R6dHln0yKJHlrqOuNVjexpHv66YWHP0+4j3cXh+9RpTa3Vr8jb0yLKlR/0f9n2eGZ6zLDPVY7jOTL1vMh7r2edgw8/R50Fr9wvXjvr7bi/5YP+UHln0yDJznfh9N1GPHM88h/TYTo8semTRI4seWfTI0h9DPXL0e1F65NAjix5Zhmcq97kx9T2GYZ9kfPbStfws78ReYxY9suiRRY/9/H3/6sHreafHPp78jISN9MiiRxY9suiRRY8semTRI4seWfTIokcWPbLokUWPLHpkuZTp43tZsS/S7pMcw9x3dFrPD8j0A0tMEjg=
+   eJzt3MFRg0AAhtEtJedk7MFSLCWlUEpKSSkuI3hwBgkQ3F/y3sxeFfiCwC6xFAAAAAAAAAAAAAAAAAAAYI1zKddLKd3ScW694QdVj215WzEuLTb2BeiRRY8semTRI0u9TzrVcV/Sor8nq6Nrs8XHt/QccW7sS48seuQYrwULrx8nz+f7qJ/168r7q2uL7T06PbLokWVDj/cW23t0emTRI4seWepzxK0e29M4+ueKiWeOfh3xPg7zV39j6lndM3kbemTZ0qP+Dfu4zAzzLMtM9RiuM1Pvm4zHenYebPg5+jxo7Xrh2lF/3+1Pduyf0iOLHllmrhPf7ybqkeOZ55Ae2+mRRY8semTRI4seWfpjqEeOfi1Kjxx6ZNEjyzCncp8bU99jGNZJxrmXruW+vBJrjVn0yKJHFj328/P9qwev550e+3jyHAkb6ZFFjyx6ZNEjix5Z9MiiRxY9suiRRY8semTRI4seWfTI8luP4f2EResi7fbkGM5f/y9g6vs5XevtAzJ9Aj55ETM=
   </data>
  </layer>
  <objectgroup name="comms" width="100" height="100">
@@ -61,6 +61,7 @@
   <object name="level" type="object" x="1216" y="1920">
    <polygon points="0,0 -256,0 -256,-96 -128,-96 -128,-384 -160,-384 -160,-480 -128,-480 -128,-704 -608,-704 -608,-480 -576,-480 -576,-384 -608,-384 -608,-96 -480,-96 -480,160 -192,160 -192,128 -448,128 -448,-128 -576,-128 -576,-352 -544,-352 -544,-512 -576,-512 -576,-672 -160,-672 -160,-512 -192,-512 -192,-352 -160,-352 -160,-128 -288,-128 -288,32 0,32"/>
   </object>
+  <object name="level" type="object" x="928" y="3104" width="256" height="32"/>
  </objectgroup>
  <objectgroup name="obstacles" width="100" height="100">
   <object name="laser" x="928" y="1952" width="32" height="96">
@@ -75,9 +76,22 @@
  </objectgroup>
  <objectgroup name="positions" width="100" height="100">
   <object name="player_spawn" x="1024" y="3072" width="32" height="32"/>
-  <object name="enemy_spawn" x="1312" y="2688" width="32" height="32">
+  <object name="enemy_spawn" x="768" y="1312" width="32" height="32">
    <properties>
     <property name="health" value="50"/>
+    <property name="objective" value="true"/>
+   </properties>
+  </object>
+  <object name="enemy_spawn" x="832" y="1312" width="32" height="32">
+   <properties>
+    <property name="health" value="50"/>
+    <property name="objective" value="true"/>
+   </properties>
+  </object>
+  <object name="enemy_spawn" x="896" y="1312" width="32" height="32">
+   <properties>
+    <property name="health" value="50"/>
+    <property name="objective" value="true"/>
    </properties>
   </object>
  </objectgroup>

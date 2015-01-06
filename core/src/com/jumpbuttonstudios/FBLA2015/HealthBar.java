@@ -27,7 +27,7 @@ public class HealthBar extends Actor {
 
 		bar.draw(batch, parentAlpha);
 		background.draw(batch, parentAlpha);
-		bar.setPosition(getX(), getY());
+		bar.setPosition(getX() + background.getWidth() - bar.getWidth(), getY());
 		background.setPosition(getX(), getY());
 
 		bar.setWidth(player.health / player.healthMax * initialWidth);

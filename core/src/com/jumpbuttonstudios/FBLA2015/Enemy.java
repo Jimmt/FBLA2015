@@ -16,19 +16,19 @@ public class Enemy extends GameSprite implements Destroyable {
 	Image still;
 	Player player;
 	Gun gun;
-	boolean clearShot, aggro;
+	boolean clearShot, aggro, objective;
 	Vector2 direction;
 	World world;
 	EnemyRaycastCallback callback;
 	AStar astar;
 	IntArray path;
 
-	public Enemy(String path, float x, float y, float healthMax, AStar astar, World world) {
+	public Enemy(String path, ItemStats stats, float x, float y, float healthMax, AStar astar, World world) {
 		super(path, x, y, 0, 1, true, BodyType.DynamicBody, world);
 		this.astar = astar;
 		this.world = world;
 		direction = new Vector2();
-		gun = new Gun(world, 3f, ItemStats.PISTOL, this);
+		gun = new Gun(world, 3f, stats, this);
 		this.healthMax = healthMax;
 		health = healthMax;
 		UserData userData = new UserData();
@@ -46,6 +46,7 @@ public class Enemy extends GameSprite implements Destroyable {
 		body.getFixtureList().get(0).setFriction(0.0f);
 		this.path = new IntArray();
 	}
+	
 
 	public void hurt(float amount) {
 		health -= amount;

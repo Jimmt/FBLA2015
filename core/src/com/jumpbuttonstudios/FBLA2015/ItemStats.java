@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public enum ItemStats {
-	PISTOL("pistolIcon.png", "bullet.png", 0.2f, 10f, 7f), RIFLE("rifleIcon.png", "bullet.png", 0.1f, 15f, 15f);
+	TUTORIAL_GUN("pistolIcon.png", "bullet.png", 0.5f, 5f, 5f), PISTOL("pistolIcon.png", "bullet.png", 0.2f, 10f, 7f), RIFLE("rifleIcon.png", "bullet.png", 0.1f, 15f, 15f);
 
 	private float rof, damage, bulletSpeed;
 	private Image icon;

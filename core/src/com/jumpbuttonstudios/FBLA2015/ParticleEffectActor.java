@@ -9,15 +9,17 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class ParticleEffectActor extends Actor {
 	ParticleEffect effect;
 
-	public ParticleEffectActor(String path, String dir) {
+	public ParticleEffectActor(String path, String dir, boolean scaled) {
 		effect = new ParticleEffect();
 		effect.load(Gdx.files.internal(path), Gdx.files.internal(dir));
 		ParticleEmitter emitter = effect.getEmitters().get(0);
-		emitter.getScale().setHigh(emitter.getScale().getHighMax() * Constants.SCALE);
-		emitter.getVelocity().setHigh(emitter.getVelocity().getHighMin() * Constants.SCALE,
-				emitter.getVelocity().getHighMax() * Constants.SCALE);
-	}
 
+		if (scaled) {
+			emitter.getScale().setHigh(emitter.getScale().getHighMax() * Constants.SCALE);
+			emitter.getVelocity().setHigh(emitter.getVelocity().getHighMin() * Constants.SCALE,
+					emitter.getVelocity().getHighMax() * Constants.SCALE);
+		}
+	}
 
 	@Override
 	public void act(float delta) {

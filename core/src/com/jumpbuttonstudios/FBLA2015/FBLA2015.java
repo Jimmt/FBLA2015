@@ -13,8 +13,11 @@ public class FBLA2015 extends Game {
 	@Override
 	public void create() {
 		soundManager = new CustomSoundManager();
-		soundManager.loadSound("gunshot", Gdx.files.internal("gunshot.wav"));
+		soundManager.loadSound("gunshot", Gdx.files.internal("sfx/gunshot.wav"));
+		soundManager.loadSound("button", Gdx.files.internal("sfx/buttonpress.wav"));
 
+		
+		
 		DEBUG = true;
 		
 		if (DEBUG) {

@@ -16,7 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class BaseScreen implements Screen {
-	protected Stage stage, hudStage;
+	protected Stage stage, hudStage, dialogStage;
 	protected Table table;
 	protected HudTable hudTable;
 	protected World world;
@@ -25,6 +25,7 @@ public class BaseScreen implements Screen {
 	protected OrthographicCamera camera;
 	protected Batch batch;
 	protected FBLA2015 game;
+	boolean paused;
 
 	public BaseScreen(FBLA2015 game) {
 		this.game = game;
@@ -53,17 +54,18 @@ public class BaseScreen implements Screen {
 		Gdx.gl.glClearColor(0, 0, 0, 1.0f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		stage.act(delta);
-		stage.draw();
-
 		camera.update();
 
 		batch.setProjectionMatrix(camera.combined);
 
-		world.step(1 / 60f, 5, 5);
+		if (!paused) {
+			stage.act(delta);
+			world.step(1 / 60f, 5, 5);
+		}
+		stage.draw();
 
 		if (FBLA2015.DEBUG) {
-			debugRenderer.render(world, stage.getCamera().combined);
+//			debugRenderer.render(world, stage.getCamera().combined);
 		}
 	}
 
@@ -87,8 +89,12 @@ public class BaseScreen implements Screen {
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
-
+		
+	}
+	
+	public void pauseGame(){
+		paused = !paused;
+		System.out.println("pause");
 	}
 
 	@Override

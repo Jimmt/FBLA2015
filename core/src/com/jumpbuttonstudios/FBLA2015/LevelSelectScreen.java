@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -12,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
@@ -34,10 +34,11 @@ public class LevelSelectScreen extends BaseScreen {
 		FileHandle levelFile = Gdx.files.internal("levels.txt");
 
 		int num = Integer.valueOf(levelFile.readString());
+		GamePrefs.initialize(num);
 
 		buttons = new Array<ImageButton>();
 
-		Image tablebg = new Image(new Texture(Gdx.files.internal("ui/levelselectbg.png")));
+		Image tablebg = new Image(new Texture(Gdx.files.internal("mainmenu/menubg.png")));
 		table.setBackground(tablebg.getDrawable());
 		
 		
@@ -52,7 +53,7 @@ public class LevelSelectScreen extends BaseScreen {
 			style.fontColor = Color.WHITE;
 			Label label = new Label(levelNames[i], style);
 			label.setWrap(true);
-			buttonTable.add(label).width(temp.getWidth());
+			buttonTable.add(levelNames[i]);
 			labels.add(label);
 		}
 		
@@ -68,26 +69,43 @@ public class LevelSelectScreen extends BaseScreen {
 			button.addListener(new ClickListener() {
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
-					game.setScreen(new GameScreen(game, levelNames[index]));
-
+					game.setScreen(new GameScreen(game, levelNames[index], index));
+					FBLA2015.soundManager.play("button", 0.5f);
 				}
 			});
 			buttons.add(button);
-			buttonTable.add(button);
+			buttonTable.add(button).padLeft(5f);
 		}
 		
-		scroller = new ScrollPane(buttonTable, skin);
+		ImageButtonStyle style = new ImageButtonStyle();
+		style.up = new Image(new Texture(Gdx.files.internal("ui/button.png"))).getDrawable();
+		TextImageButton back = new TextImageButton("Back", skin.getFont("default-font"), style);
+		back.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				game.setScreen(new MenuScreen(game));
+				FBLA2015.soundManager.play("button", 0.5f);
+			}
+		});
+		
+		ScrollPaneStyle scrollStyle = new ScrollPaneStyle();
+		scrollStyle.hScroll = new Image(new Texture(Gdx.files.internal("ui/scrollbar.png"))).getDrawable();
+		scrollStyle.hScrollKnob = new Image(new Texture(Gdx.files.internal("ui/scrollknob.png"))).getDrawable();
+		scroller = new ScrollPane(buttonTable, scrollStyle);
 //		scroller.setFadeScrollBars(false);
 		scroller.setScrollingDisabled(false, true);
 		table.add("Level Select").padBottom(100f);
 		table.row();
 		table.add(scroller);
-
+		table.row();
+		table.add(back).padTop(100f);
 	}
 	
 	@Override
 	public void render(float delta){
 		super.render(delta);
+		
+		
 	}
 	
 	

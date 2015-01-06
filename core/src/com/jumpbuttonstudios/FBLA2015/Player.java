@@ -41,7 +41,7 @@ public class Player extends GameSprite {
 	public Player(String path, World world) {
 		super(path, 1, world);
 		
-		streak = new ParticleEffectActor("effects/streak.p", "");
+		streak = new ParticleEffectActor("effects/streak.p", "", true);
 
 		hitbox = new Rectangle(getX(), getY(), getWidth(), getHeight());
 		commHitbox = new Rectangle(getX() / Constants.SCALE, getY() / Constants.SCALE, getWidth() / Constants.SCALE, getHeight() / Constants.SCALE);

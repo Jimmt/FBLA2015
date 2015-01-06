@@ -15,7 +15,7 @@ public class Target extends GameSprite {
 		data.tag = "target";
 		data.value = this;
 		body.setUserData(data);
-		effect = new ParticleEffectActor("effects/hit.p", "");
+		effect = new ParticleEffectActor("effects/hit.p", "", true);
 		effectX = getX() + getWidth() / 2;
 		effectY = getY() + getHeight() / 2;
 	}

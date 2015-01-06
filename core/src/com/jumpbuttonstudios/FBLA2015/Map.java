@@ -64,10 +64,10 @@ public class Map extends Actor {
 
 		while (layerIterator.hasNext()) {
 			MapLayer layer = layerIterator.next();
-			if (layer.getName().equals("lights")) {
-				lightsLayer = layer;
-
-			}
+// if (layer.getName().equals("lights")) {
+// lightsLayer = layer;
+//
+// }
 			if (layer.getName().equals("positions")) {
 				positionsLayer = layer;
 			}
@@ -81,11 +81,11 @@ public class Map extends Actor {
 				tilesLayer = (TiledMapTileLayer) layer;
 			}
 		}
-		
+
 		for (int i = 0; i < map.getProperties().get("width", Integer.class); i++) {
 			for (int j = 0; j < map.getProperties().get("height", Integer.class); j++) {
 				TiledMapTileLayer.Cell cell = tilesLayer.getCell(i, j);
-				
+
 				if (cell != null) {
 					if (tilesLayer.getCell(i, j).getTile().getProperties()
 							.get("type", String.class).equals("floor")) {
@@ -101,25 +101,25 @@ public class Map extends Actor {
 
 		parseComms();
 
-		Iterator<MapObject> objectIterator = lightsLayer.getObjects().iterator();
-		while (objectIterator.hasNext()) {
-			RectangleMapObject object = (RectangleMapObject) objectIterator.next();
-			if (object.getName().equals("cone")) {
-				ConeLight light = new ConeLight(gs.rayHandler, 16, Color.WHITE, 800,
-						object.getRectangle().x, object.getRectangle().y, 0, 45);
-			}
-			if (object.getName().equals("point")) {
-
-				PointLight light = new PointLight(gs.rayHandler, Integer.valueOf(object
-						.getProperties().get("rays", String.class)),
-						new Color(0.6f, 0.6f, 0.6f, 1f), Integer.valueOf(object.getProperties()
-								.get("distance", String.class)), object.getRectangle().x
-								* Constants.SCALE, object.getRectangle().y * Constants.SCALE);
-
+// Iterator<MapObject> objectIterator = lightsLayer.getObjects().iterator();
+// while (objectIterator.hasNext()) {
+// RectangleMapObject object = (RectangleMapObject) objectIterator.next();
+// if (object.getName().equals("cone")) {
+// ConeLight light = new ConeLight(gs.rayHandler, 16, Color.WHITE, 800,
+// object.getRectangle().x, object.getRectangle().y, 0, 45);
+// }
+// if (object.getName().equals("point")) {
+//
+// PointLight light = new PointLight(gs.rayHandler, Integer.valueOf(object
+// .getProperties().get("rays", String.class)),
+// new Color(0.6f, 0.6f, 0.6f, 1f), Integer.valueOf(object.getProperties()
+// .get("distance", String.class)), object.getRectangle().x
+// * Constants.SCALE, object.getRectangle().y * Constants.SCALE);
+//
 // light.setXray(true);
-			}
-
-		}
+// }
+//
+// }
 
 	}
 
@@ -164,13 +164,23 @@ public class Map extends Actor {
 						object.getRectangle().y * Constants.SCALE);
 			}
 			if (object.getName().equals("enemy_spawn")) {
-				gs.createEnemy(object.getRectangle().x * Constants.SCALE, object.getRectangle().y
-						* Constants.SCALE,
-						Float.parseFloat(object.getProperties().get("health", String.class)));
+				if (!object.getProperties().containsKey("stats")) {
+					gs.createEnemy(
+							ItemStats.TUTORIAL_GUN,
+							object.getRectangle().x * Constants.SCALE,
+							object.getRectangle().y * Constants.SCALE,
+							Float.parseFloat(object.getProperties().get("health", String.class)),
+							Boolean.parseBoolean(object.getProperties().get("objective",
+									String.class)));
+				} else {
+
+				}
 
 			}
-			if (object.getName().equals("boss_spawn")) {
-
+			if (object.getName().equals("worm")) {
+				Worm worm = new Worm(object.getRectangle().x * Constants.SCALE,
+						object.getRectangle().y * Constants.SCALE, gs.world);
+				gs.createBoss(worm);
 			}
 		}
 	}
