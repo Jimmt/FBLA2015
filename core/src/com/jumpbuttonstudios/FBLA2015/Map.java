@@ -165,8 +165,8 @@ public class Map extends Actor {
 			}
 			if (object.getName().equals("enemy_spawn")) {
 				if (!object.getProperties().containsKey("stats")) {
-					gs.createEnemy(
-							ItemStats.TUTORIAL_GUN,
+					gs.createEnemy(ItemStats.TUTORIAL_GUN,
+							"enemy/enemy.png",
 							object.getRectangle().x * Constants.SCALE,
 							object.getRectangle().y * Constants.SCALE,
 							Float.parseFloat(object.getProperties().get("health", String.class)),
@@ -176,6 +176,15 @@ public class Map extends Actor {
 
 				}
 
+			}
+			if(object.getName().equals("2_enemy")){
+				gs.createEnemy(ItemStats.LEVEL2_GUN,
+						"enemy/level2enemy.png",
+						object.getRectangle().x * Constants.SCALE,
+						object.getRectangle().y * Constants.SCALE,
+						Float.parseFloat(object.getProperties().get("health", String.class)),
+						Boolean.parseBoolean(object.getProperties().get("objective",
+								String.class)));
 			}
 			if (object.getName().equals("worm")) {
 				Worm worm = new Worm(object.getRectangle().x * Constants.SCALE,

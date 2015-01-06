@@ -11,11 +11,11 @@ public class GameContactListener implements ContactListener {
 	public void beginContact(Contact contact) {
 		UserData a = (UserData) contact.getFixtureA().getBody().getUserData();
 		UserData b = (UserData) contact.getFixtureB().getBody().getUserData();
-		
-		if(a.tag.equals("target") && b.value instanceof Bullet){
+
+		if (a.tag.equals("target") && b.value instanceof Bullet) {
 			((Target) a.value).playParticles();
 		}
-		if(b.tag.equals("target") && a.value instanceof Bullet){
+		if (b.tag.equals("target") && a.value instanceof Bullet) {
 			((Target) b.value).playParticles();
 		}
 
@@ -44,6 +44,24 @@ public class GameContactListener implements ContactListener {
 			if (!((Bullet) a.value).friendly) {
 				((Player) b.value).hurt(((Bullet) a.value).damage);
 			}
+		}
+
+		if (a.value instanceof Bullet && b.value instanceof Boss) {
+			if (((Bullet) a.value).friendly) {
+				((Boss) b.value).health -= ((Bullet) a.value).damage;
+			}
+		}
+		if (b.value instanceof Bullet && a.value instanceof Boss) {
+			((Boss) a.value).health -= ((Bullet) b.value).damage;
+		}
+
+		if (a.value instanceof Player && b.value instanceof Boss) {
+
+			((Player) a.value).hurt(((Boss) b.value).damage);
+
+		}
+		if (b.value instanceof Player && a.value instanceof Boss) {
+			((Player) b.value).hurt(((Boss) a.value).damage);
 		}
 	}
 

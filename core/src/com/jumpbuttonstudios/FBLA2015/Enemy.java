@@ -16,12 +16,13 @@ public class Enemy extends GameSprite implements Destroyable {
 	Image still;
 	Player player;
 	Gun gun;
-	boolean clearShot, aggro, objective;
+	boolean clearShot, aggro, objective, effectPlaying;
 	Vector2 direction;
 	World world;
 	EnemyRaycastCallback callback;
 	AStar astar;
 	IntArray path;
+	float effectX, effectY;
 
 	public Enemy(String path, ItemStats stats, float x, float y, float healthMax, AStar astar, World world) {
 		super(path, x, y, 0, 1, true, BodyType.DynamicBody, world);
@@ -45,6 +46,7 @@ public class Enemy extends GameSprite implements Destroyable {
 		body.getFixtureList().get(0).setFilterData(f);
 		body.getFixtureList().get(0).setFriction(0.0f);
 		this.path = new IntArray();
+
 	}
 	
 
@@ -59,11 +61,13 @@ public class Enemy extends GameSprite implements Destroyable {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
+	
 
 	@Override
 	public void act(float delta) {
 		super.act(delta);
 
+		
 		world.rayCast(callback, player.body.getWorldCenter(), body.getWorldCenter());
 
 		direction.set(
@@ -93,7 +97,7 @@ public class Enemy extends GameSprite implements Destroyable {
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
-
+		
 		gun.draw(batch, parentAlpha);
 
 	}
@@ -117,7 +121,6 @@ public class Enemy extends GameSprite implements Destroyable {
 
 	@Override
 	public void destroy() {
-
 	}
 
 }

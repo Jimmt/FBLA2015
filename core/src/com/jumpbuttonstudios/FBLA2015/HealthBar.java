@@ -9,11 +9,23 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 public class HealthBar extends Actor {
 	Image background, bar;
 	Player player;
-	float initialWidth;
+	Boss boss;
+	float initialWidth, barWidth;
 
 	public HealthBar(Player player) {
 		this.player = player;
 
+		background = new Image(new Texture(Gdx.files.internal("ui/healthbarbg.png")));
+		background.setWidth(background.getWidth() * 2);
+		bar = new Image(new Texture(Gdx.files.internal("ui/healthbar.png")));
+		bar.setWidth(bar.getWidth() * 2);
+		initialWidth = bar.getWidth();
+		setSize(background.getWidth(), background.getHeight());
+	}
+
+	public HealthBar(Boss boss) {
+		this.boss = boss;
+		
 		background = new Image(new Texture(Gdx.files.internal("ui/healthbarbg.png")));
 		background.setWidth(background.getWidth() * 2);
 		bar = new Image(new Texture(Gdx.files.internal("ui/healthbar.png")));
@@ -30,10 +42,21 @@ public class HealthBar extends Actor {
 		bar.setPosition(getX() + background.getWidth() - bar.getWidth(), getY());
 		background.setPosition(getX(), getY());
 
-		bar.setWidth(player.health / player.healthMax * initialWidth);
-		
-		if (player.health / player.healthMax * initialWidth < 0) {
-			bar.setWidth(0);
+		if (player != null) {
+			barWidth = player.health / player.healthMax * initialWidth;
+		} else {	
+			barWidth = boss.health / boss.healthMax * initialWidth;
+		}
+		bar.setWidth(barWidth);
+
+		if (player != null) {
+			if (player.health / player.healthMax * initialWidth < 0) {
+				bar.setWidth(0);
+			}
+		} else {
+			if (boss.health / boss.healthMax * initialWidth < 0) {
+				bar.setWidth(0);
+			}
 		}
 	}
 }

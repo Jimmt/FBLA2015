@@ -6,14 +6,15 @@ import box2dLight.RayHandler;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
+import com.badlogic.gdx.graphics.g2d.ParticleEmitter;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
@@ -39,19 +40,22 @@ public class GameScreen extends BaseScreen {
 	AStar astar;
 	ShapeRenderer sr;
 	FBLA2015 game;
+	ParticleEffectPool pool;
+	Array<ParticleEffectActor> effects;
+	BossHealthDialog hpDialog;
 
 	public GameScreen(FBLA2015 game, String levelName, int levelNum) {
 		super(game);
 
 		this.game = game;
 		this.levelNum = levelNum;
-		
-		if(levelNum == 0){
+
+		if (levelNum == 0) {
 			hasBoss = false;
 		} else {
 			hasBoss = true;
 		}
-		
+
 		ItemStats.makeCache();
 
 		FitViewport viewport = new FitViewport(Constants.SCLWIDTH, Constants.SCLHEIGHT);
@@ -106,17 +110,27 @@ public class GameScreen extends BaseScreen {
 
 		sr = new ShapeRenderer();
 
+		ParticleEffect effect = new ParticleEffect();
+		effect.load(Gdx.files.internal("effects/explosion.p"), Gdx.files.internal(""));
+		ParticleEmitter emitter = effect.getEmitters().get(0);
+		emitter.getScale().setHigh(emitter.getScale().getHighMax() * Constants.SCALE);
+		emitter.getVelocity().setHigh(emitter.getVelocity().getHighMin() * Constants.SCALE,
+				emitter.getVelocity().getHighMax() * Constants.SCALE);
+		pool = new ParticleEffectPool(effect, 3, 3);
+		effects = new Array<ParticleEffectActor>();
+
 	}
-	
-	public void createBoss(Boss boss){
+
+	public void createBoss(Boss boss) {
 		this.boss = boss;
 		boss.setPlayer(player);
 		stage.addActor(boss);
 	}
 
-	public void createEnemy(ItemStats stats, float x, float y, float health, boolean objective) {
+	public void createEnemy(ItemStats stats, String path, float x, float y, float health,
+			boolean objective) {
 
-		Enemy enemy = new Enemy("enemy/enemy.png", stats, x, y, health, astar, world);
+		Enemy enemy = new Enemy(path, stats, x, y, health, astar, world);
 		enemy.objective = objective;
 		enemy.setPlayer(player);
 		stage.addActor(enemy);
@@ -177,15 +191,39 @@ public class GameScreen extends BaseScreen {
 			}
 
 		}
+		
+		if(boss != null){
+			if(boss.aggro){
+				if(hpDialog == null){
+					hpDialog = new BossHealthDialog(boss, skin);
+					hpDialog.show(hudStage);
+					hpDialog.addAction(Actions.sequence(Actions.moveBy(0, Constants.HEIGHT / 2), Actions.moveBy(0, Constants.HEIGHT / 2, 1f)));
+				}
+			}
+		}
 
 		objectiveCount = 0;
+
+		for (int i = 0; i < effects.size; i++) {
+			if (effects.get(i).effect.isComplete()) {
+				stage.getActors().removeValue(effects.get(i), false);
+				effects.removeIndex(i);
+			}
+		}
+
 		for (int i = 0; i < enemies.size; i++) {
 			if (enemies.get(i).objective) {
 				objectiveCount++;
 			}
 
 			if (enemies.get(i).health <= 0) {
+				ParticleEffectActor effect = new ParticleEffectActor(pool.obtain());
+				effects.add(effect);
+				stage.addActor(effect);
+				effect.effect.start();
+				effect.effect.setPosition(enemies.get(i).getX(), enemies.get(i).getY());
 				enemies.get(i).destroy();
+
 				stage.getActors().removeValue(enemies.get(i), false);
 				world.destroyBody(enemies.get(i).body);
 
@@ -195,6 +233,7 @@ public class GameScreen extends BaseScreen {
 
 				enemies.removeIndex(i);
 				byteCoins++;
+
 			}
 		}
 		if (objectiveCount == 0 && ((boss != null && boss.health <= 0) || (!hasBoss))) {

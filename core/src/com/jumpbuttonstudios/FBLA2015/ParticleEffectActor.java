@@ -20,6 +20,10 @@ public class ParticleEffectActor extends Actor {
 					emitter.getVelocity().getHighMax() * Constants.SCALE);
 		}
 	}
+	
+	public ParticleEffectActor(ParticleEffect effect){
+		this.effect = effect;
+	}
 
 	@Override
 	public void act(float delta) {

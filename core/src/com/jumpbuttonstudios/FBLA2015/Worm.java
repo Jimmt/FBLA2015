@@ -61,7 +61,7 @@ public class Worm extends Boss {
 			body.createFixture(fd);
 			UserData data = new UserData();
 			data.tag = "wormsegment";
-			data.value = this;
+			data.value = Worm.this;
 			body.setUserData(data);
 			setOrigin(getWidth() / 2, getHeight() / 2);
 
@@ -98,7 +98,7 @@ public class Worm extends Boss {
 	}
 
 	public Worm(float x, float y, World world) {
-		super(100);
+		super(1000, 20, "Worm");
 		segments = new Array<WormSegment>();
 		joints = new Array<RevoluteJoint>();
 
@@ -139,7 +139,7 @@ public class Worm extends Boss {
 		Vector2 direction = new Vector2(x - segments.get(0).body.getWorldCenter().x, y
 				- segments.get(0).body.getWorldCenter().y);
 		segments.get(0).body.applyForceToCenter(
-				direction.nor().scl(5f).sub(segments.get(0).body.getLinearVelocity()), true);
+				direction.nor().scl(7f).sub(segments.get(0).body.getLinearVelocity()), true);
 
 	}
 
@@ -152,6 +152,7 @@ public class Worm extends Boss {
 					- segments.get(0).getY());
 
 			if (distance.len() <= aggroRange) {
+				aggro = true;
 				moveTowards(player.getX(), player.getY());
 			}
 		}
