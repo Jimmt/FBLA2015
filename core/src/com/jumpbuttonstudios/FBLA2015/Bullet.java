@@ -7,7 +7,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class Bullet extends GameSprite {
-	boolean delete, friendly;
+	boolean delete, friendly, bounce;
 	float damage;
 
 	public Bullet(String path, boolean friendly, float x, float y, float angle, float damage, World world) {

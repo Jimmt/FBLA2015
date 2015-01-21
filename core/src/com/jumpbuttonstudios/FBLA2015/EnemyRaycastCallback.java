@@ -11,7 +11,7 @@ public class EnemyRaycastCallback implements RayCastCallback {
 	public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction) {
 		
 		UserData userData = (UserData) fixture.getBody().getUserData();
-		if (userData.value instanceof Enemy || userData.value instanceof Bullet || userData.tag.equals("feet")) {
+		if (userData.value instanceof Enemy || userData.value instanceof Bullet || userData.value instanceof Boss) {
 			hit = false;
 			return -1;
 		} else {

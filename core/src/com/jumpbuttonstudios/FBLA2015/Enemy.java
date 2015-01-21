@@ -24,12 +24,13 @@ public class Enemy extends GameSprite implements Destroyable {
 	IntArray path;
 	float effectX, effectY;
 
-	public Enemy(String path, ItemStats stats, float x, float y, float healthMax, AStar astar, World world) {
+	public Enemy(String path, ItemStats stats, float x, float y, float healthMax, AStar astar,
+			World world) {
 		super(path, x, y, 0, 1, true, BodyType.DynamicBody, world);
 		this.astar = astar;
 		this.world = world;
 		direction = new Vector2();
-		gun = new Gun(world, 3f, stats, this);
+		gun = new Gun(world, 3f, stats, body);
 		this.healthMax = healthMax;
 		health = healthMax;
 		UserData userData = new UserData();
@@ -48,7 +49,6 @@ public class Enemy extends GameSprite implements Destroyable {
 		this.path = new IntArray();
 
 	}
-	
 
 	public void hurt(float amount) {
 		health -= amount;
@@ -61,13 +61,11 @@ public class Enemy extends GameSprite implements Destroyable {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
-	
 
 	@Override
 	public void act(float delta) {
 		super.act(delta);
 
-		
 		world.rayCast(callback, player.body.getWorldCenter(), body.getWorldCenter());
 
 		direction.set(
@@ -87,7 +85,7 @@ public class Enemy extends GameSprite implements Destroyable {
 		}
 
 		if (!callback.isHit() && aggro) {
-			gun.fire(1f, 0, 0.1f, false, direction);
+			gun.fire((getWidth() + getHeight()) / 2, 0, 0.1f, false, direction);
 
 		}
 
@@ -97,7 +95,7 @@ public class Enemy extends GameSprite implements Destroyable {
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
-		
+
 		gun.draw(batch, parentAlpha);
 
 	}

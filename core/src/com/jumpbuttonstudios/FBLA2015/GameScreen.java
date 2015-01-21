@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
 import com.badlogic.gdx.graphics.g2d.ParticleEmitter;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -34,7 +35,7 @@ public class GameScreen extends BaseScreen {
 	StageComparator comparator;
 	CommDialog commDialog;
 	ShopDialog shopDialog;
-	boolean hitComm, gameOver, finished, completeDialogShown, hasBoss;
+	boolean hitComm, gameOver, finished, completeDialogShown, hasBoss = true;
 	Image black;
 	int byteCoins, levelNum, objectiveCount;
 	AStar astar;
@@ -43,18 +44,13 @@ public class GameScreen extends BaseScreen {
 	ParticleEffectPool pool;
 	Array<ParticleEffectActor> effects;
 	BossHealthDialog hpDialog;
+	String explanationText;
 
-	public GameScreen(FBLA2015 game, String levelName, int levelNum) {
+	public GameScreen(FBLA2015 game, String levelName) {
 		super(game);
 
 		this.game = game;
-		this.levelNum = levelNum;
 
-		if (levelNum == 0) {
-			hasBoss = false;
-		} else {
-			hasBoss = true;
-		}
 
 		ItemStats.makeCache();
 
@@ -81,7 +77,6 @@ public class GameScreen extends BaseScreen {
 		player.body.setTransform(map.getPlayerSpawn(), 0);
 
 		hudStage = new Stage(hudViewport);
-		dialogStage = new Stage(hudViewport);
 		hudTable = new HudTable(player, this, skin);
 		hudTable.setFillParent(true);
 		hudStage.addActor(hudTable);
@@ -118,7 +113,7 @@ public class GameScreen extends BaseScreen {
 				emitter.getVelocity().getHighMax() * Constants.SCALE);
 		pool = new ParticleEffectPool(effect, 3, 3);
 		effects = new Array<ParticleEffectActor>();
-
+		
 	}
 
 	public void createBoss(Boss boss) {
@@ -174,7 +169,8 @@ public class GameScreen extends BaseScreen {
 // sr.end();
 
 		stage.getActors().sort(comparator);
-
+		stage.draw();
+		stage.act(delta);
 		hudStage.draw();
 		hudStage.act(delta);
 		dialogStage.draw();
@@ -199,6 +195,9 @@ public class GameScreen extends BaseScreen {
 					hpDialog.show(hudStage);
 					hpDialog.addAction(Actions.sequence(Actions.moveBy(0, Constants.HEIGHT / 2), Actions.moveBy(0, Constants.HEIGHT / 2, 1f)));
 				}
+			}
+			if(boss.health <= 0){
+				hpDialog.addAction(Actions.fadeOut(1f, Interpolation.pow2Out));
 			}
 		}
 
@@ -226,6 +225,8 @@ public class GameScreen extends BaseScreen {
 
 				stage.getActors().removeValue(enemies.get(i), false);
 				world.destroyBody(enemies.get(i).body);
+				
+				FBLA2015.soundManager.play("enemydeath");
 
 				for (int j = 0; j < enemies.get(i).gun.bullets.size; j++) {
 					world.destroyBody(enemies.get(i).gun.bullets.get(j).body);
@@ -235,9 +236,6 @@ public class GameScreen extends BaseScreen {
 				byteCoins++;
 
 			}
-		}
-		if (objectiveCount == 0 && ((boss != null && boss.health <= 0) || (!hasBoss))) {
-			completeLevel();
 		}
 
 		if (player.health <= 0) {

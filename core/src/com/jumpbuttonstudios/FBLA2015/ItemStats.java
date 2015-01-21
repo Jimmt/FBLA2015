@@ -5,7 +5,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public enum ItemStats {
-	TUTORIAL_GUN("pistolIcon.png", "bullet.png", 0.5f, 5f, 5f), LEVEL2_GUN("pistolIcon.png", "bullet.png", 0.3f, 10f, 5f), PISTOL("pistolIcon.png", "bullet.png", 0.2f, 10f, 7f), RIFLE("rifleIcon.png", "bullet.png", 0.1f, 15f, 15f);
+	TUTORIAL_GUN("pistolIcon.png", "bullet.png", 0.5f, 5f, 5f), LEVEL2_GUN("pistolIcon.png",
+			"bullet.png", 0.3f, 10f, 5f), LEVEL3_GUN("pistolIcon.png", "bullet.png", 0.25f, 12f, 6f), PISTOL(
+			"pistolIcon.png", "bullet.png", 0.2f, 10f, 7f), HORSE("rifleIcon.png",
+			"level3/benign.png", 2f, 15f, 1f);
 
 	private float rof, damage, bulletSpeed;
 	private Image icon;
@@ -24,16 +27,16 @@ public enum ItemStats {
 	public static void makeCache() {
 		cache = ItemStats.values();
 	}
-	
-	public float getBulletSpeed(){
+
+	public float getBulletSpeed() {
 		return bulletSpeed;
 	}
-	
-	public String getBulletPath(){
+
+	public String getBulletPath() {
 		return bulletPath;
 	}
-	
-	public String getPath(){
+
+	public String getPath() {
 		return path;
 	}
 

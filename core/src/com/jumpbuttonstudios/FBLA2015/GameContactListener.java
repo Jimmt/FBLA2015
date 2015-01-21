@@ -20,10 +20,14 @@ public class GameContactListener implements ContactListener {
 		}
 
 		if (a.value instanceof Bullet && !(b.value instanceof Bullet)) {
-			((Bullet) a.value).delete = true;
+			if (!((Bullet) a.value).bounce) {
+				((Bullet) a.value).delete = true;
+			}
 		}
 		if (b.value instanceof Bullet && !(a.value instanceof Bullet)) {
-			((Bullet) b.value).delete = true;
+			if (!((Bullet) b.value).bounce) {
+				((Bullet) b.value).delete = true;
+			}
 		}
 		if (a.value instanceof Enemy && b.value instanceof Bullet) {
 			if (((Bullet) b.value).friendly) {
@@ -52,15 +56,17 @@ public class GameContactListener implements ContactListener {
 			}
 		}
 		if (b.value instanceof Bullet && a.value instanceof Boss) {
-			((Boss) a.value).health -= ((Bullet) b.value).damage;
+			if (((Bullet) b.value).friendly) {
+				((Boss) a.value).health -= ((Bullet) b.value).damage;
+			}
 		}
 
-		if (a.value instanceof Player && b.value instanceof Boss) {
+		if (a.value instanceof Player && b.value instanceof Worm) {
 
 			((Player) a.value).hurt(((Boss) b.value).damage);
 
 		}
-		if (b.value instanceof Player && a.value instanceof Boss) {
+		if (b.value instanceof Player && a.value instanceof Worm) {
 			((Player) b.value).hurt(((Boss) a.value).damage);
 		}
 	}

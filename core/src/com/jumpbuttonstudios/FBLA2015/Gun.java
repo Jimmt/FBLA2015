@@ -1,10 +1,9 @@
 package com.jumpbuttonstudios.FBLA2015;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
@@ -14,16 +13,20 @@ public class Gun extends Actor {
 	Array<Bullet> bullets;
 	float lastFireTime = 999f;
 	World world;
-	GameSprite parent;
 	ItemStats stats;
+	Body body;
+	Vector2 temp = new Vector2();
+	boolean bounce;
 
-	public Gun(World world, float bulletSpeed, ItemStats stats, GameSprite parent) {
+	public Gun(World world, float bulletSpeed, ItemStats stats, Body body) {
 
 		this.stats = stats;
 		bullets = new Array<Bullet>();
 		this.world = world;
-		this.parent = parent;
+		this.body = body;
 	}
+
+
 
 	public void fire(float radius, float distance, float volume, boolean friendly, Vector2 direction) {
 
@@ -33,24 +36,45 @@ public class Gun extends Actor {
 
 				FBLA2015.soundManager.play("gunshot", volume);
 
-				Vector2 coords = new Vector2(parent.getX() + parent.getWidth() / 2
-						+ MathUtils.cosDeg(direction.angle()) * radius, parent.getY()
-						+ parent.getHeight() / 2 + MathUtils.sinDeg(direction.angle()) * radius);
+				// half width is factored in
+				Vector2 coords = new Vector2(body.getPosition().x
+						+ MathUtils.cosDeg(direction.angle()) * radius, body.getPosition().y
+						+ MathUtils.sinDeg(direction.angle()) * radius);
 
 				Bullet bullet = new Bullet(stats.getBulletPath(), friendly, coords.x, coords.y,
 						direction.angle() * MathUtils.degRad, stats.getDamage(), world);
+				bullet.bounce = bounce;
 
-				Vector2 temp = parent.body.getLinearVelocity();
-				if(direction.x > 0 && direction.y > 0){
-					bullet.body.setLinearVelocity(direction.nor().scl(stats.getBulletSpeed()).add(parent.body.getLinearVelocity()));	
+				Vector2 temp = body.getLinearVelocity();
+				if (direction.x > 0 && direction.y > 0) {
+					bullet.body.setLinearVelocity(direction.nor().scl(stats.getBulletSpeed())
+							.add(body.getLinearVelocity()));
 				} else {
 					bullet.body.setLinearVelocity(direction.nor().scl(stats.getBulletSpeed()));
 				}
-				
+
 				bullets.add(bullet);
 			}
 		}
 
+	}
+
+	public void fireStraight(float radius, float volume, float angle) {
+		if (lastFireTime > stats.getROF()) {
+			lastFireTime = 0;
+			FBLA2015.soundManager.play("gunshot", volume);
+
+			Vector2 coords = new Vector2(body.getPosition().x + MathUtils.cosDeg(angle) * radius,
+					body.getPosition().y + MathUtils.sinDeg(angle) * radius);
+
+			Bullet bullet = new Bullet(stats.getBulletPath(), false, coords.x, coords.y, angle
+					* MathUtils.degRad, stats.getDamage(), world);
+			bullet.bounce = bounce;
+			temp.set(MathUtils.cosDeg(angle), MathUtils.sinDeg(angle));
+			bullet.body.setLinearVelocity(temp.nor().scl(stats.getBulletSpeed()));
+
+			bullets.add(bullet);
+		}
 	}
 
 	public void updateFire(float delta) {

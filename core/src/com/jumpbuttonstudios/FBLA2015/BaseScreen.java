@@ -1,12 +1,13 @@
 package com.jumpbuttonstudios.FBLA2015;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
@@ -25,6 +26,7 @@ public class BaseScreen implements Screen {
 	protected OrthographicCamera camera;
 	protected Batch batch;
 	protected FBLA2015 game;
+	protected EscapeDialog dialog;
 	boolean paused;
 
 	public BaseScreen(FBLA2015 game) {
@@ -45,7 +47,13 @@ public class BaseScreen implements Screen {
 
 		batch = new SpriteBatch();
 
-		Gdx.input.setInputProcessor(stage);
+		FitViewport hudViewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT);
+		dialogStage = new Stage(hudViewport);
+
+		InputMultiplexer multiplexer = new InputMultiplexer(dialogStage, stage);
+		Gdx.input.setInputProcessor(multiplexer);
+
+		dialog = new EscapeDialog(game, this, skin);
 	}
 
 	@Override
@@ -64,8 +72,15 @@ public class BaseScreen implements Screen {
 		}
 		stage.draw();
 
+		dialogStage.draw();
+		dialogStage.act(delta);
+
 		if (FBLA2015.DEBUG) {
-//			debugRenderer.render(world, stage.getCamera().combined);
+			debugRenderer.render(world, stage.getCamera().combined);
+		}
+
+		if (Gdx.input.isKeyPressed(Keys.ESCAPE)) {
+			dialog.show(dialogStage);
 		}
 	}
 
@@ -89,10 +104,10 @@ public class BaseScreen implements Screen {
 
 	@Override
 	public void pause() {
-		
+
 	}
-	
-	public void pauseGame(){
+
+	public void pauseGame() {
 		paused = !paused;
 		System.out.println("pause");
 	}

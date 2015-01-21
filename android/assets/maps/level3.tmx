@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32">
+  <image source="tiles.png" width="608" height="544"/>
+  <tile id="60">
+   <properties>
+    <property name="type" value="wall"/>
+   </properties>
+  </tile>
+  <tile id="61">
+   <properties>
+    <property name="type" value="wall"/>
+   </properties>
+  </tile>
+  <tile id="62">
+   <properties>
+    <property name="type" value="wall"/>
+   </properties>
+  </tile>
+  <tile id="63">
+   <properties>
+    <property name="type" value="floor"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="tiles" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztm+1twyAQQBkli9TKKBnFo2QUj5JRiiWQrATzER/nI35POvVPbZ95YA5onQMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADQYXJu+XPucUI8j4TP+3F22/XAv9ty9z9HizXvylccCnzYAh+2wIct8GELfOgTatq9ulGkfeIz/M+7xP1KMbIPn7tG+8RnqYw3fNjy4cfhXLv2tLZ21Gij2F8tzkexr1gBH7bAhy3w0YbUHuvevIWPNqTqn70a8Nd9+H74KuzNN4GPPu/9LfjAh3TgQ97HkT2ok+ePWXINLugjSdhb+Dh/3rs+lc+mBszOmdPBc/HM/bN9RHKM9Pax88yPfpzzIf1NaKU07vChCz7G8jGFb5rQs7r52DmLeqTOoSz7CHP2PeaTitoca9aPuefUxruP1YWPW+v1O/P5M87nUv2wFalvllYNuPXR6mJ7fWm8pmooDUej+ljH4zdjrtZHKjQcSc0hmj6+dRGvD/mK9g8pJqF1iKaPI21p3UfILduW+BjSR3cXIZfL+6jZr5GqZ0th0MfshKmZQ6xE8DEfud452z5CfotEfr1DwMcS3hcfAoEPW3EVH6nznJZInf30iKv4OIry+gMfBUbxEb8DgvvNszPIKD465DM7g+DDFviwhfJ++zoH3DLxilGq+6bN74bI3fcjWv9uVotSvSxVD7fu35XqqB77gSNw1n4qPtLgwxb4sIVhH0vjLX8CfNgCH7bAhy3wYQup/2FpXQ+Hder7Gny7fgcA6MY/gV3ihg==
+  </data>
+ </layer>
+ <objectgroup name="comms" width="100" height="100"/>
+ <objectgroup name="obstacles" width="100" height="100"/>
+ <objectgroup name="positions" width="100" height="100">
+  <object name="player_spawn" x="448" y="3040" width="32" height="32"/>
+  <object name="3_enemy" x="160" y="2368" width="32" height="32">
+   <properties>
+    <property name="health" value="150"/>
+    <property name="objective" value="false"/>
+   </properties>
+  </object>
+  <object name="3_enemy" x="256" y="2304" width="32" height="32">
+   <properties>
+    <property name="health" value="150"/>
+    <property name="objective" value="false"/>
+   </properties>
+  </object>
+  <object name="3_enemy" x="352" y="2304" width="32" height="32">
+   <properties>
+    <property name="health" value="150"/>
+    <property name="objective" value="false"/>
+   </properties>
+  </object>
+  <object name="3_enemy" x="896" y="2400" width="32" height="32">
+   <properties>
+    <property name="health" value="150"/>
+    <property name="objective" value="false"/>
+   </properties>
+  </object>
+  <object name="3_enemy" x="672" y="2336" width="32" height="32">
+   <properties>
+    <property name="health" value="150"/>
+    <property name="objective" value="false"/>
+   </properties>
+  </object>
+  <object name="3_enemy" x="768" y="2368" width="32" height="32">
+   <properties>
+    <property name="health" value="150"/>
+    <property name="objective" value="false"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="customs" width="100" height="100">
+  <object name="horse" x="640" y="2688" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="box2D" width="100" height="100">
+  <object name="level" type="object" x="352" y="3136">
+   <polygon points="0,0 0,-320 -352,-320 -352,-832 -320,-832 -320,-864 -288,-864 -288,-896 -256,-896 -256,-928 -224,-928 -224,-960 -32,-960 0,-928 -192,-928 -192,-896 -224,-896 -224,-864 -256,-864 -256,-832 -288,-832 -288,-800 -320,-800 -320,-352 32,-352 32,-32 256,-32 256,-352 768,-352 768,-832 800,-864 800,-320 288,-320 288,0 160,0"/>
+  </object>
+  <object name="level" type="object" x="320" y="2176">
+   <polygon points="0,0 32,32 32,-128 -128,-128 -128,-512 96,-512 96,-736 1536,-736 1568,-768 64,-768 64,-544 -160,-544 -160,-96 0,-96"/>
+  </object>
+  <object name="level" type="object" x="480" y="2688">
+   <polygon points="0,0 96,0 96,-672 0,-672 0,-576"/>
+  </object>
+  <object name="level" type="object" x="1120" y="2304">
+   <polygon points="0,0 32,-32 -128,-32 -128,-64 -288,-64 -288,-96 -384,-96 -384,-224 -128,-224 -128,-640 -128,-672 -160,-672 -160,-256 -416,-256 -416,-64 -320,-64 -320,-32 -160,-32 -160,0"/>
+  </object>
+  <object name="level" type="object" x="992" y="1632">
+   <polygon points="0,0 0,32 32,32 32,448 736,448 736,576 768,576 768,704 800,704 800,832 832,832 832,960 864,960 864,800 832,800 832,672 800,672 800,544 768,544 768,416 64,416 64,0 32,0"/>
+  </object>
+  <object name="level" type="object" x="1856" y="1440">
+   <polygon points="0,0 32,-32 32,256 384,256 384,480 128,480 128,576 160,576 160,704 192,704 192,832 224,832 224,960 192,992 192,864 160,864 160,736 128,736 128,608 96,608 96,448 352,448 352,288 0,288 0,224"/>
+  </object>
+  <object name="level" type="object" x="2048" y="2432">
+   <polygon points="0,0 32,-32 288,-32 288,-256 544,-256 544,-608 1152,-608 1152,672 544,672 544,384 288,384 288,160 -192,160 -192,128 320,128 320,352 576,352 576,640 1120,640 1120,-576 576,-576 576,-224 320,-224 320,0 160,0"/>
+  </object>
+ </objectgroup>
+</map>

@@ -41,7 +41,7 @@ public class Worm extends Boss {
 				open = getDrawable();
 				isOpen = true;
 				closed = new Image(new Texture(
-						Gdx.files.internal("enemy/worm/wormsegmentfirst1.png"))).getDrawable();
+						Gdx.files.internal("level2/worm/wormsegmentfirst1.png"))).getDrawable();
 			}
 
 			setSize(getWidth() * Constants.SCALE, getHeight() * Constants.SCALE);
@@ -98,7 +98,7 @@ public class Worm extends Boss {
 	}
 
 	public Worm(float x, float y, World world) {
-		super(1000, 20, "Worm");
+		super(100, 20, "Worm");
 		segments = new Array<WormSegment>();
 		joints = new Array<RevoluteJoint>();
 
@@ -106,10 +106,10 @@ public class Worm extends Boss {
 
 		for (int i = 0; i < 5; i++) {
 			boolean first = false;
-			String path = "enemy/worm/wormsegment.png";
+			String path = "level2/worm/wormsegment.png";
 			if (i == 0) {
 				first = true;
-				path = "enemy/worm/wormsegmentfirst.png";
+				path = "level2/worm/wormsegmentfirst.png";
 			}
 			segments.add(new WormSegment(path, first, getX() + i * 0.5f, getY(), world));
 
@@ -146,22 +146,22 @@ public class Worm extends Boss {
 	@Override
 	public void act(float delta) {
 		super.act(delta);
+		if (segments.size > 0) {
+			if (player != null) {
+				distance.set(player.getX() - segments.get(0).getX(), player.getY()
+						- segments.get(0).getY());
 
-		if (player != null) {
-			distance.set(player.getX() - segments.get(0).getX(), player.getY()
-					- segments.get(0).getY());
-
-			if (distance.len() <= aggroRange) {
-				aggro = true;
-				moveTowards(player.getX(), player.getY());
+				if (distance.len() <= aggroRange) {
+					aggro = true;
+					moveTowards(player.getX(), player.getY());
+				}
 			}
-		}
 
-		for (int i = 0; i < segments.size; i++) {
-			segments.get(i).act(delta);
+			for (int i = 0; i < segments.size; i++) {
+				segments.get(i).act(delta);
+			}
+			segments.get(0).setRotation(distance.angle() + 180);
 		}
-		segments.get(0).setRotation(distance.angle() + 180);
-
 	}
 
 	@Override

@@ -15,6 +15,7 @@ public class FBLA2015 extends Game {
 		soundManager = new CustomSoundManager();
 		soundManager.loadSound("gunshot", Gdx.files.internal("sfx/gunshot.wav"));
 		soundManager.loadSound("button", Gdx.files.internal("sfx/buttonpress.wav"));
+		soundManager.loadSound("enemydeath", Gdx.files.internal("sfx/enemydeath.wav"));
 
 		
 		

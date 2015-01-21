@@ -29,7 +29,7 @@ public class Map extends Actor {
 	private Box2DMapObjectParser parser;
 	private Vector2 playerSpawn;
 	private GameScreen gs;
-	private MapLayer positionsLayer, commsLayer, obstaclesLayer;
+	private MapLayer positionsLayer, commsLayer, obstaclesLayer, customsLayer;
 	private TiledMapTileLayer tilesLayer;
 	boolean[][] collisions;
 
@@ -80,6 +80,9 @@ public class Map extends Actor {
 			if (layer.getName().equals("tiles")) {
 				tilesLayer = (TiledMapTileLayer) layer;
 			}
+			if(layer.getName().equals("customs")){
+				customsLayer = layer;
+			}
 		}
 
 		for (int i = 0; i < map.getProperties().get("width", Integer.class); i++) {
@@ -121,6 +124,10 @@ public class Map extends Actor {
 //
 // }
 
+	}
+	
+	public MapLayer getCustomsLayer(){
+		return customsLayer;
 	}
 
 	public void parseObstacles() {
@@ -165,7 +172,8 @@ public class Map extends Actor {
 			}
 			if (object.getName().equals("enemy_spawn")) {
 				if (!object.getProperties().containsKey("stats")) {
-					gs.createEnemy(ItemStats.TUTORIAL_GUN,
+					gs.createEnemy(
+							ItemStats.TUTORIAL_GUN,
 							"enemy/enemy.png",
 							object.getRectangle().x * Constants.SCALE,
 							object.getRectangle().y * Constants.SCALE,
@@ -177,14 +185,17 @@ public class Map extends Actor {
 				}
 
 			}
-			if(object.getName().equals("2_enemy")){
-				gs.createEnemy(ItemStats.LEVEL2_GUN,
-						"enemy/level2enemy.png",
-						object.getRectangle().x * Constants.SCALE,
-						object.getRectangle().y * Constants.SCALE,
+			if (object.getName().equals("2_enemy")) {
+				gs.createEnemy(ItemStats.LEVEL2_GUN, "level2/enemy.png", object.getRectangle().x
+						* Constants.SCALE, object.getRectangle().y * Constants.SCALE,
 						Float.parseFloat(object.getProperties().get("health", String.class)),
-						Boolean.parseBoolean(object.getProperties().get("objective",
-								String.class)));
+						Boolean.parseBoolean(object.getProperties().get("objective", String.class)));
+			}
+			if (object.getName().equals("3_enemy")) {
+				gs.createEnemy(ItemStats.LEVEL3_GUN, "level3/enemy.png", object.getRectangle().x
+						* Constants.SCALE, object.getRectangle().y * Constants.SCALE,
+						Float.parseFloat(object.getProperties().get("health", String.class)),
+						Boolean.parseBoolean(object.getProperties().get("objective", String.class)));
 			}
 			if (object.getName().equals("worm")) {
 				Worm worm = new Worm(object.getRectangle().x * Constants.SCALE,

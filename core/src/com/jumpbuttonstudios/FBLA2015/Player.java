@@ -48,7 +48,7 @@ public class Player extends GameSprite {
 		controller = new PlayerInputController(this, 2, 10);
 		this.world = world;
 
-		gun = new Gun(world, 10f, stats, this);
+		gun = new Gun(world, 10f, stats, body);
 
 		UserData userData = new UserData();
 		userData.setValue(this);

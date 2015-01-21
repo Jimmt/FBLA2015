@@ -28,17 +28,6 @@
    eJzt2v2NgjAYB+BuAbm/bhRHcRRHcRRHYZQrOUw4I/JxFF/weZI3xoRIy0/bWkhp/6qUznVK162qeneHg8vX6PaVX7eqeqN+7ZU8YpHHuDzGXnK7v2fWpLH7cb7I70/yeC23+VLoWtzqAp/7AXkU+c7KY5mCeaRPzqObByavx7vjm/x6lcf6pvS9HUPGjr/nNLXy8c3QueTxuqre2mjodzG3D0PjnTze0wd5PCePcHk8vS4L+nBa47zyiJVHO1eVWrvJo/x55SGPkuQhj1b1O2+fZ9aU/eFGHvPzKKVe4V6JPNaz9zy6ceNxf6ldc462u79nVcmjqCn96u8zRiGPWA6cx17bLY9A5BHLwv81fyrK2qRvr3kclTziqLrf7Fge7djQ7k+8raEHd3/WZM7zgN147ZnwAv5zX87YtT55xCKPWO5zwZKKuGYHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoJwfMTj5Ww==
   </data>
  </layer>
- <objectgroup name="positions" width="100" height="100">
-  <object name="player_spawn" x="576" y="1024" width="32" height="32"/>
-  <object name="worm" x="576" y="704" width="32" height="32"/>
-  <object name="hole" x="2464" y="224" width="32" height="160"/>
-  <object name="2_enemy" x="352" y="352" width="32" height="32">
-   <properties>
-    <property name="health" value="50"/>
-    <property name="objective" value="false"/>
-   </properties>
-  </object>
- </objectgroup>
  <objectgroup name="obstacles" width="100" height="100"/>
  <objectgroup name="box2D" width="100" height="100">
   <object name="level" type="object" x="288" y="256">
@@ -57,5 +46,48 @@
    <polygon points="0,0 32,32 0,32 0,64 -64,64 -64,160 384,160 384,64 320,64 320,32 288,32 288,-256 384,-256 384,-640 416,-608 416,-224 320,-224 320,0 352,0 352,32 416,32 416,192 -96,192 -96,32 -32,32 -32,0 0,0"/>
   </object>
  </objectgroup>
- <objectgroup name="comms" width="100" height="100"/>
+ <objectgroup name="positions" width="100" height="100">
+  <object name="player_spawn" x="576" y="1024" width="32" height="32"/>
+  <object name="2_enemy" x="352" y="352" width="32" height="32">
+   <properties>
+    <property name="health" value="100"/>
+    <property name="objective" value="false"/>
+   </properties>
+  </object>
+  <object name="2_enemy" x="672" y="448" width="32" height="32">
+   <properties>
+    <property name="health" value="100"/>
+    <property name="objective" value="false"/>
+   </properties>
+  </object>
+  <object name="2_enemy" x="1312" y="192" width="32" height="32">
+   <properties>
+    <property name="health" value="100"/>
+    <property name="objective" value="false"/>
+   </properties>
+  </object>
+  <object name="2_enemy" x="448" y="512" width="32" height="32">
+   <properties>
+    <property name="health" value="100"/>
+    <property name="objective" value="false"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="comms" width="100" height="100">
+  <object name="comm" x="352" y="704" width="512" height="384">
+   <properties>
+    <property name="text" value="Clear the area of all malware."/>
+   </properties>
+  </object>
+  <object x="1472" y="576" width="64"/>
+  <object name="comm" x="1408" y="128" width="352" height="448">
+   <properties>
+    <property name="text" value="We've detected a worm ahead. Proceed with caution."/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="customs" width="100" height="100">
+  <object name="hole" x="2464" y="192" width="32" height="160"/>
+  <object name="worm" x="2144" y="256" width="32" height="32"/>
+ </objectgroup>
 </map>
