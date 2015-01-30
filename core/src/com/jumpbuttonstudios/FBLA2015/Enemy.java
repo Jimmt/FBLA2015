@@ -85,7 +85,7 @@ public class Enemy extends GameSprite implements Destroyable {
 		}
 
 		if (!callback.isHit() && aggro) {
-			gun.fire((getWidth() + getHeight()) / 2, 0, 0.1f, false, direction);
+			gun.fire((getWidth() + getHeight()) / 2, 0, 0.05f, false, direction);
 
 		}
 

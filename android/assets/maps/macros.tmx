@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32">
+  <image source="tiles.png" width="608" height="544"/>
+  <tile id="79">
+   <properties>
+    <property name="type" value="wall"/>
+   </properties>
+  </tile>
+  <tile id="80">
+   <properties>
+    <property name="type" value="wall"/>
+   </properties>
+  </tile>
+  <tile id="81">
+   <properties>
+    <property name="type" value="floor"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="tiles" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt3cGtgkAUQNEpzRLUCn4plmIplmIp4uoX4AteyTnJhB0Z5g4JCwJrAQDAcV3W+jtvx6ON7bqek+u0l/fcrwcc58lF2pEeLXq06NGiR4seLXq06NGiR4seLXq06NGiR4seLXq06NGiR4seLXq06NGiR4seLXq0XNZ6TL3vNLGO23luQ/M5za7Ub5m6z351X9fo0aJHix4terTo0aJHix4terTo0aJHix4terTo0aJHix4terTo0aJHix4terTo0aJHix4terTo0aJHix4terTo0aJHix4terTo0aJHix4terTo0aJHix4terTo0aLHjMHvhdz1+NzUvp4aeny/gR7/9GiZ6uG7VTM8F7Xo0aJHix4terTo0aJHix4terTo0aJHix4terTo0aJHix4terTo0aJHy+D/o+57z/2IXlkad6Q=
+  </data>
+ </layer>
+ <objectgroup name="comms" width="100" height="100"/>
+ <objectgroup name="obstacles" width="100" height="100"/>
+ <objectgroup name="positions" width="100" height="100">
+  <object name="player_spawn" x="128" y="3072" width="32" height="32"/>
+  <object name="4_enemy" x="320" y="2688" width="32" height="32">
+   <properties>
+    <property name="health" value="200"/>
+    <property name="objective" value="false"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="customs" width="100" height="100">
+  <object name="page-1" x="0" y="3168" width="32" height="32"/>
+  <object name="page-2" x="576" y="2496" width="32" height="32"/>
+  <object name="page-3" x="576" y="1760" width="32" height="32"/>
+  <object name="page-3" x="1152" y="992" width="32" height="32"/>
+  <object name="page-3" x="0" y="992" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="box2D" width="100" height="100">
+  <object name="page1" type="object" x="32" y="3168">
+   <polygon points="0,0 672,0 672,32 -32,32 -32,-768 0,-768"/>
+  </object>
+  <object name="page1" type="object" x="32" y="3168">
+   <polygon points="0,0 672,0 672,32 -32,32 -32,-768 0,-768"/>
+  </object>
+  <object name="level" type="object" x="576" y="2560" width="32" height="608"/>
+  <object name="level" type="object" x="576" y="2528" width="576" height="32"/>
+  <object name="level" type="object" x="0" y="2400" width="576" height="32"/>
+  <object name="level" type="object" x="576" y="2432">
+   <polygon points="0,0 32,-32 32,-1408 0,-1440 0,-480"/>
+  </object>
+  <object name="level" type="object" x="1152" y="2528">
+   <polygon points="0,0 0,32 32,0 32,-1504 576,-1504 608,-1536 608,-2272 576,-2304 -1120,-2304 -1152,-1536 -1120,-1504 -576,-1504 -576,-1536 -1120,-1536 -1120,-2272 576,-2272 576,-1536 32,-1536 0,-1504 0,-64"/>
+  </object>
+ </objectgroup>
+</map>

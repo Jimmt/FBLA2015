@@ -1,6 +1,7 @@
 package com.jumpbuttonstudios.FBLA2015;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
@@ -18,10 +19,11 @@ public class TrojanHorse extends Boss {
 	Image horse;
 	Body body;
 	Vector2 distance = new Vector2(), temp = new Vector2();
-	Array<Gun> guns = new Array<Gun>();
-	float aggroRange = 4;
+	Array<ColorGun> guns = new Array<ColorGun>();
+	float aggroRange = 4, lastMoveTime = 0f, moveCap = 2f;
 	EnemyRaycastCallback callback;
 	World world;
+	boolean active;
 
 	public TrojanHorse(float x, float y, World world) {
 		super(200, 20, "Trojan Horse");
@@ -49,8 +51,10 @@ public class TrojanHorse extends Boss {
 		horse.setOrigin(horse.getWidth() / 2, horse.getHeight() / 2);
 		callback = new EnemyRaycastCallback();
 
-		for (int i = 0; i < 10; i++) {
-			Gun gun = new Gun(world, 1f, ItemStats.HORSE, body);
+		Color[] colors = { Color.RED, Color.YELLOW, Color.ORANGE, Color.GREEN, Color.BLUE,
+				Color.OLIVE, Color.PURPLE, Color.CYAN, Color.GRAY };
+		for (int i = 0; i < 9; i++) {
+			ColorGun gun = new ColorGun(world, 2f, ItemStats.HORSE, body, colors[i]);
 			gun.bounce = true;
 			guns.add(gun);
 		}
@@ -59,8 +63,13 @@ public class TrojanHorse extends Boss {
 	public void moveTowards(float x, float y) {
 
 		Vector2 direction = new Vector2(x - body.getWorldCenter().x, y - body.getWorldCenter().y);
-		body.applyForceToCenter(direction.nor().scl(7f).sub(body.getLinearVelocity()), true);
+		body.applyForceToCenter(direction.nor().scl(7f).sub(body.getLinearVelocity()).scl(0.05f),
+				true);
 
+	}
+
+	public void activate(){
+		active = true;
 	}
 
 	@Override
@@ -69,13 +78,14 @@ public class TrojanHorse extends Boss {
 
 		world.rayCast(callback, player.body.getWorldCenter(), body.getWorldCenter());
 
-		for (int i = 0; i < guns.size; i++) {
-			guns.get(i).fireStraight(horse.getWidth() + 0.5f, 0, ((float) i) / guns.size * 360f);
+		if (active) {
+			for (int i = 0; i < guns.size; i++) {
+				guns.get(i).fireStraight(horse.getWidth() / 2f, 0, ((float) i) / guns.size * 360f);
 
-			guns.get(i).act(delta);
-			guns.get(i).updateFire(delta);
+				guns.get(i).act(delta);
+				guns.get(i).updateFire(delta);
+			}
 		}
-
 		horse.act(delta);
 
 	}
@@ -84,29 +94,31 @@ public class TrojanHorse extends Boss {
 	public void draw(Batch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
 
-		for (int i = 0; i < guns.size; i++) {
-			guns.get(i).draw(batch, parentAlpha);
-			
-			if(guns.get(i).bullets.size > 5){
-				guns.get(i).bullets.get(0).delete = true;
+		if (active) {
+			for (int i = 0; i < guns.size; i++) {
+				guns.get(i).draw(batch, parentAlpha);
+
+				if (guns.get(i).bullets.size > 2) {
+					guns.get(i).bullets.get(0).delete = true;
+				}
+			}
+
+			if (player != null) {
+				distance.set(player.getX() - horse.getX(), player.getY() - horse.getY());
+
+				if (distance.len() <= aggroRange) {
+					aggro = true;
+					moveTowards(player.getX(), player.getY());
+				}
+				if (player.getX() - (horse.getX() + horse.getWidth() / 2) > 0) {
+					horse.setScaleX(1);
+				} else {
+					horse.setScaleX(-1);
+				}
 			}
 		}
-
-		moveTowards(player.getX(), player.getY());
-
-		if (player != null) {
-			distance.set(player.getX() - horse.getX(), player.getY() - horse.getY());
-
-			if (distance.len() <= aggroRange) {
-				aggro = true;
-				moveTowards(player.getX(), player.getY());
-			}
-			if (player.getX() - (horse.getX() + horse.getWidth() / 2) > 0) {
-				horse.setScaleX(1);
-			} else {
-				horse.setScaleX(-1);
-			}
-		}
+		
+	
 		horse.setPosition(body.getPosition().x - horse.getWidth() / 2,
 				body.getPosition().y - horse.getHeight() / 2);
 		horse.draw(batch, parentAlpha);

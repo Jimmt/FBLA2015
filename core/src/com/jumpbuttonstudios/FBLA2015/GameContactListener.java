@@ -54,12 +54,19 @@ public class GameContactListener implements ContactListener {
 			if (((Bullet) a.value).friendly) {
 				((Boss) b.value).health -= ((Bullet) a.value).damage;
 			}
+			if(b.value instanceof TrojanHorse){
+				((TrojanHorse) b.value).activate();
+			}
 		}
 		if (b.value instanceof Bullet && a.value instanceof Boss) {
 			if (((Bullet) b.value).friendly) {
 				((Boss) a.value).health -= ((Bullet) b.value).damage;
 			}
+			if(a.value instanceof TrojanHorse){
+				((TrojanHorse) a.value).activate();
+			}
 		}
+		
 
 		if (a.value instanceof Player && b.value instanceof Worm) {
 

@@ -38,13 +38,15 @@ public class Player extends GameSprite {
 	Rectangle hitbox, commHitbox;
 	ParticleEffectActor streak;
 
+
 	public Player(String path, World world) {
 		super(path, 1, world);
-		
+
 		streak = new ParticleEffectActor("effects/streak.p", "", true);
 
 		hitbox = new Rectangle(getX(), getY(), getWidth(), getHeight());
-		commHitbox = new Rectangle(getX() / Constants.SCALE, getY() / Constants.SCALE, getWidth() / Constants.SCALE, getHeight() / Constants.SCALE);
+		commHitbox = new Rectangle(getX() / Constants.SCALE, getY() / Constants.SCALE, getWidth()
+				/ Constants.SCALE, getHeight() / Constants.SCALE);
 		controller = new PlayerInputController(this, 2, 10);
 		this.world = world;
 
@@ -61,6 +63,9 @@ public class Player extends GameSprite {
 		body.getFixtureList().get(0).setFilterData(f);
 
 		this.stdRotate = false;
+
+
+
 	}
 
 	public void hurt(float amount) {
@@ -71,7 +76,8 @@ public class Player extends GameSprite {
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
-		
+
+
 		streak.effect.setPosition(getX() + getWidth() / 2, getY() + getHeight() / 2);
 		streak.effect.getEmitters().get(0).getAngle().setHigh(getRotation() - 90);
 		streak.effect.getEmitters().get(0).getRotation().setHigh(getRotation());
@@ -85,8 +91,9 @@ public class Player extends GameSprite {
 
 		streak.act(delta);
 		hitbox.set(getX(), getY(), getWidth(), getHeight());
-		commHitbox.set(getX() / Constants.SCALE, getY() / Constants.SCALE, getWidth() / Constants.SCALE, getHeight() / Constants.SCALE);
-		
+		commHitbox.set(getX() / Constants.SCALE, getY() / Constants.SCALE, getWidth()
+				/ Constants.SCALE, getHeight() / Constants.SCALE);
+
 		stateTime += delta;
 
 		getStage().getCamera().position.set(Math.round((getX() + getWidth() / 2) * 100f) / 100f,

@@ -80,7 +80,7 @@ public class Map extends Actor {
 			if (layer.getName().equals("tiles")) {
 				tilesLayer = (TiledMapTileLayer) layer;
 			}
-			if(layer.getName().equals("customs")){
+			if (layer.getName().equals("customs")) {
 				customsLayer = layer;
 			}
 		}
@@ -125,8 +125,8 @@ public class Map extends Actor {
 // }
 
 	}
-	
-	public MapLayer getCustomsLayer(){
+
+	public MapLayer getCustomsLayer() {
 		return customsLayer;
 	}
 
@@ -148,6 +148,7 @@ public class Map extends Actor {
 				Target target = new Target(object.getRectangle().x * Constants.SCALE,
 						object.getRectangle().y * Constants.SCALE, 0, gs.world);
 				gs.stage.addActor(target);
+
 			}
 		}
 	}
@@ -197,6 +198,19 @@ public class Map extends Actor {
 						Float.parseFloat(object.getProperties().get("health", String.class)),
 						Boolean.parseBoolean(object.getProperties().get("objective", String.class)));
 			}
+			if (object.getName().equals("3_enemy2")) {
+				gs.createEnemy(ItemStats.LEVEL3_GUN2, "level3/enemy2.png", object.getRectangle().x
+						* Constants.SCALE, object.getRectangle().y * Constants.SCALE,
+						Float.parseFloat(object.getProperties().get("health", String.class)),
+						Boolean.parseBoolean(object.getProperties().get("objective", String.class)));
+			}
+			if (object.getName().equals("4_enemy")) {
+				gs.createEnemy(ItemStats.LEVEL4_GUN, "level4/enemy.png", object.getRectangle().x
+						* Constants.SCALE, object.getRectangle().y * Constants.SCALE,
+						Float.parseFloat(object.getProperties().get("health", String.class)),
+						Boolean.parseBoolean(object.getProperties().get("objective", String.class)));
+			}
+
 			if (object.getName().equals("worm")) {
 				Worm worm = new Worm(object.getRectangle().x * Constants.SCALE,
 						object.getRectangle().y * Constants.SCALE, gs.world);

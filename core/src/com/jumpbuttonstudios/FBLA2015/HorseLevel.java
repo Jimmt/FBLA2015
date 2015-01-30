@@ -13,7 +13,7 @@ public class HorseLevel extends GameScreen {
 		super(game, "level3");
 
 		parseCustoms(map.getCustomsLayer());
-
+		explanationText = "You just killed a Trojan Horse. This type of malware disguises itself as a benign application, but when executed will often harm the system. Typically, Trojan Horses are only effective against the unwary user.";
 	}
 
 	public void parseCustoms(MapLayer customsLayer) {
@@ -39,6 +39,8 @@ public class HorseLevel extends GameScreen {
 
 			world.destroyBody(horse.body);
 			stage.getActors().removeValue(horse, false);
+
+			completeLevel();
 
 		}
 	}

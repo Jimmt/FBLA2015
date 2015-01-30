@@ -79,6 +79,9 @@ public class LevelSelectScreen extends BaseScreen {
 					if(index == 2){
 						screen = new HorseLevel(game);
 					}
+					if(index == 3){
+						screen = new MacroLevel(game);
+					}
 					game.setScreen(screen);
 					FBLA2015.soundManager.play("button", 0.5f);
 				}
