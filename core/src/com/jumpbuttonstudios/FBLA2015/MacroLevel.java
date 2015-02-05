@@ -19,7 +19,7 @@ public class MacroLevel extends GameScreen {
 	public MacroLevel(FBLA2015 game) {
 		super(game, "Macros");
 
-		explanationText = "";
+		explanationText = "You just defeated a macro virus. This type of malware resides in files like word documents (.docx) or powerpoints (.ppt), exploiting the ability to use macros. Macros are essentially small programs meant to automate repetitive tasks; however, some people create malicious macros that infect the computer once the document or powerpoint is opened. Once a macro virus infects a computer, it will often propagate itself to other files that support macros, ensuring that the malware is spread as much as possible. ";
 		parseCustoms(map.getCustomsLayer());
 
 	}
@@ -31,13 +31,14 @@ public class MacroLevel extends GameScreen {
 		while (customsIterator.hasNext()) {
 			RectangleMapObject object = (RectangleMapObject) customsIterator.next();
 
-			if (object.getName().equals("macro")) {
+			if (object.getName().equals("boss")) {
 				virus = new MacroVirus(object.getRectangle().x * Constants.SCALE,
 						object.getRectangle().y * Constants.SCALE, world);
 				createBoss(virus);
+
 			}
 			if (object.getName().contains("page")) {
-				
+
 				Image page = new Image(new Texture(Gdx.files.internal("maps/" + object.getName()
 						+ ".png")));
 				page.setSize(page.getWidth() * Constants.SCALE, page.getHeight() * Constants.SCALE);
@@ -55,6 +56,13 @@ public class MacroLevel extends GameScreen {
 	@Override
 	public void render(float delta) {
 		super.render(delta);
+
+		if (virus.health <= 0 && stage.getActors().contains(virus, false)) {
+			world.destroyBody(virus.body);
+			stage.getActors().removeValue(virus, false);
+			completeLevel();
+		}
+
 	}
 
 }

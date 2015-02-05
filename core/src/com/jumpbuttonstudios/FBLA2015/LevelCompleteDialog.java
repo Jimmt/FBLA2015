@@ -23,6 +23,7 @@ public class LevelCompleteDialog extends Dialog {
 
 		Image panel = new Image(new Texture(Gdx.files.internal("ui/levelcompletebg.png")));
 		background(panel.getDrawable());
+		setSize(Constants.WIDTH - 100, Constants.HEIGHT - 100);
 
 		ImageButtonStyle style = new ImageButtonStyle();
 		style.up = new Image(new Texture(Gdx.files.internal("ui/button.png"))).getDrawable();
@@ -36,16 +37,19 @@ public class LevelCompleteDialog extends Dialog {
 		});
 
 		LabelStyle lstyle = new LabelStyle();
-		lstyle.font = new BitmapFont(Gdx.files.internal("skin/orbitron.fnt"));
+		BitmapFont font = new BitmapFont(Gdx.files.internal("skin/gputeks.fnt"));
+		lstyle.font = font;
 		lstyle.fontColor = Color.WHITE;
 		explanation = new Label(game.explanationText, lstyle);
 		explanation.setWrap(true);
 
-		getContentTable().add("Level Complete");
+		getContentTable().add("Level Complete").expandX();
 		getContentTable().row();
 		getContentTable().add(explanation).fillX().center();
 		getContentTable().row();
-		getContentTable().add(back);
+		getContentTable().add(back).expandX();
+		
+		
 	}
 
 }

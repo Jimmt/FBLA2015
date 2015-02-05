@@ -25,7 +25,7 @@ import com.badlogic.gdx.utils.Array;
 
 public class Player extends GameSprite {
 
-	float speed = 5f, healthMax = 100, health = healthMax;
+	float speed = 5f, healthMax = 10000, health = healthMax;
 	float angle, stateTime;
 
 	Vector2 centerPosition, mouse, dir;

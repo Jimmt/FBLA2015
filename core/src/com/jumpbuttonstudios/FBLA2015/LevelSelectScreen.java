@@ -19,7 +19,7 @@ import com.badlogic.gdx.utils.Array;
 public class LevelSelectScreen extends BaseScreen {
 	Array<ImageButton> buttons;
 	Array<Label> labels;
-	String[] levelNames = { "tutorial", "worms", "horses", "level4", "level5" };
+	String[] levelNames = { "tutorial", "worms", "horses", "macro", "level5" };
 	ScrollPane scroller;
 	Table buttonTable;
 

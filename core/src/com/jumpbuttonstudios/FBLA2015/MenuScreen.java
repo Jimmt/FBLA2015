@@ -33,6 +33,12 @@ public class MenuScreen extends BaseScreen {
 	public void show() {
 		super.show();
 
+		if (!FBLA2015.DEBUG) {
+			FBLA2015.soundManager.playMusic("menu", 0.1f);
+		}
+
+		
+		
 		table.setFillParent(true);
 		title = new Label("Menu Screen", new LabelStyle(skin.getFont("default-font"), Color.WHITE));
 		table.add(title).padBottom(10f);
@@ -56,16 +62,40 @@ public class MenuScreen extends BaseScreen {
 				- circle.getHeight() / 2);
 
 		ImageButtonStyle style = new ImageButtonStyle();
-		style.up = new Image(new Texture(Gdx.files.internal("ui/button.png")))
-				.getDrawable();
+		style.up = new Image(new Texture(Gdx.files.internal("ui/button.png"))).getDrawable();
 		start = new TextImageButton("Start", skin.getFont("default-font"), style);
 
-		table.add(start).padBottom(5f);
+		TextImageButton credits = new TextImageButton("Credits", skin.getFont("default-font"),
+				style);
+		
+		TextImageButton controls = new TextImageButton("Controls", skin.getFont("default-font"),
+				style);
+
+		table.add(start).padBottom(5f).width(controls.textLabel.getWidth());
 		table.row();
 		start.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				game.setScreen(new LevelSelectScreen(game));
+				FBLA2015.soundManager.play("button", 0.5f);
+			}
+		});
+
+		table.add(credits).padBottom(5f).width(controls.textLabel.getWidth());
+		credits.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				game.setScreen(new CreditsScreen(game));
+				FBLA2015.soundManager.play("button", 0.5f);
+			}
+		});
+		
+		table.row();
+		table.add(controls).width(controls.textLabel.getWidth());
+		controls.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				game.setScreen(new ControlsScreen(game));
 				FBLA2015.soundManager.play("button", 0.5f);
 			}
 		});

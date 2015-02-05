@@ -9,7 +9,9 @@ public enum ItemStats {
 			"bullet.png", 0.3f, 10f, 5f), LEVEL3_GUN("pistolIcon.png", "bullet.png", 1.5f, 12f, 6f), LEVEL3_GUN2(
 			"pistolIcon.png", "bullet.png", 0.7f, 20f, 3f), PISTOL("pistolIcon.png", "bullet.png",
 			0.2f, 10f, 7f), HORSE("rifleIcon.png", "level3/benign.png", 2f, 15f, 5f), LEVEL4_GUN(
-			"pistolIcon.png", "bullet.png", 3f, 25f, 10f);
+			"pistolIcon.png", "bullet.png", 3f, 25f, 10f), LEVEL4_GUN2(
+					"pistolIcon.png", "bullet.png", 2f, 20f, 7f), MACRO_CANNON(
+					"pistolIcon.png", "level4/cannonshell.png", 4f, 50f, 2.5f);
 
 	private float rof, damage, bulletSpeed;
 	private Image icon;

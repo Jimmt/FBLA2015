@@ -35,7 +35,8 @@ public class GameScreen extends BaseScreen {
 	StageComparator comparator;
 	CommDialog commDialog;
 	ShopDialog shopDialog;
-	boolean hitComm, gameOver, finished, completeDialogShown, hasBoss = true;
+	boolean hitComm, gameOver, finished, completeDialogShown, hasBoss = true, musicStopped;
+	float vol, lastChange, changeCap = 0.1f, dv;
 	Image black;
 	int byteCoins, levelNum, objectiveCount;
 	AStar astar;
@@ -49,8 +50,10 @@ public class GameScreen extends BaseScreen {
 	public GameScreen(FBLA2015 game, String levelName) {
 		super(game);
 
-		this.game = game;
+		vol = FBLA2015.soundManager.musics.get("menu").getVolume();
+		dv = vol / 10;
 
+		this.game = game;
 
 		ItemStats.makeCache();
 
@@ -113,7 +116,7 @@ public class GameScreen extends BaseScreen {
 				emitter.getVelocity().getHighMax() * Constants.SCALE);
 		pool = new ParticleEffectPool(effect, 3, 3);
 		effects = new Array<ParticleEffectActor>();
-		
+
 	}
 
 	public void createBoss(Boss boss) {
@@ -144,7 +147,9 @@ public class GameScreen extends BaseScreen {
 	public void completeLevel() {
 		if (!completeDialogShown) {
 			LevelCompleteDialog dialog = new LevelCompleteDialog(game, this, skin);
-			dialog.show(dialogStage);
+			dialog.setPosition(Constants.WIDTH / 2 - dialog.getWidth() / 2,
+					Constants.HEIGHT / 2 - dialog.getHeight() / 2);
+			dialogStage.addActor(dialog);
 			completeDialogShown = true;
 		}
 	}
@@ -168,6 +173,21 @@ public class GameScreen extends BaseScreen {
 // sr.setColor(Color.CYAN);
 // sr.end();
 
+		if (!musicStopped) {
+			if (lastChange > changeCap) {
+				vol -= dv;
+				FBLA2015.soundManager.musics.get("menu").setVolume(vol);
+				lastChange = 0;
+
+				if (vol <= 0) {
+					musicStopped = true;
+					FBLA2015.soundManager.stopMusic("menu");
+				}
+			} else {
+				lastChange += delta;
+			}
+		}
+
 		stage.getActors().sort(comparator);
 		stage.draw();
 		stage.act(delta);
@@ -187,16 +207,17 @@ public class GameScreen extends BaseScreen {
 			}
 
 		}
-		
-		if(boss != null){
-			if(boss.aggro){
-				if(hpDialog == null){
+
+		if (boss != null) {
+			if (boss.aggro) {
+				if (hpDialog == null) {
 					hpDialog = new BossHealthDialog(boss, skin);
 					hpDialog.show(hudStage);
-					hpDialog.addAction(Actions.sequence(Actions.moveBy(0, Constants.HEIGHT / 2), Actions.moveBy(0, Constants.HEIGHT / 2, 1f)));
+					hpDialog.addAction(Actions.sequence(Actions.moveBy(0, Constants.HEIGHT / 2),
+							Actions.moveBy(0, Constants.HEIGHT / 2, 1f)));
 				}
 			}
-			if(boss.health <= 0){
+			if (boss.health <= 0) {
 				hpDialog.addAction(Actions.fadeOut(1f, Interpolation.pow2Out));
 			}
 		}
@@ -225,7 +246,7 @@ public class GameScreen extends BaseScreen {
 
 				stage.getActors().removeValue(enemies.get(i), false);
 				world.destroyBody(enemies.get(i).body);
-				
+
 				FBLA2015.soundManager.play("enemydeath");
 
 				for (int j = 0; j < enemies.get(i).gun.bullets.size; j++) {
@@ -253,6 +274,10 @@ public class GameScreen extends BaseScreen {
 			Table.drawDebug(hudStage);
 		}
 // rayHandler.updateAndRender();
+
+		if (FBLA2015.DEBUG) {
+			debugRenderer.render(world, stage.getCamera().combined);
+		}
 
 	}
 

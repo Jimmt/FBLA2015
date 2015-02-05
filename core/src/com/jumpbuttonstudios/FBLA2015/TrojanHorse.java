@@ -18,7 +18,7 @@ import com.badlogic.gdx.utils.Array;
 public class TrojanHorse extends Boss {
 	Image horse;
 	Body body;
-	Vector2 distance = new Vector2(), temp = new Vector2();
+	Vector2 distance = new Vector2(), temp = new Vector2(), direction = new Vector2();
 	Array<ColorGun> guns = new Array<ColorGun>();
 	float aggroRange = 4, lastMoveTime = 0f, moveCap = 2f;
 	EnemyRaycastCallback callback;
@@ -62,7 +62,7 @@ public class TrojanHorse extends Boss {
 
 	public void moveTowards(float x, float y) {
 
-		Vector2 direction = new Vector2(x - body.getWorldCenter().x, y - body.getWorldCenter().y);
+		direction.set(x - body.getWorldCenter().x, y - body.getWorldCenter().y);
 		body.applyForceToCenter(direction.nor().scl(7f).sub(body.getLinearVelocity()).scl(0.05f),
 				true);
 

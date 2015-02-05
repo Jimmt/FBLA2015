@@ -75,9 +75,7 @@ public class BaseScreen implements Screen {
 		dialogStage.draw();
 		dialogStage.act(delta);
 
-		if (FBLA2015.DEBUG) {
-			debugRenderer.render(world, stage.getCamera().combined);
-		}
+		
 
 		if (Gdx.input.isKeyPressed(Keys.ESCAPE)) {
 			dialog.show(dialogStage);
@@ -109,7 +107,6 @@ public class BaseScreen implements Screen {
 
 	public void pauseGame() {
 		paused = !paused;
-		System.out.println("pause");
 	}
 
 	@Override

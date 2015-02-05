@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntArray;
@@ -22,7 +23,7 @@ public class Enemy extends GameSprite implements Destroyable {
 	EnemyRaycastCallback callback;
 	AStar astar;
 	IntArray path;
-	float effectX, effectY;
+	float effectX, effectY, startAngle, finalAngle, angularSpeed = 2f;
 
 	public Enemy(String path, ItemStats stats, float x, float y, float healthMax, AStar astar,
 			World world) {
@@ -48,6 +49,9 @@ public class Enemy extends GameSprite implements Destroyable {
 		body.getFixtureList().get(0).setFriction(0.0f);
 		this.path = new IntArray();
 
+		setOrigin(width / 2, height / 2);
+
+		stdRotate = false;
 	}
 
 	public void hurt(float amount) {
@@ -89,7 +93,12 @@ public class Enemy extends GameSprite implements Destroyable {
 
 		}
 
-		setRotation(direction.angle() - 90);
+		startAngle = getRotation();
+		finalAngle = direction.angle() - 90;
+
+		addAction(Actions.rotateBy(-MathUtils.atan2((MathUtils.sinDeg(startAngle - finalAngle)),
+				MathUtils.cosDeg(startAngle - finalAngle)) * angularSpeed));
+
 	}
 
 	@Override

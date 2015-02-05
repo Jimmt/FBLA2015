@@ -210,6 +210,12 @@ public class Map extends Actor {
 						Float.parseFloat(object.getProperties().get("health", String.class)),
 						Boolean.parseBoolean(object.getProperties().get("objective", String.class)));
 			}
+			if (object.getName().equals("4_enemy2")) {
+				gs.createEnemy(ItemStats.LEVEL4_GUN2, "level4/enemy2.png", object.getRectangle().x
+						* Constants.SCALE, object.getRectangle().y * Constants.SCALE,
+						Float.parseFloat(object.getProperties().get("health", String.class)),
+						Boolean.parseBoolean(object.getProperties().get("objective", String.class)));
+			}
 
 			if (object.getName().equals("worm")) {
 				Worm worm = new Worm(object.getRectangle().x * Constants.SCALE,
