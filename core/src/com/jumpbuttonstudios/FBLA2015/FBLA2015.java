@@ -19,7 +19,7 @@ public class FBLA2015 extends Game {
 		soundManager.loadMusic("menu", Gdx.files.internal("sfx/menu.wav"));
 		
 		
-		DEBUG = true;
+//		DEBUG = true;
 		
 		if (DEBUG) {
 			setScreen(new MenuScreen(this));

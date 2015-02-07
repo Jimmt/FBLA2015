@@ -19,7 +19,7 @@ import com.badlogic.gdx.utils.Array;
 public class LevelSelectScreen extends BaseScreen {
 	Array<ImageButton> buttons;
 	Array<Label> labels;
-	String[] levelNames = { "tutorial", "worms", "horses", "macro", "level5" };
+	String[] levelNames = { "tutorial", "worms", "horses", "macro", "honeypot" };
 	ScrollPane scroller;
 	Table buttonTable;
 
@@ -45,7 +45,7 @@ public class LevelSelectScreen extends BaseScreen {
 
 		labels = new Array<Label>();
 
-		Image temp = new Image(new Texture(Gdx.files.internal("ui/tutorialbg.png")));
+		Image temp = new Image(new Texture(Gdx.files.internal("ui/levelbgs/tutorialbg.png")));
 		for (int i = 0; i < num; i++) {
 			LabelStyle style = new LabelStyle();
 			style.font = skin.getFont("default-font");
@@ -60,7 +60,7 @@ public class LevelSelectScreen extends BaseScreen {
 
 		for (int i = 0; i < num; i++) {
 			ImageButtonStyle style = new ImageButtonStyle();
-			Image bg = new Image(new Texture(Gdx.files.internal("ui/" + levelNames[i] + "bg.png")));
+			Image bg = new Image(new Texture(Gdx.files.internal("ui/levelbgs/" + levelNames[i] + "bg.png")));
 			style.up = bg.getDrawable();
 			ImageButton button = new ImageButton(style);
 
@@ -76,18 +76,21 @@ public class LevelSelectScreen extends BaseScreen {
 					if (index == 1) {
 						screen = new WormLevel(game);
 					}
-					if(index == 2){
+					if (index == 2) {
 						screen = new HorseLevel(game);
 					}
-					if(index == 3){
+					if (index == 3) {
 						screen = new MacroLevel(game);
+					}
+					if (index == 4) {
+						screen = new HoneypotLevel(game);
 					}
 					game.setScreen(screen);
 					FBLA2015.soundManager.play("button", 0.5f);
 				}
 			});
 			buttons.add(button);
-			buttonTable.add(button).padLeft(5f);
+			buttonTable.add(button).padLeft(15f).padBottom(30f);
 		}
 
 		ImageButtonStyle style = new ImageButtonStyle();
@@ -102,12 +105,12 @@ public class LevelSelectScreen extends BaseScreen {
 		});
 
 		ScrollPaneStyle scrollStyle = new ScrollPaneStyle();
-		scrollStyle.hScroll = new Image(new Texture(Gdx.files.internal("ui/scrollbar.png")))
+		scrollStyle.hScroll = new Image(new Texture(Gdx.files.internal("ui/scrollbar/scrollbar.png")))
 				.getDrawable();
-		scrollStyle.hScrollKnob = new Image(new Texture(Gdx.files.internal("ui/scrollknob.png")))
+		scrollStyle.hScrollKnob = new Image(new Texture(Gdx.files.internal("ui/scrollbar/scrollknob.png")))
 				.getDrawable();
 		scroller = new ScrollPane(buttonTable, scrollStyle);
-// scroller.setFadeScrollBars(false);
+		scroller.setFadeScrollBars(false);
 		scroller.setScrollingDisabled(false, true);
 		table.add("Level Select").padBottom(100f);
 		table.row();

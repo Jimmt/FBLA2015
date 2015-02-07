@@ -2,6 +2,7 @@ package com.jumpbuttonstudios.FBLA2015;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -25,8 +26,9 @@ import com.badlogic.gdx.utils.Array;
 
 public class Player extends GameSprite {
 
-	float speed = 5f, healthMax = 10000, health = healthMax;
+	float speed = 5f, healthMax = 100, health = healthMax;
 	float angle, stateTime;
+	
 
 	Vector2 centerPosition, mouse, dir;
 	Vector3 coords = new Vector3();
@@ -63,7 +65,6 @@ public class Player extends GameSprite {
 		body.getFixtureList().get(0).setFilterData(f);
 
 		this.stdRotate = false;
-
 
 
 	}

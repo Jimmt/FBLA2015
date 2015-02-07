@@ -6,7 +6,7 @@ public class TutorialLevel extends GameScreen {
 		super(game, "tutorial");
 
 		hasBoss = false;
-		explanationText = "";
+		explanationText = "Training complete.\n ";
 	}
 
 	@Override

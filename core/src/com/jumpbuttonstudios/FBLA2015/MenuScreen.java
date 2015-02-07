@@ -37,20 +37,25 @@ public class MenuScreen extends BaseScreen {
 			FBLA2015.soundManager.playMusic("menu", 0.1f);
 		}
 
+		Prefs.load();
+
+		Gdx.graphics.setDisplayMode(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),
+				Prefs.prefs.getBoolean("fullscreen"));
 		
-		
+		FBLA2015.soundManager.setPlay(Prefs.prefs.getBoolean("sound"));
+
 		table.setFillParent(true);
 		title = new Label("Menu Screen", new LabelStyle(skin.getFont("default-font"), Color.WHITE));
 		table.add(title).padBottom(10f);
 		table.row();
 
 		Image background = new Image(new Texture(Gdx.files.internal("mainmenu/menubg.png")));
+		background.setSize(Constants.WIDTH, Constants.HEIGHT);
 		Texture circTex = new Texture(Gdx.files.internal("mainmenu/circle.png"));
 		circTex.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		circle = new Image(circTex);
 
 		stage.addActor(background);
-// stage.addActor(circle);
 		for (int i = 0; i < 4; i++) {
 			Image arc = new Image(new Texture(Gdx.files.internal("mainmenu/arc.png")));
 			stage.addActor(arc);
@@ -58,8 +63,6 @@ public class MenuScreen extends BaseScreen {
 			arc.setPosition(Constants.WIDTH / 2, Constants.HEIGHT / 2);
 			arc.setOrigin(0, 0);
 		}
-		circle.setPosition(Constants.WIDTH / 2 - circle.getWidth() / 2, Constants.HEIGHT / 2
-				- circle.getHeight() / 2);
 
 		ImageButtonStyle style = new ImageButtonStyle();
 		style.up = new Image(new Texture(Gdx.files.internal("ui/button.png"))).getDrawable();
@@ -67,8 +70,11 @@ public class MenuScreen extends BaseScreen {
 
 		TextImageButton credits = new TextImageButton("Credits", skin.getFont("default-font"),
 				style);
-		
+
 		TextImageButton controls = new TextImageButton("Controls", skin.getFont("default-font"),
+				style);
+
+		TextImageButton options = new TextImageButton("Options", skin.getFont("default-font"),
 				style);
 
 		table.add(start).padBottom(5f).width(controls.textLabel.getWidth());
@@ -89,13 +95,23 @@ public class MenuScreen extends BaseScreen {
 				FBLA2015.soundManager.play("button", 0.5f);
 			}
 		});
-		
+
 		table.row();
-		table.add(controls).width(controls.textLabel.getWidth());
+		table.add(controls).width(controls.textLabel.getWidth()).padBottom(5f);
 		controls.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				game.setScreen(new ControlsScreen(game));
+				FBLA2015.soundManager.play("button", 0.5f);
+			}
+		});
+
+		table.row();
+		table.add(options).width(controls.textLabel.getWidth());
+		options.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				game.setScreen(new OptionsScreen(game));
 				FBLA2015.soundManager.play("button", 0.5f);
 			}
 		});
@@ -133,7 +149,8 @@ public class MenuScreen extends BaseScreen {
 			}
 
 			arcs[i].rotateBy(delta * -30f);
-			arcs[i].setOrigin(400 - arcs[i].getX(), 400 - arcs[i].getY());
+			arcs[i].setOrigin(Constants.WIDTH / 2 - arcs[i].getX(),
+					Constants.HEIGHT / 2 - arcs[i].getY());
 		}
 
 		if (lastAdd > addCap) {

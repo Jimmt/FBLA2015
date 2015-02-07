@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class LevelCompleteDialog extends Dialog {
@@ -42,6 +43,7 @@ public class LevelCompleteDialog extends Dialog {
 		lstyle.fontColor = Color.WHITE;
 		explanation = new Label(game.explanationText, lstyle);
 		explanation.setWrap(true);
+		explanation.setAlignment(Align.center);
 
 		getContentTable().add("Level Complete").expandX();
 		getContentTable().row();

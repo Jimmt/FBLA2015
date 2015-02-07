@@ -17,7 +17,7 @@ public class GameOverDialog extends Dialog {
 
 		game.pauseGame();
 
-		Image panel = new Image(new Texture(Gdx.files.internal("ui/commbg.png")));
+		Image panel = new Image(new Texture(Gdx.files.internal("ui/comm/commbg.png")));
 		background(panel.getDrawable());
 
 		ImageButtonStyle style = new ImageButtonStyle();

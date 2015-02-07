@@ -100,7 +100,7 @@
   </object>
  </objectgroup>
  <objectgroup name="customs" width="100" height="100">
-  <object name="horse" x="640" y="2688" width="32" height="32"/>
+  <object name="horse" x="2880" y="2560" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="box2D" width="100" height="100">
   <object name="level" type="object" x="352" y="3136">

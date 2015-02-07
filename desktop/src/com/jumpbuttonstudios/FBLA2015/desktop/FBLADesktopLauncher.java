@@ -7,8 +7,8 @@ import com.jumpbuttonstudios.FBLA2015.FBLA2015;
 public class FBLADesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = 800;
-		config.height = 800;
+		config.width = 1024;
+		config.height = 768;
 		new LwjglApplication(new FBLA2015(), config);
 	}
 }
