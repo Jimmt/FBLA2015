@@ -45,11 +45,11 @@ public class LevelCompleteDialog extends Dialog {
 		explanation.setWrap(true);
 		explanation.setAlignment(Align.center);
 
-		getContentTable().add("Level Complete").expandX();
+		getContentTable().add("Level Complete").expandX().padBottom(15f);
 		getContentTable().row();
 		getContentTable().add(explanation).fillX().center();
 		getContentTable().row();
-		getContentTable().add(back).expandX();
+		getContentTable().add(back).expandX().padTop(15f);
 		
 		
 	}

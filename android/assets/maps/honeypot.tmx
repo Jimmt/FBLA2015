@@ -7,17 +7,62 @@
     <property name="type" value="wall"/>
    </properties>
   </tile>
+  <tile id="77">
+   <properties>
+    <property name="type" value="floor"/>
+   </properties>
+  </tile>
+  <tile id="78">
+   <properties>
+    <property name="type" value="floor"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="tiles" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt0TERACAMwMAaxL8dLLDQy/C/Z8oMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALDlLDW88aPFjxY/Wvxo8aPFjxY/Wvxo8aPFjxY/Wvxo8aPFjxY/gN8u3wYJoQ==
+   eJzt3OFNwzAQQOGMwkKFFRiFUTpKR2EUUkUVQdTUSXPnZ/M+6cRPcnl1aUXVaZIkSZIkSZIkSZIkqc5pmi5bpvX1ju56j1/nnzVjj3j2YLnX422Zsz3yFXq8z/Npj3w+X7HYg8UeLPZgub3Pq2lhjxy1PZpd4D9jDxZ7sNiDxR4s9mCxB4s9WOzBYg8We7DYg8UeLPZgsQeLPVjswWIPhvXncmt6+D/bGFs62CXW3g6lLukLDOSoFjZ53tEtbLJfVAubbBfdwib1slrY5LHsFjYpa9XCJve1bLFuEr5oB1qfDc/IT4QWnpEF5Wx4RhakFj2dkajvohi9R+Z9K/2urdP6/kftVdpv1Mdxr2MP1hzZo/Q9Ic7fM9+zl3k+Anpcvyfk0nq/3mZ933y+Yo09WAN+vXs+Af8W3a6L/no36H0Nsseze632C7lvUUbv0Rvac9bteoLXRqP1CF4Xj3JGPBvfKD3CF+1E6zPi2fitdY+EFbvS6ox4Nsqym9jisawmtqgX3cQW20U1scV+UT1SlxiIPVjswWIPFnuw2IPFHiz2YLEHiz1Y7MFiDxZ7sNiDxR4sq882Hzqt9yr5AtwvoKQ=
   </data>
  </layer>
  <objectgroup name="obstacles" width="100" height="100"/>
  <objectgroup name="positions" width="100" height="100">
-  <object name="player_spawn" x="736" y="2816" width="32" height="32"/>
+  <object name="player_spawn" x="1632" y="3040" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="customs" width="100" height="100"/>
- <objectgroup name="box2D" width="100" height="100"/>
- <objectgroup name="comms" width="100" height="100"/>
+ <objectgroup name="customs" width="100" height="100">
+  <object name="spawn" x="384" y="2112" width="64" height="64"/>
+  <object name="spawn" x="1600" y="704" width="64" height="64"/>
+  <object name="spawn" x="2880" y="2112" width="64" height="64"/>
+ </objectgroup>
+ <objectgroup name="box2D" width="100" height="100">
+  <object name="level" type="object" x="1280" y="2688">
+   <polygon points="0,0 32,0 32,480 672,480 672,-32 704,-32 704,512 0,512"/>
+  </object>
+  <object name="level" type="object" x="1312" y="2688">
+   <polygon points="0,0 0,-32 -32,-32 -32,-64 -64,-64 -64,-96 -96,-96 -96,-128 -128,-128 -128,-160 -160,-160 -160,-224 -192,-224 -192,-288 -224,-288 -224,-352 -256,-352 -256,-448 -288,-448 -288,-320 -256,-320 -256,-256 -224,-256 -224,-192 -192,-192 -192,-128 -160,-128 -160,-96 -128,-96 -128,-64 -96,-64 -96,-32 -64,-32 -64,0"/>
+  </object>
+  <object name="level" type="object" x="1024" y="2240">
+   <polygon points="0,0 -544,0 -544,32 -672,32 -672,-224 -544,-224 -544,-192 0,-192 0,-224 -512,-224 -512,-256 -704,-256 -704,64 -512,64 -512,32 0,32"/>
+  </object>
+  <object name="level" type="object" x="1024" y="2048">
+   <polygon points="0,0 32,0 32,-96 64,-96 64,-160 96,-160 96,-224 128,-224 128,-256 160,-256 160,-288 192,-288 192,-320 224,-320 224,-352 256,-352 256,-384 288,-384 288,-416 320,-416 320,-448 352,-448 352,-480 416,-480 416,-512 480,-512 480,-544 384,-544 384,-512 320,-512 320,-480 288,-480 288,-448 256,-448 256,-416 224,-416 224,-384 192,-384 192,-352 160,-352 160,-320 128,-320 128,-288 96,-288 96,-256 64,-256 64,-192 32,-192 32,-128 0,-128"/>
+  </object>
+  <object name="level" type="object" x="1504" y="1504">
+   <polygon points="0,0 -32,0 -32,-576 -64,-576 -64,-896 320,-896 320,-576 288,-576 288,0 288,32 256,32 256,-608 288,-608 288,-864 -32,-864 -32,-608 0,-608"/>
+  </object>
+  <object name="level" type="object" x="1792" y="1504">
+   <polygon points="0,0 64,0 64,32 128,32 128,64 160,64 160,96 192,96 192,128 224,128 224,160 256,160 256,192 288,192 288,224 320,224 320,256 352,256 352,288 384,288 384,352 416,352 416,416 448,416 448,512 448,544 416,544 416,448 384,448 384,384 352,384 352,320 320,320 320,288 288,288 288,256 256,256 256,224 224,224 224,192 192,192 192,160 160,160 160,128 128,128 128,96 96,96 96,64 32,64 32,32 0,32"/>
+  </object>
+  <object name="level" type="object" x="2240" y="2016">
+   <polygon points="0,0 576,0 576,-32 768,-32 768,288 576,288 576,256 0,256 0,224 608,224 608,256 736,256 736,0 608,0 608,32 0,32"/>
+  </object>
+  <object name="level" type="object" x="2208" y="2240">
+   <polygon points="0,0 32,0 32,128 0,128 0,192 -32,192 -32,224 -32,256 -64,256 -64,320 -96,320 -96,352 -128,352 -128,384 -160,384 -160,416 -192,416 -192,448 -224,448 -224,384 -192,384 -192,352 -160,352 -160,320 -128,320 -128,288 -96,288 -96,224 -64,224 -64,160 -32,160 -32,96 0,96"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="comms" width="100" height="100">
+  <object name="comm" x="1280" y="2656" width="704" height="544">
+   <properties>
+    <property name="text" value="This is a bait for luring in malware. Wait for the malware to arrive and eradicate it."/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

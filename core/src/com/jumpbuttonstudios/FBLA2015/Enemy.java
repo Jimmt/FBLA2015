@@ -23,13 +23,14 @@ public class Enemy extends GameSprite implements Destroyable {
 	EnemyRaycastCallback callback;
 	AStar astar;
 	IntArray path;
-	float effectX, effectY, startAngle, finalAngle, angularSpeed = 2f;
+	float effectX, effectY, startAngle, finalAngle, angularSpeed = 2f, pathSpeed;
 
 	public Enemy(String path, ItemStats stats, float x, float y, float healthMax, AStar astar,
 			World world) {
 		super(path, x, y, 0, 1, true, BodyType.DynamicBody, world);
 		this.astar = astar;
 		this.world = world;
+		this.pathSpeed = stats.getMoveSpeed();
 		direction = new Vector2();
 		gun = new Gun(world, 3f, stats, body);
 		this.healthMax = healthMax;
@@ -120,7 +121,7 @@ public class Enemy extends GameSprite implements Destroyable {
 			if (direction.len() > optimalFireDistance) {
 				body.setLinearVelocity(pathDir.nor());
 			} else {
-				body.setLinearVelocity(pathDir.nor().scl(0.75f));
+				body.setLinearVelocity(pathDir.nor().scl(pathSpeed));
 			}
 		}
 

@@ -38,7 +38,7 @@ public class GameScreen extends BaseScreen {
 	boolean hitComm, gameOver, finished, completeDialogShown, hasBoss = true, musicStopped;
 	float vol, lastChange, changeCap = 0.1f, dv;
 	Image black;
-	int byteCoins, levelNum, objectiveCount;
+	int byteCoins, levelNum, objectiveCount, enemiesKilled;
 	AStar astar;
 	ShapeRenderer sr;
 	FBLA2015 game;
@@ -125,12 +125,13 @@ public class GameScreen extends BaseScreen {
 		stage.addActor(boss);
 	}
 
-	public void createEnemy(ItemStats stats, String path, float x, float y, float health,
+	public void createEnemy(ItemStats stats, float range, String path, float x, float y, float health,
 			boolean objective) {
 
 		Enemy enemy = new Enemy(path, stats, x, y, health, astar, world);
 		enemy.objective = objective;
 		enemy.setPlayer(player);
+		enemy.setRange(range);
 		stage.addActor(enemy);
 		enemies.add(enemy);
 
@@ -243,7 +244,7 @@ public class GameScreen extends BaseScreen {
 				effect.effect.start();
 				effect.effect.setPosition(enemies.get(i).getX(), enemies.get(i).getY());
 				enemies.get(i).destroy();
-
+				
 				stage.getActors().removeValue(enemies.get(i), false);
 				world.destroyBody(enemies.get(i).body);
 
@@ -255,6 +256,7 @@ public class GameScreen extends BaseScreen {
 
 				enemies.removeIndex(i);
 				byteCoins++;
+				enemiesKilled++;
 
 			}
 		}
