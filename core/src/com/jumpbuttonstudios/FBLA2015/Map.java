@@ -137,11 +137,21 @@ public class Map extends Actor {
 			RectangleMapObject object = (RectangleMapObject) obstaclesIterator.next();
 
 			if (object.getName().equals("laser")) {
-				Laser laser = new Laser(gs.player, object.getRectangle().x * Constants.SCALE,
-						object.getRectangle().y * Constants.SCALE, object.getRectangle().width
-								* Constants.SCALE, object.getRectangle().height * Constants.SCALE,
-						Float.valueOf(object.getProperties().get("repeat", String.class)));
-				gs.stage.addActor(laser);
+				if (object.getProperties().containsKey("black")) {
+					Laser laser = new Laser(gs.player, object.getRectangle().x * Constants.SCALE,
+							object.getRectangle().y * Constants.SCALE, object.getRectangle().width
+									* Constants.SCALE, object.getRectangle().height
+									* Constants.SCALE, Float.valueOf(object.getProperties().get(
+									"repeat", String.class)), "obstacle/blacklaser.png");
+					gs.stage.addActor(laser);
+				} else {
+					Laser laser = new Laser(gs.player, object.getRectangle().x * Constants.SCALE,
+							object.getRectangle().y * Constants.SCALE, object.getRectangle().width
+									* Constants.SCALE, object.getRectangle().height
+									* Constants.SCALE, Float.valueOf(object.getProperties().get(
+									"repeat", String.class)), "obstacle/laser.png");
+					gs.stage.addActor(laser);
+				}
 
 			}
 			if (object.getName().equals("target")) {

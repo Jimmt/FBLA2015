@@ -98,7 +98,7 @@ public class Worm extends Boss {
 	}
 
 	public Worm(float x, float y, World world) {
-		super(100, 20, "Worm");
+		super(300, 20, "Worm");
 		segments = new Array<WormSegment>();
 		joints = new Array<RevoluteJoint>();
 
@@ -139,7 +139,7 @@ public class Worm extends Boss {
 		Vector2 direction = new Vector2(x - segments.get(0).body.getWorldCenter().x, y
 				- segments.get(0).body.getWorldCenter().y);
 		segments.get(0).body.applyForceToCenter(
-				direction.nor().scl(7f).sub(segments.get(0).body.getLinearVelocity()), true);
+				direction.nor().scl(5f).sub(segments.get(0).body.getLinearVelocity()), true);
 
 	}
 

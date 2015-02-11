@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntArray;
 
 public class Enemy extends GameSprite implements Destroyable {
-	float healthMax, health, aggroRange = 4, optimalFireDistance = 3, lastKnownAngle;
+	float healthMax, health, aggroRange = 5, optimalFireDistance = 3, lastKnownAngle;
 	Image still;
 	Player player;
 	Gun gun;

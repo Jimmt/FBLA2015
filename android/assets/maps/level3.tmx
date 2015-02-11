@@ -28,7 +28,13 @@
    eJztm+1twyAQQBkli9TKKBnFo2QUj5JRiiWQrATzER/nI35POvVPbZ95YA5onQMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADQYXJu+XPucUI8j4TP+3F22/XAv9ty9z9HizXvylccCnzYAh+2wIct8GELfOgTatq9ulGkfeIz/M+7xP1KMbIPn7tG+8RnqYw3fNjy4cfhXLv2tLZ21Gij2F8tzkexr1gBH7bAhy3w0YbUHuvevIWPNqTqn70a8Nd9+H74KuzNN4GPPu/9LfjAh3TgQ97HkT2ok+ePWXINLugjSdhb+Dh/3rs+lc+mBszOmdPBc/HM/bN9RHKM9Pax88yPfpzzIf1NaKU07vChCz7G8jGFb5rQs7r52DmLeqTOoSz7CHP2PeaTitoca9aPuefUxruP1YWPW+v1O/P5M87nUv2wFalvllYNuPXR6mJ7fWm8pmooDUej+ljH4zdjrtZHKjQcSc0hmj6+dRGvD/mK9g8pJqF1iKaPI21p3UfILduW+BjSR3cXIZfL+6jZr5GqZ0th0MfshKmZQ6xE8DEfud452z5CfotEfr1DwMcS3hcfAoEPW3EVH6nznJZInf30iKv4OIry+gMfBUbxEb8DgvvNszPIKD465DM7g+DDFviwhfJ++zoH3DLxilGq+6bN74bI3fcjWv9uVotSvSxVD7fu35XqqB77gSNw1n4qPtLgwxb4sIVhH0vjLX8CfNgCH7bAhy3wYQup/2FpXQ+Hder7Gny7fgcA6MY/gV3ihg==
   </data>
  </layer>
- <objectgroup name="comms" width="100" height="100"/>
+ <objectgroup name="comms" width="100" height="100">
+  <object name="comm" x="2336" y="2176" width="288" height="640">
+   <properties>
+    <property name="text" value="The trojan horse lies ahead. It will activate once you attack it, so be ready."/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup name="obstacles" width="100" height="100">
   <object name="laser" x="992" y="1440" width="32" height="192">
    <properties>
@@ -40,61 +46,61 @@
   <object name="player_spawn" x="448" y="3040" width="32" height="32"/>
   <object name="3_enemy" x="160" y="2368" width="32" height="32">
    <properties>
-    <property name="health" value="150"/>
+    <property name="health" value="50"/>
     <property name="objective" value="false"/>
    </properties>
   </object>
   <object name="3_enemy" x="256" y="2304" width="32" height="32">
    <properties>
-    <property name="health" value="150"/>
+    <property name="health" value="50"/>
     <property name="objective" value="false"/>
    </properties>
   </object>
   <object name="3_enemy" x="352" y="2304" width="32" height="32">
    <properties>
-    <property name="health" value="150"/>
+    <property name="health" value="50"/>
     <property name="objective" value="false"/>
    </properties>
   </object>
   <object name="3_enemy" x="896" y="2400" width="32" height="32">
    <properties>
-    <property name="health" value="150"/>
+    <property name="health" value="50"/>
     <property name="objective" value="false"/>
    </properties>
   </object>
   <object name="3_enemy" x="672" y="2336" width="32" height="32">
    <properties>
-    <property name="health" value="150"/>
+    <property name="health" value="50"/>
     <property name="objective" value="false"/>
    </properties>
   </object>
   <object name="3_enemy" x="768" y="2368" width="32" height="32">
    <properties>
-    <property name="health" value="150"/>
+    <property name="health" value="50"/>
     <property name="objective" value="false"/>
    </properties>
   </object>
   <object name="3_enemy2" x="256" y="1760" width="32" height="32">
    <properties>
-    <property name="health" value="200"/>
+    <property name="health" value="75"/>
     <property name="objective" value="false"/>
    </properties>
   </object>
   <object name="3_enemy2" x="1184" y="1856" width="32" height="32">
    <properties>
-    <property name="health" value="200"/>
+    <property name="health" value="75"/>
     <property name="objective" value="false"/>
    </properties>
   </object>
   <object name="3_enemy2" x="2048" y="1792" width="32" height="32">
    <properties>
-    <property name="health" value="200"/>
+    <property name="health" value="50"/>
     <property name="objective" value="false"/>
    </properties>
   </object>
   <object name="3_enemy2" x="1280" y="1856" width="32" height="32">
    <properties>
-    <property name="health" value="200"/>
+    <property name="health" value="50"/>
     <property name="objective" value="false"/>
    </properties>
   </object>

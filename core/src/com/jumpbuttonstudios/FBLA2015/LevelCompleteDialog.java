@@ -38,7 +38,7 @@ public class LevelCompleteDialog extends Dialog {
 		});
 
 		LabelStyle lstyle = new LabelStyle();
-		BitmapFont font = new BitmapFont(Gdx.files.internal("skin/gputeks.fnt"));
+		BitmapFont font = new BitmapFont(Gdx.files.internal("skin/couriernew.fnt"));
 		lstyle.font = font;
 		lstyle.fontColor = Color.WHITE;
 		explanation = new Label(game.explanationText, lstyle);

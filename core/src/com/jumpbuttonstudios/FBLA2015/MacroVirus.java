@@ -22,7 +22,7 @@ public class MacroVirus extends Boss {
 	Gun cannon;
 
 	public MacroVirus(float x, float y, World world) {
-		super(100, 2f, "Macro Virus");
+		super(1000, 2f, "Macro Virus");
 
 		virus = new Image(new Texture(Gdx.files.internal("level4/boss.png")));
 		virus.setSize(virus.getWidth() * Constants.SCALE, virus.getHeight() * Constants.SCALE);
@@ -54,14 +54,15 @@ public class MacroVirus extends Boss {
 		cannon.updateFire(delta);
 		virus.act(delta);
 		cannon.act(delta);
+		direction.set(player.getX() - body.getWorldCenter().x,
+				player.getY() - body.getWorldCenter().y);
 	}
 
 	public void moveTowards(float x, float y) {
 
-		direction.set(x - body.getWorldCenter().x, y - body.getWorldCenter().y);
 		body.applyForceToCenter(direction.nor().scl(7f).sub(body.getLinearVelocity()).scl(0.05f),
 				true);
-		
+
 	}
 
 	@Override
@@ -77,9 +78,7 @@ public class MacroVirus extends Boss {
 				moveTowards(player.getX(), player.getY());
 			}
 		}
-		
-		
-		
+
 		cannon.draw(batch, parentAlpha);
 		cannon.fire(width, 0, 0.5f, false, direction.cpy());
 

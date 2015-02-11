@@ -26,7 +26,7 @@ public class TrojanHorse extends Boss {
 	boolean active;
 
 	public TrojanHorse(float x, float y, World world) {
-		super(200, 20, "Trojan Horse");
+		super(1000, 20, "Trojan Horse");
 
 		setPosition(x, y);
 		this.world = world;

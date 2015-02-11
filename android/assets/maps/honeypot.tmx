@@ -23,7 +23,20 @@
    eJzt3OFNwzAQQOGMwkKFFRiFUTpKR2EUUkUVQdTUSXPnZ/M+6cRPcnl1aUXVaZIkSZIkSZIkSZIkqc5pmi5bpvX1ju56j1/nnzVjj3j2YLnX422Zsz3yFXq8z/Npj3w+X7HYg8UeLPZgub3Pq2lhjxy1PZpd4D9jDxZ7sNiDxR4s9mCxB4s9WOzBYg8We7DYg8UeLPZgsQeLPVjswWIPhvXncmt6+D/bGFs62CXW3g6lLukLDOSoFjZ53tEtbLJfVAubbBfdwib1slrY5LHsFjYpa9XCJve1bLFuEr5oB1qfDc/IT4QWnpEF5Wx4RhakFj2dkajvohi9R+Z9K/2urdP6/kftVdpv1Mdxr2MP1hzZo/Q9Ic7fM9+zl3k+Anpcvyfk0nq/3mZ933y+Yo09WAN+vXs+Af8W3a6L/no36H0Nsseze632C7lvUUbv0Rvac9bteoLXRqP1CF4Xj3JGPBvfKD3CF+1E6zPi2fitdY+EFbvS6ox4Nsqym9jisawmtqgX3cQW20U1scV+UT1SlxiIPVjswWIPFnuw2IPFHiz2YLEHiz1Y7MFiDxZ7sNiDxR4sq882Hzqt9yr5AtwvoKQ=
   </data>
  </layer>
- <objectgroup name="obstacles" width="100" height="100"/>
+ <objectgroup name="obstacles" width="100" height="100">
+  <object name="laser" x="1088" y="1888" width="32" height="512">
+   <properties>
+    <property name="black" value=""/>
+    <property name="repeat" value="2f"/>
+   </properties>
+  </object>
+  <object name="laser" x="2144" y="1888" width="32" height="512">
+   <properties>
+    <property name="black" value=""/>
+    <property name="repeat" value="2f"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup name="positions" width="100" height="100">
   <object name="player_spawn" x="1632" y="3040" width="32" height="32"/>
  </objectgroup>
