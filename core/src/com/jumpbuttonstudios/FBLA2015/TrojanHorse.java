@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
@@ -38,10 +39,11 @@ public class TrojanHorse extends Boss {
 		bd.position.set(x, y);
 		bd.type = BodyType.DynamicBody;
 		body = world.createBody(bd);
-		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(horse.getWidth() / 2, horse.getHeight() / 2);
+		CircleShape shape = new CircleShape();
+		shape.setRadius((horse.getWidth() + horse.getHeight()) / 4);
 		FixtureDef fd = new FixtureDef();
 		fd.shape = shape;
+		fd.friction = 0.0f;
 		body.createFixture(fd);
 		UserData data = new UserData();
 		data.tag = "horse";
@@ -63,12 +65,12 @@ public class TrojanHorse extends Boss {
 	public void moveTowards(float x, float y) {
 
 		direction.set(x - body.getWorldCenter().x, y - body.getWorldCenter().y);
-		body.applyForceToCenter(direction.nor().scl(7f).sub(body.getLinearVelocity()).scl(0.05f),
+		body.applyForceToCenter(direction.nor().scl(7f).sub(body.getLinearVelocity()).scl(0.1f),
 				true);
-
+		System.out.println(direction.nor().scl(7f).sub(body.getLinearVelocity()).scl(0.1f));
 	}
 
-	public void activate(){
+	public void activate() {
 		active = true;
 	}
 
@@ -109,6 +111,7 @@ public class TrojanHorse extends Boss {
 				if (distance.len() <= aggroRange) {
 					aggro = true;
 					moveTowards(player.getX(), player.getY());
+
 				}
 				if (player.getX() - (horse.getX() + horse.getWidth() / 2) > 0) {
 					horse.setScaleX(1);
@@ -117,8 +120,7 @@ public class TrojanHorse extends Boss {
 				}
 			}
 		}
-		
-	
+
 		horse.setPosition(body.getPosition().x - horse.getWidth() / 2,
 				body.getPosition().y - horse.getHeight() / 2);
 		horse.draw(batch, parentAlpha);
