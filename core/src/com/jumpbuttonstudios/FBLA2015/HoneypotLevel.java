@@ -13,11 +13,11 @@ import com.badlogic.gdx.utils.Array;
 public class HoneypotLevel extends GameScreen {
 	Array<Vector2> spawnPoints = new Array<Vector2>();
 	float lastSpawnTime = 999f, spawnCap = 3f;
-	int enemyCap = 1;
+	int enemyCap = 10;
 	EnemiesKilledDialog dialog;
 
 	public HoneypotLevel(FBLA2015 game) {
-		super(game, "Honeypot");
+		super(game, "honeypot");
 
 		parseCustoms(map.getCustomsLayer());
 		this.explanationText = "";

@@ -13,7 +13,8 @@ public class HorseLevel extends GameScreen {
 		super(game, "level3");
 
 		parseCustoms(map.getCustomsLayer());
-		explanationText = "You just killed a Trojan Horse. This type of malware disguises itself as a benign application, but when executed will often harm the system. Typically, Trojan Horses are only effective against the unwary user.";
+		explanationText = "You just killed a Trojan Horse. This type of malware disguises itself as a benign application, but when executed will often harm the system by granting unauthorized access to other computers and using CPU cycles and network bandwidth. Trojan Horses are only effective against the unwary user, and thus are often spread through mediums like email attachments or online torrents or downloads.";
+// completeLevel();
 	}
 
 	public void parseCustoms(MapLayer customsLayer) {

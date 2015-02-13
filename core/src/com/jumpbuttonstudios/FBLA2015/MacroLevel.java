@@ -17,7 +17,7 @@ public class MacroLevel extends GameScreen {
 	boolean loaded;
 
 	public MacroLevel(FBLA2015 game) {
-		super(game, "Macros");
+		super(game, "macros");
 
 		explanationText = "You just defeated a macro virus. This type of malware resides in files like word documents (.docx) or powerpoints (.ppt), exploiting the ability to use macros. Macros are essentially small programs meant to automate repetitive tasks; however, some people create malicious macros that infect the computer once the document or powerpoint is opened. Once a macro virus infects a computer, it will often propagate itself to other files that support macros, ensuring that the malware is spread as much as possible. ";
 		parseCustoms(map.getCustomsLayer());

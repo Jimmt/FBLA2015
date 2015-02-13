@@ -16,7 +16,7 @@ public class WormLevel extends GameScreen {
 		super(game, "level2");
 		parseCustoms(map.getCustomsLayer());
 		explanationText = "You just killed a computer worm. This type of malware exploits bugs in operating system software to enter the computer, and then installs a backdoor to allow an external user to control the computer. Worms will also attempt to spread themselves to other computers, creating networks of computers all under the control of the original creator of the worm.";
- completeLevel();
+// completeLevel();
 	}
 
 	public void parseCustoms(MapLayer customsLayer) {

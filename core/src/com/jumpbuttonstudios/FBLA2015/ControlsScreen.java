@@ -25,7 +25,7 @@ public class ControlsScreen extends BaseScreen {
 		tex.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		Image pic = new Image(tex);
 
-		table.add(pic).width(pic.getWidth()).height(pic.getHeight());
+		table.add(pic).width(pic.getWidth() * 1.5f).height(pic.getHeight() * 1.5f);
 
 		pic.addAction(Actions.sequence(Actions.alpha(0.0f),
 				Actions.fadeIn(1.0f)));

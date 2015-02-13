@@ -34,7 +34,7 @@ public class MenuScreen extends BaseScreen {
 		super.show();
 
 		if (!FBLA2015.DEBUG) {
-			FBLA2015.soundManager.playMusic("menu", 0.1f);
+			FBLA2015.soundManager.playMusic("menu", 0.09f);
 		}
 
 		Prefs.load();

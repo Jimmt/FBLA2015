@@ -63,7 +63,7 @@ public class OptionsScreen extends BaseScreen {
 		checkBoxStyle.checkboxOn = new Image(new Texture(
 				Gdx.files.internal("ui/checkbox/checkOn.png"))).getDrawable();
 		checkBoxStyle.checkboxOff = new Image(new Texture(
-				Gdx.files.internal("ui/checkBox/checkOff.png"))).getDrawable();
+				Gdx.files.internal("ui/checkbox/checkOff.png"))).getDrawable();
 		checkBoxStyle.font = font;
 
 		final CheckBox sound = new CheckBox("", checkBoxStyle);

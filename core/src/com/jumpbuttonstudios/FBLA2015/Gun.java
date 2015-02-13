@@ -34,7 +34,7 @@ public class Gun extends Actor {
 			if (lastFireTime > stats.getROF()) {
 				lastFireTime = 0;
 
-				FBLA2015.soundManager.play("gunshot", volume);
+				FBLA2015.soundManager.playRandom("gunshot", volume, 0.85f, 1.15f);
 
 				// half width is factored in
 				Vector2 coords = new Vector2(body.getPosition().x
