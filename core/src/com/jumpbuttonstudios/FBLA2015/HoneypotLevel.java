@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.Array;
 public class HoneypotLevel extends GameScreen {
 	Array<Vector2> spawnPoints = new Array<Vector2>();
 	float lastSpawnTime = 999f, spawnCap = 3f;
-	int enemyCap = 10;
+	int enemyCap = 15;
 	EnemiesKilledDialog dialog;
 
 	public HoneypotLevel(FBLA2015 game) {
@@ -53,13 +53,19 @@ public class HoneypotLevel extends GameScreen {
 
 		dialog.killed = enemiesKilled;
 
-		if (lastSpawnTime > spawnCap) {
+		if (lastSpawnTime > spawnCap && !gameOver) {
 			lastSpawnTime = 0;
+
+			if (spawnCap > 2f) {
+				spawnCap -= 0.25f;
+			}
+
 			int index = MathUtils.random(spawnPoints.size - 1);
 
 			createEnemy(ItemStats.LEVEL5_GUN, 100,
 					"level5/enemy" + MathUtils.random(1, 4) + ".png", spawnPoints.get(index).x,
-					spawnPoints.get(index).y, 20, true);
+					spawnPoints.get(index).y, 40, true);
+			System.out.println(enemies.size);
 
 		} else {
 			lastSpawnTime += delta;
