@@ -22,7 +22,7 @@ public class MacroVirus extends Boss {
 	Gun cannon;
 
 	public MacroVirus(float x, float y, World world) {
-		super(1000, 2f, "Macro Virus");
+		super(300, 2f, "Macro Virus");
 
 		virus = new Image(new Texture(Gdx.files.internal("level4/boss.png")));
 		virus.setSize(virus.getWidth() * Constants.SCALE, virus.getHeight() * Constants.SCALE);
