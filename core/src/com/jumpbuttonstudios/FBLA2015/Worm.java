@@ -21,7 +21,8 @@ public class Worm extends Boss {
 	Array<WormSegment> segments;
 	Array<RevoluteJoint> joints;
 	Vector2 distance = new Vector2();
-	float aggroRange = 5;
+
+// float aggroRange = 5;
 
 	class WormSegment extends Image {
 		Body body;
@@ -147,14 +148,11 @@ public class Worm extends Boss {
 	public void act(float delta) {
 		super.act(delta);
 		if (segments.size > 0) {
-			if (player != null) {
-				distance.set(player.getX() - segments.get(0).getX(), player.getY()
-						- segments.get(0).getY());
+			distance.set(player.getX() - segments.get(0).getX(), player.getY()
+					- segments.get(0).getY());
+			if (aggro) {
 
-				if (distance.len() <= aggroRange) {
-					aggro = true;
-					moveTowards(player.getX(), player.getY());
-				}
+				moveTowards(player.getX(), player.getY());
 			}
 
 			for (int i = 0; i < segments.size; i++) {

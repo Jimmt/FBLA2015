@@ -1,10 +1,11 @@
 package com.jumpbuttonstudios.FBLA2015;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
@@ -13,12 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
-import com.badlogic.gdx.scenes.scene2d.ui.SelectBox.SelectBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Array;
 
 public class OptionsScreen extends BaseScreen {
 
@@ -80,8 +76,9 @@ public class OptionsScreen extends BaseScreen {
 		fullscreen.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-
-				Gdx.graphics.setDisplayMode(1024, 768, fullscreen.isChecked());
+				Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+				Gdx.graphics.setDisplayMode((int) d.getWidth(), (int) d.getHeight(),
+						fullscreen.isChecked());
 				Prefs.putBoolean("fullscreen", fullscreen.isChecked());
 				FBLA2015.soundManager.play("button", 0.5f);
 			}
@@ -97,13 +94,11 @@ public class OptionsScreen extends BaseScreen {
 		table.add(sound).padBottom(15f).padTop(30f);
 		table.add(label).padLeft(20f).padBottom(15f).padTop(30f);
 		sound.setChecked(Prefs.prefs.getBoolean("sound"));
-		
 
 		table.row();
 		table.add(fullscreen).padBottom(60f);
 		table.add(fullscreenLabel).padLeft(20f).padBottom(60f);
 		fullscreen.setChecked(Prefs.prefs.getBoolean("fullscreen"));
-
 
 		table.row();
 		table.add(back).colspan(2);

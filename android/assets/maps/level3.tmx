@@ -2,6 +2,11 @@
 <map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32">
   <image source="tiles.png" width="608" height="544"/>
+  <tile id="59">
+   <properties>
+    <property name="type" value="wall"/>
+   </properties>
+  </tile>
   <tile id="60">
    <properties>
     <property name="type" value="wall"/>
@@ -25,7 +30,7 @@
  </tileset>
  <layer name="tiles" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJztm+1twyAQQBkli9TKKBnFo2QUj5JRiiWQrATzER/nI35POvVPbZ95YA5onQMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADQYXJu+XPucUI8j4TP+3F22/XAv9ty9z9HizXvylccCnzYAh+2wIct8GELfOgTatq9ulGkfeIz/M+7xP1KMbIPn7tG+8RnqYw3fNjy4cfhXLv2tLZ21Gij2F8tzkexr1gBH7bAhy3w0YbUHuvevIWPNqTqn70a8Nd9+H74KuzNN4GPPu/9LfjAh3TgQ97HkT2ok+ePWXINLugjSdhb+Dh/3rs+lc+mBszOmdPBc/HM/bN9RHKM9Pax88yPfpzzIf1NaKU07vChCz7G8jGFb5rQs7r52DmLeqTOoSz7CHP2PeaTitoca9aPuefUxruP1YWPW+v1O/P5M87nUv2wFalvllYNuPXR6mJ7fWm8pmooDUej+ljH4zdjrtZHKjQcSc0hmj6+dRGvD/mK9g8pJqF1iKaPI21p3UfILduW+BjSR3cXIZfL+6jZr5GqZ0th0MfshKmZQ6xE8DEfud452z5CfotEfr1DwMcS3hcfAoEPW3EVH6nznJZInf30iKv4OIry+gMfBUbxEb8DgvvNszPIKD465DM7g+DDFviwhfJ++zoH3DLxilGq+6bN74bI3fcjWv9uVotSvSxVD7fu35XqqB77gSNw1n4qPtLgwxb4sIVhH0vjLX8CfNgCH7bAhy3wYQup/2FpXQ+Hder7Gny7fgcA6MY/gV3ihg==
+   eJztm9GRgyAQQCklhXhOSrEUSrlSLMVSTudw4iQIEpd1Sd6b2cmXijxwFzTOAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOjQOzf+ODdcEL9nYm73cHXf1WC+t/E+/7YWS7sP3mJT4MMW+LAFPmyBD1vgQ59Q00brxs7J9E8XrjH/3iXOl4uWfcxt1+if9Voq8w0ftnzM89AfXXtaWztq9NE6Xi3mo3WsWAEftsCHLfBRhtQe617ewkcZUvXPXg346T66xPoq7M0XgY869/0u+MCHdOBD3seZPaiL84eXXIML+ojS/+8tPO8jvvT5Zs9jz9WQy5n9yffiiX3P5BiRnCO1fexc82Ucp3xIPxNKyc07fOiCj7Z8hBxyF7pWNR8776KG2Hsoyz6WHCiVQ+ZzTZlcVcXH4qLk3Jl87td8LjUOS5F6ZmnVgFsfpS62x+fmaxep1zQctepjmY/vzLmjPmKh4Ugqh2j6eNfFenxor+j4kKIXWodo+jjTl9Z9hLYl+xIfTfqo7iK05et9xPJYrXo2FwZ9eCfMkRxiJYIPf+Z452z7CO0bJdpXOwR8jOF+8SEQ+LAV3+Ij9j6nJBS/+f4KH2dRXn/gI0MrPrrHfL4Jtcc/94UFWvFRoT3eGQQftsCHLZT325da8JaIaY1c3Re+8Zk2kTrvS5R+N6tFrl6WqodL9+9ydVSN/cAWuGo/FR9x8GELfNjCsI+x8JQfAT5sgQ9b4MMW+LCF1H9YStfDYZ067YXV9TUAfAZ/0svgxA==
   </data>
  </layer>
  <objectgroup name="comms" width="100" height="100">
@@ -108,7 +113,7 @@
  <objectgroup name="customs" width="100" height="100">
   <object name="horse" x="2880" y="2560" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="box2D" width="100" height="100">
+ <objectgroup name="box2D" width="100" height="100" visible="0">
   <object name="level" type="object" x="352" y="3136">
    <polygon points="0,0 0,-320 -352,-320 -352,-832 -320,-832 -320,-864 -288,-864 -288,-896 -256,-896 -256,-928 -224,-928 -224,-960 -32,-960 0,-928 -192,-928 -192,-896 -224,-896 -224,-864 -256,-864 -256,-832 -288,-832 -288,-800 -320,-800 -320,-352 32,-352 32,-32 256,-32 256,-352 768,-352 768,-832 800,-864 800,-320 288,-320 288,0 160,0"/>
   </object>

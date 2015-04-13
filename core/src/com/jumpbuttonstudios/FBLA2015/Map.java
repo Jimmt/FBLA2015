@@ -185,7 +185,7 @@ public class Map extends Actor {
 				if (!object.getProperties().containsKey("stats")) {
 					gs.createEnemy(
 							ItemStats.TUTORIAL_GUN,
-							4,
+							-1,
 							"enemy/enemy.png",
 							object.getRectangle().x * Constants.SCALE,
 							object.getRectangle().y * Constants.SCALE,
@@ -198,32 +198,32 @@ public class Map extends Actor {
 
 			}
 			if (object.getName().equals("2_enemy")) {
-				gs.createEnemy(ItemStats.LEVEL2_GUN, 4, "level2/enemy.png", object.getRectangle().x
+				gs.createEnemy(ItemStats.LEVEL2_GUN, -1, "level2/enemy.png", object.getRectangle().x
 						* Constants.SCALE, object.getRectangle().y * Constants.SCALE,
 						Float.parseFloat(object.getProperties().get("health", String.class)),
 						Boolean.parseBoolean(object.getProperties().get("objective", String.class)));
 			}
 			if (object.getName().equals("3_enemy")) {
-				gs.createEnemy(ItemStats.LEVEL3_GUN, 4, "level3/enemy.png", object.getRectangle().x
+				gs.createEnemy(ItemStats.LEVEL3_GUN, -1, "level3/enemy.png", object.getRectangle().x
 						* Constants.SCALE, object.getRectangle().y * Constants.SCALE,
 						Float.parseFloat(object.getProperties().get("health", String.class)),
 						Boolean.parseBoolean(object.getProperties().get("objective", String.class)));
 			}
 			if (object.getName().equals("3_enemy2")) {
-				gs.createEnemy(ItemStats.LEVEL3_GUN2, 4, "level3/enemy2.png",
+				gs.createEnemy(ItemStats.LEVEL3_GUN2, -1, "level3/enemy2.png",
 						object.getRectangle().x * Constants.SCALE, object.getRectangle().y
 								* Constants.SCALE,
 						Float.parseFloat(object.getProperties().get("health", String.class)),
 						Boolean.parseBoolean(object.getProperties().get("objective", String.class)));
 			}
 			if (object.getName().equals("4_enemy")) {
-				gs.createEnemy(ItemStats.LEVEL4_GUN, 4, "level4/enemy.png", object.getRectangle().x
+				gs.createEnemy(ItemStats.LEVEL4_GUN, -1, "level4/enemy.png", object.getRectangle().x
 						* Constants.SCALE, object.getRectangle().y * Constants.SCALE,
 						Float.parseFloat(object.getProperties().get("health", String.class)),
 						Boolean.parseBoolean(object.getProperties().get("objective", String.class)));
 			}
 			if (object.getName().equals("4_enemy2")) {
-				gs.createEnemy(ItemStats.LEVEL4_GUN2, 4, "level4/enemy2.png",
+				gs.createEnemy(ItemStats.LEVEL4_GUN2, -1, "level4/enemy2.png",
 						object.getRectangle().x * Constants.SCALE, object.getRectangle().y
 								* Constants.SCALE,
 						Float.parseFloat(object.getProperties().get("health", String.class)),
@@ -234,6 +234,7 @@ public class Map extends Actor {
 				Worm worm = new Worm(object.getRectangle().x * Constants.SCALE,
 						object.getRectangle().y * Constants.SCALE, gs.world);
 				gs.createBoss(worm);
+				
 			}
 		}
 	}

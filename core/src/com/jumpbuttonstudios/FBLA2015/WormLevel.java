@@ -39,12 +39,18 @@ public class WormLevel extends GameScreen {
 						* Constants.SCALE, world);
 				createBoss(worm);
 			}
+
+			if (object.getName().equals("trigger")) {
+				trigger = object.getRectangle();
+				trigger.set(trigger.x * Constants.SCALE, trigger.y * Constants.SCALE, trigger.width * Constants.SCALE, trigger.height * Constants.SCALE);
+			}
 		}
 	}
 
 	@Override
 	public void render(float delta) {
 		super.render(delta);
+
 
 		if (worm.health <= 0) {
 			for (int i = 0; i < worm.segments.size; i++) {

@@ -50,12 +50,20 @@ public class MacroLevel extends GameScreen {
 				page.toBack();
 
 			}
+			if(object.getName().equals("trigger")){
+				trigger = object.getRectangle();
+				trigger.set(trigger.x * Constants.SCALE, trigger.y * Constants.SCALE, trigger.width * Constants.SCALE, trigger.height * Constants.SCALE);
+			}
 		}
 	}
 
 	@Override
 	public void render(float delta) {
 		super.render(delta);
+		
+		if(player.hitbox.overlaps(trigger)){
+			virus.aggro = true;
+		}
 
 		if (virus.health <= 0 && stage.getActors().contains(virus, false)) {
 			world.destroyBody(virus.body);

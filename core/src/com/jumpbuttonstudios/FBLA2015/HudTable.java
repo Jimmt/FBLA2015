@@ -18,15 +18,15 @@ public class HudTable extends Table {
 
 		Table infoTable = new Table(skin);
 
-		healthBar = new HealthBar(player);
-		infoTable.add(healthBar);
-		infoTable.row();
+		
 		coinsBar = new CoinsBar(0, skin);
-
-		add(coinsBar).left().top();
-		add(infoTable).expand().top().right();
+		add(coinsBar).expand().left().top();
+		healthBar = new HealthBar(player);
+		add(healthBar).expand().right().top();
+		
+		
+//		add(infoTable).expand();
 		row();
-
 
 	}
 

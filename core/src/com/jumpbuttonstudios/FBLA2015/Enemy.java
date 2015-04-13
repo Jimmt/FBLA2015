@@ -13,7 +13,8 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntArray;
 
 public class Enemy extends GameSprite implements Destroyable {
-	float healthMax, health, aggroRange = 5, optimalFireDistance = 3, lastKnownAngle;
+	float healthMax, health, aggroRange = Constants.ENEMY_AGGRO_RANGE,
+			optimalFireDistance = Constants.ENEMY_FIRE_RANGE, lastKnownAngle;
 	Image still;
 	Player player;
 	Gun gun;
@@ -51,7 +52,6 @@ public class Enemy extends GameSprite implements Destroyable {
 		this.path = new IntArray();
 
 		setOrigin(width / 2, height / 2);
-
 		stdRotate = false;
 	}
 
@@ -82,11 +82,15 @@ public class Enemy extends GameSprite implements Destroyable {
 		gun.updateFire(delta);
 		gun.act(delta);
 
-		if (direction.len() < aggroRange) {
-			follow(delta);
-			aggro = true;
-		} else {
-
+		if (aggroRange == -1) {
+			if (direction.x < Constants.SCLWIDTH / 2) {
+				follow(delta);
+				aggro = true;
+			}
+			if (direction.y < Constants.SCLHEIGHT / 2) {
+				follow(delta);
+				aggro = true;
+			}
 		}
 
 		if (!callback.isHit() && aggro) {

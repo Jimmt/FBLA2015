@@ -27,7 +27,7 @@ public class TrojanHorse extends Boss {
 	boolean active;
 
 	public TrojanHorse(float x, float y, World world) {
-		super(1000, 20, "Trojan Horse");
+		super(500, 20, "Trojan Horse");
 
 		setPosition(x, y);
 		this.world = world;
@@ -54,8 +54,9 @@ public class TrojanHorse extends Boss {
 		callback = new EnemyRaycastCallback();
 
 		Color[] colors = { Color.RED, Color.YELLOW, Color.ORANGE, Color.GREEN, Color.BLUE,
-				Color.OLIVE, Color.PURPLE, Color.CYAN, Color.GRAY };
-		for (int i = 0; i < 9; i++) {
+				Color.OLIVE, Color.PURPLE, Color.CYAN, Color.GRAY, Color.WHITE };
+		
+		for (int i = 0; i < 10; i++) {
 			ColorGun gun = new ColorGun(world, 2f, ItemStats.HORSE, body, colors[i]);
 			gun.bounce = true;
 			guns.add(gun);
@@ -67,11 +68,11 @@ public class TrojanHorse extends Boss {
 		direction.set(x - body.getWorldCenter().x, y - body.getWorldCenter().y);
 		body.applyForceToCenter(direction.nor().scl(7f).sub(body.getLinearVelocity()).scl(0.1f),
 				true);
-		System.out.println(direction.nor().scl(7f).sub(body.getLinearVelocity()).scl(0.1f));
 	}
 
 	public void activate() {
 		active = true;
+		aggro = true;
 	}
 
 	@Override
@@ -108,8 +109,7 @@ public class TrojanHorse extends Boss {
 			if (player != null) {
 				distance.set(player.getX() - horse.getX(), player.getY() - horse.getY());
 
-				if (distance.len() <= aggroRange) {
-					aggro = true;
+				if (aggro) {
 					moveTowards(player.getX(), player.getY());
 
 				}

@@ -45,7 +45,7 @@ public class MenuScreen extends BaseScreen {
 		FBLA2015.soundManager.setPlay(Prefs.prefs.getBoolean("sound"));
 
 		table.setFillParent(true);
-		title = new Label("Menu Screen", new LabelStyle(skin.getFont("default-font"), Color.WHITE));
+		title = new Label("Infection", new LabelStyle(skin.getFont("default-font"), Color.WHITE));
 		table.add(title).padBottom(10f);
 		table.row();
 

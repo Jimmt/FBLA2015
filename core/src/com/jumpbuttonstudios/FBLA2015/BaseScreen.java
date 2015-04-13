@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 public class BaseScreen implements Screen {
 	protected Stage stage, hudStage, dialogStage;
@@ -27,6 +28,7 @@ public class BaseScreen implements Screen {
 	protected Batch batch;
 	protected FBLA2015 game;
 	protected EscapeDialog dialog;
+	protected StretchViewport hudViewport, viewport;
 	boolean paused;
 
 	public BaseScreen(FBLA2015 game) {
@@ -47,7 +49,8 @@ public class BaseScreen implements Screen {
 
 		batch = new SpriteBatch();
 
-		FitViewport hudViewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT);
+		hudViewport = new StretchViewport(Constants.WIDTH, Constants.HEIGHT);
+		viewport = new StretchViewport(Constants.SCLWIDTH, Constants.SCLHEIGHT);
 		dialogStage = new Stage(hudViewport);
 
 		InputMultiplexer multiplexer = new InputMultiplexer(dialogStage, stage);
@@ -74,6 +77,8 @@ public class BaseScreen implements Screen {
 
 		dialogStage.draw();
 		dialogStage.act(delta);
+		
+		
 
 		
 
@@ -84,7 +89,8 @@ public class BaseScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
+		viewport.update(width, height);
+		hudViewport.update(width, height);
 
 	}
 

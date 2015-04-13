@@ -14,14 +14,15 @@ import com.badlogic.gdx.graphics.g2d.ParticleEmitter;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class GameScreen extends BaseScreen {
+	Rectangle trigger;
 	RayHandler rayHandler;
 	Array<GameSprite> sprites = new Array<GameSprite>();
 	Array<RectangleMapObject> comms = new Array<RectangleMapObject>();
@@ -57,9 +58,7 @@ public class GameScreen extends BaseScreen {
 
 		ItemStats.makeCache();
 
-		FitViewport viewport = new FitViewport(Constants.SCLWIDTH, Constants.SCLHEIGHT);
 		stage = new Stage(viewport);
-		FitViewport hudViewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT);
 
 		rayHandler = new RayHandler(world);
 		rayHandler.setCombinedMatrix(stage.getCamera().combined);
@@ -125,8 +124,8 @@ public class GameScreen extends BaseScreen {
 		stage.addActor(boss);
 	}
 
-	public void createEnemy(ItemStats stats, float range, String path, float x, float y, float health,
-			boolean objective) {
+	public void createEnemy(ItemStats stats, float range, String path, float x, float y,
+			float health, boolean objective) {
 
 		Enemy enemy = new Enemy(path, stats, x, y, health, astar, world);
 		enemy.objective = objective;
@@ -148,8 +147,8 @@ public class GameScreen extends BaseScreen {
 	public void completeLevel() {
 		if (!completeDialogShown) {
 			LevelCompleteDialog dialog = new LevelCompleteDialog(game, this, skin);
-			dialog.setPosition(Constants.WIDTH / 2 - dialog.getWidth() / 2,
-					Constants.HEIGHT / 2 - dialog.getHeight() / 2);
+			dialog.setPosition(Constants.WIDTH / 2 - dialog.getWidth() / 2, Constants.HEIGHT / 2
+					- dialog.getHeight() / 2);
 			dialogStage.addActor(dialog);
 			completeDialogShown = true;
 		}
@@ -173,6 +172,10 @@ public class GameScreen extends BaseScreen {
 // }
 // sr.setColor(Color.CYAN);
 // sr.end();
+		
+		if(trigger != null && player.hitbox.overlaps(trigger)){
+			boss.aggro = true;
+		}
 
 		if (!musicStopped) {
 			if (lastChange > changeCap) {
@@ -209,6 +212,7 @@ public class GameScreen extends BaseScreen {
 
 		}
 
+		
 		if (boss != null) {
 			if (boss.aggro) {
 				if (hpDialog == null) {
@@ -219,7 +223,10 @@ public class GameScreen extends BaseScreen {
 				}
 			}
 			if (boss.health <= 0) {
-				hpDialog.addAction(Actions.fadeOut(1f, Interpolation.pow2Out));
+				if (hpDialog != null) {
+					hpDialog.addAction(Actions.fadeOut(1f, Interpolation.pow2Out));
+				}
+
 			}
 		}
 
@@ -244,7 +251,7 @@ public class GameScreen extends BaseScreen {
 				effect.effect.start();
 				effect.effect.setPosition(enemies.get(i).getX(), enemies.get(i).getY());
 				enemies.get(i).destroy();
-				
+
 				stage.getActors().removeValue(enemies.get(i), false);
 				world.destroyBody(enemies.get(i).body);
 
@@ -280,7 +287,6 @@ public class GameScreen extends BaseScreen {
 		if (FBLA2015.DEBUG) {
 			debugRenderer.render(world, stage.getCamera().combined);
 		}
-
 	}
 
 }
