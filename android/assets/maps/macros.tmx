@@ -20,7 +20,7 @@
  </tileset>
  <layer name="tiles" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt3cGtgkAUQNEpzRLUCn4plmIplmIp4uoX4AteyTnJhB0Z5g4JCwJrAQDAcV3W+jtvx6ON7bqek+u0l/fcrwcc58lF2pEeLXq06NGiR4seLXq06NGiR4seLXq06NGiR4seLXq06NGiR4seLXq06NGiR4seLXq0XNZ6TL3vNLGO23luQ/M5za7Ub5m6z351X9fo0aJHix4terTo0aJHix4terTo0aJHix4terTo0aJHix4terTo0aJHix4terTo0aJHix4terTo0aJHix4terTo0aJHix4terTo0aJHix4terTo0aJHix4terTo0aLHjMHvhdz1+NzUvp4aeny/gR7/9GiZ6uG7VTM8F7Xo0aJHix4terTo0aJHix4terTo0aJHix4terTo0aJHix4terTo0aJHy+D/o+57z/2IXlkad6Q=
+   eJzt3dEJwkAUBdEtzRLUCizFUizFUizF7cGHTMIZuORPYk4EPySuJUmSJJ2321qP6z6ebft9fSav07/a5/657+PZduWRGo/WeLTGozUerfFojUdrPFrj0RqP1ni0xqM1Hq3xaI1Hazxa49Eaj9Z4tMajNR6t8WjtqB63td5Tv3eauI77dZ5D53OZvVLHaupzdtT7uhaPVjxa8WjFoxWPVjxa8WjFoxWPVjxa8WjFoxWPVjxa8WjFoxWPVjxa8WjFoxWPVjxa8WjFoxWPVjxa8WjFoxWPVjxa8WjFoxWPVjxa8WjFoxWPVjxa8WjFoxWPVjxmGnxeyIvH703d11PjwaMUj1ZTHp5bNZPvRa14tOLRikcrHq14tOLRikcrHq14tOLRikcrHq14tOLRikcrHq14tOLRavD/o17/Pvcz9gUeLRNz
   </data>
  </layer>
  <objectgroup name="comms" width="100" height="100">
@@ -91,7 +91,7 @@
   <object name="boss" x="864" y="512" width="32" height="32"/>
   <object name="trigger" x="576" y="992" width="608" height="32"/>
  </objectgroup>
- <objectgroup name="box2D" width="100" height="100">
+ <objectgroup name="box2D" width="100" height="100" visible="0">
   <object name="page1" type="object" x="32" y="3168">
    <polygon points="0,0 672,0 672,32 -32,32 -32,-768 0,-768"/>
   </object>
