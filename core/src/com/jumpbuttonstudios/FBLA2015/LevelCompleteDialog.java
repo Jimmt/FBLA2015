@@ -22,6 +22,7 @@ public class LevelCompleteDialog extends Dialog {
 
 		game.pauseGame();
 
+		
 		Image panel = new Image(new Texture(Gdx.files.internal("ui/levelcompletebg.png")));
 		background(panel.getDrawable());
 		setSize(Constants.WIDTH - 100, Constants.HEIGHT - 100);

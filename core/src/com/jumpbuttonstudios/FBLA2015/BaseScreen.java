@@ -72,6 +72,9 @@ public class BaseScreen implements Screen {
 		if (!paused) {
 			stage.act(delta);
 			world.step(1 / 60f, 5, 5);
+			FBLA2015.soundManager.setPlay(true);
+		} else {
+			FBLA2015.soundManager.setPlay(false);
 		}
 		stage.draw();
 
