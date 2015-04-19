@@ -17,7 +17,7 @@ public class EnemiesKilledDialog extends Dialog {
 
 	public EnemiesKilledDialog(int cap, Skin skin) {
 		super("", skin);
-		Image bg = new Image(new Texture(Gdx.files.internal("ui/bosshealthbg.png")));
+		Image bg = new Image(Textures.getTex("ui/bosshealthbg.png"));
 		background(bg.getDrawable());
 		this.cap = cap;
 

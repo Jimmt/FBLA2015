@@ -1,9 +1,9 @@
 package com.jumpbuttonstudios.FBLA2015;
 
-public class TutorialLevel extends GameScreen {
+public class IntroductionLevel extends GameScreen {
 
-	public TutorialLevel(FBLA2015 game) {
-		super(game, "tutorial");
+	public IntroductionLevel(FBLA2015 game) {
+		super(game, "introduction", false);
 
 		hasBoss = false;
 		explanationText = "Training complete.\n ";

@@ -1,6 +1,7 @@
 package com.jumpbuttonstudios.FBLA2015;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 
 public class Constants {
 	public static float WIDTH = Gdx.graphics.getWidth();
@@ -12,4 +13,6 @@ public class Constants {
 	private static float screenRadius = WIDTH;
 	public static float ENEMY_AGGRO_RANGE = screenRadius * Constants.SCALE;
 	public static float ENEMY_FIRE_RANGE = screenRadius / 4 * 3f * Constants.SCALE;
+	public static Color PLAYER_COLOR;
+
 }

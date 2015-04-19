@@ -32,7 +32,7 @@ public class TrojanHorse extends Boss {
 		setPosition(x, y);
 		this.world = world;
 
-		horse = new Image(new Texture(Gdx.files.internal("level3/horse.png")));
+		horse = new Image(Textures.getTex("level3/horse.png"));
 		horse.setSize(horse.getWidth() * Constants.SCALE, horse.getHeight() * Constants.SCALE);
 
 		BodyDef bd = new BodyDef();

@@ -21,7 +21,7 @@ public class ControlsScreen extends BaseScreen {
 	public void show() {
 		super.show();
 
-		Texture tex = new Texture(Gdx.files.internal("instructions.png"));
+		Texture tex = Textures.getTex("instructions.png");
 		tex.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		Image pic = new Image(tex);
 
@@ -33,7 +33,7 @@ public class ControlsScreen extends BaseScreen {
 		table.row();
 
 		ImageButtonStyle style = new ImageButtonStyle();
-		style.up = new Image(new Texture(Gdx.files.internal("ui/button.png"))).getDrawable();
+		style.up = new Image(Textures.getTex("ui/button.png")).getDrawable();
 		TextImageButton back = new TextImageButton("Back", skin.getFont("default-font"), style);
 		back.addListener(new ClickListener() {
 			@Override

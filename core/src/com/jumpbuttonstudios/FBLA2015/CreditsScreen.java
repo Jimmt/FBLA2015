@@ -25,7 +25,7 @@ public class CreditsScreen extends BaseScreen {
 		table.add("Credits").padBottom(30f);
 
 		ImageButtonStyle style = new ImageButtonStyle();
-		style.up = new Image(new Texture(Gdx.files.internal("ui/button.png"))).getDrawable();
+		style.up = new Image(Textures.getTex("ui/button.png")).getDrawable();
 		TextImageButton back = new TextImageButton("Back", skin.getFont("default-font"), style);
 		back.addListener(new ClickListener() {
 			@Override

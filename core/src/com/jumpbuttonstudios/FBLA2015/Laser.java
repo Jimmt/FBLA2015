@@ -15,15 +15,15 @@ public class Laser extends Image {
 
 	public Laser(Player player, float x, float y, float width, float height, float repeat,
 			String path) {
-		super(new Texture(Gdx.files.internal(path)));
+		super(Textures.getTex(path));
 
 		String projPath = "obstacle/projector.png";
 		if (path.contains("black")) {
 			projPath = "obstacle/blackprojector.png";
 		}
 
-		proj1 = new Image(new Texture(Gdx.files.internal(projPath)));
-		proj2 = new Image(new Texture(Gdx.files.internal(projPath)));
+		proj1 = new Image(Textures.getTex(projPath));
+		proj2 = new Image(Textures.getTex(projPath));
 		proj1.setSize(proj1.getWidth() * Constants.SCALE, proj1.getHeight() * Constants.SCALE);
 		proj2.setSize(proj2.getWidth() * Constants.SCALE, proj2.getHeight() * Constants.SCALE);
 		proj2.setOrigin(proj2.getWidth() / 2, proj2.getHeight() / 2);

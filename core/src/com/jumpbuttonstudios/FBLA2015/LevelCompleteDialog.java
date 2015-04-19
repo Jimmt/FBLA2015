@@ -22,17 +22,17 @@ public class LevelCompleteDialog extends Dialog {
 
 		game.pauseGame();
 
-		
-		Image panel = new Image(new Texture(Gdx.files.internal("ui/levelcompletebg.png")));
+		Image panel = new Image(Textures.getTex("ui/levelcompletebg.png"));
 		background(panel.getDrawable());
 		setSize(Constants.WIDTH - 100, Constants.HEIGHT - 100);
 
 		ImageButtonStyle style = new ImageButtonStyle();
-		style.up = new Image(new Texture(Gdx.files.internal("ui/button.png"))).getDrawable();
+		style.up = new Image(Textures.getTex("ui/button.png")).getDrawable();
 		TextImageButton back = new TextImageButton("Back", skin.getFont("default-font"), style);
 		back.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
+				GamePrefs.putInteger("credits", GamePrefs.prefs.getInteger("credits") + game.byteCoins);
 				fbla.setScreen(new LevelSelectScreen(fbla));
 
 			}
@@ -51,8 +51,7 @@ public class LevelCompleteDialog extends Dialog {
 		getContentTable().add(explanation).fillX().center();
 		getContentTable().row();
 		getContentTable().add(back).expandX().padTop(15f);
-		
-		
+
 	}
 
 }

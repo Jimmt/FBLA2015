@@ -21,7 +21,7 @@ public class MenuScreen extends BaseScreen {
 	Label title;
 	Array<LiveTile> tiles = new Array<LiveTile>();
 	float lastAdd = 0, addCap = 0.6f;
-	Texture tex = new Texture(Gdx.files.internal("mainmenu/livetile.png"));
+	Texture tex = Textures.getTex("mainmenu/livetile.png");
 	Image circle;
 	Image[] arcs = new Image[4];
 
@@ -49,15 +49,15 @@ public class MenuScreen extends BaseScreen {
 		table.add(title).padBottom(10f);
 		table.row();
 
-		Image background = new Image(new Texture(Gdx.files.internal("mainmenu/menubg.png")));
+		Image background = new Image(Textures.getTex("mainmenu/menubg.png"));
 		background.setSize(Constants.WIDTH, Constants.HEIGHT);
-		Texture circTex = new Texture(Gdx.files.internal("mainmenu/circle.png"));
+		Texture circTex = Textures.getTex("mainmenu/circle.png");
 		circTex.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		circle = new Image(circTex);
 
 		stage.addActor(background);
 		for (int i = 0; i < 4; i++) {
-			Image arc = new Image(new Texture(Gdx.files.internal("mainmenu/arc.png")));
+			Image arc = new Image(Textures.getTex("mainmenu/arc.png"));
 			stage.addActor(arc);
 			arcs[i] = arc;
 			arc.setPosition(Constants.WIDTH / 2, Constants.HEIGHT / 2);
@@ -65,7 +65,7 @@ public class MenuScreen extends BaseScreen {
 		}
 
 		ImageButtonStyle style = new ImageButtonStyle();
-		style.up = new Image(new Texture(Gdx.files.internal("ui/button.png"))).getDrawable();
+		style.up = new Image(Textures.getTex("ui/button.png")).getDrawable();
 		start = new TextImageButton("Start", skin.getFont("default-font"), style);
 
 		TextImageButton credits = new TextImageButton("Credits", skin.getFont("default-font"),
@@ -77,7 +77,7 @@ public class MenuScreen extends BaseScreen {
 		TextImageButton options = new TextImageButton("Options", skin.getFont("default-font"),
 				style);
 
-		table.add(start).padBottom(5f).width(controls.textLabel.getWidth());
+		table.add(start).padBottom(5f).width(controls.textLabel.getWidth() + 10);
 		table.row();
 		start.addListener(new ClickListener() {
 			@Override
@@ -87,7 +87,7 @@ public class MenuScreen extends BaseScreen {
 			}
 		});
 
-		table.add(credits).padBottom(5f).width(controls.textLabel.getWidth());
+		table.add(credits).padBottom(5f).width(controls.textLabel.getWidth() + 10);
 		credits.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -97,7 +97,7 @@ public class MenuScreen extends BaseScreen {
 		});
 
 		table.row();
-		table.add(controls).width(controls.textLabel.getWidth()).padBottom(5f);
+		table.add(controls).width(controls.textLabel.getWidth() + 10).padBottom(5f);
 		controls.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -107,7 +107,7 @@ public class MenuScreen extends BaseScreen {
 		});
 
 		table.row();
-		table.add(options).width(controls.textLabel.getWidth());
+		table.add(options).width(controls.textLabel.getWidth() + 10);
 		options.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {

@@ -17,7 +17,7 @@ public class HoneypotLevel extends GameScreen {
 	EnemiesKilledDialog dialog;
 
 	public HoneypotLevel(FBLA2015 game) {
-		super(game, "honeypot");
+		super(game, "honeypot", false);
 
 		parseCustoms(map.getCustomsLayer());
 		this.explanationText = "";

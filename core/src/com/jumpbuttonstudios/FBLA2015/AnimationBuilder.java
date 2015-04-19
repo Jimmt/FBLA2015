@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.Array;
 public class AnimationBuilder {
 
 	public static Animation fillAnimation(float frameTime, int width, int height, int[] removes, String path) {
-		Texture sheet = new Texture(Gdx.files.internal(path));
+		Texture sheet = Textures.getTex(path);
 
 		Array<TextureRegion> regionList = new Array<TextureRegion>();
 		TextureRegion[][] regions = TextureRegion.split(sheet, width, height);

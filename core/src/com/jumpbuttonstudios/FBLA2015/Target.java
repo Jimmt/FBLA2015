@@ -23,7 +23,7 @@ public class Target extends GameSprite {
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
-		effect.effect.setPosition(effectX, effectY);
+		effect.setPosition(effectX, effectY);
 		effect.draw(batch, parentAlpha);
 	}
 

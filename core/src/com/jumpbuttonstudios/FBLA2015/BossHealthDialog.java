@@ -13,7 +13,7 @@ public class BossHealthDialog extends Dialog {
 	public BossHealthDialog(Boss boss, Skin skin) {
 		super("", skin);
 
-		Image bg = new Image(new Texture(Gdx.files.internal("ui/bosshealthbg.png")));
+		Image bg = new Image(Textures.getTex("ui/bosshealthbg.png"));
 		background(bg.getDrawable());
 
 		getContentTable().add(boss.name);

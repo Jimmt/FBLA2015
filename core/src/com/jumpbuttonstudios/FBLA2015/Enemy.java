@@ -91,6 +91,12 @@ public class Enemy extends GameSprite implements Destroyable {
 				follow(delta);
 				aggro = true;
 			}
+		} else {
+			
+			if (direction.len() <= aggroRange) {
+				follow(delta);
+				aggro = true;
+			}
 		}
 
 		if (!callback.isHit() && aggro) {

@@ -9,7 +9,7 @@ public class Hole extends Image {
 	Rectangle hitbox;
 
 	public Hole() {
-		super(new Texture(Gdx.files.internal("level2/hole.png")));
+		super(Textures.getTex("level2/hole.png"));
 
 		setSize(getWidth() * Constants.SCALE, getHeight() * Constants.SCALE);
 

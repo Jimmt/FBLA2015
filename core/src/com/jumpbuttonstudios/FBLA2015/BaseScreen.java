@@ -57,6 +57,7 @@ public class BaseScreen implements Screen {
 		Gdx.input.setInputProcessor(multiplexer);
 
 		dialog = new EscapeDialog(game, this, skin);
+
 	}
 
 	@Override
@@ -80,10 +81,6 @@ public class BaseScreen implements Screen {
 
 		dialogStage.draw();
 		dialogStage.act(delta);
-		
-		
-
-		
 
 		if (Gdx.input.isKeyPressed(Keys.ESCAPE)) {
 			dialog.show(dialogStage);

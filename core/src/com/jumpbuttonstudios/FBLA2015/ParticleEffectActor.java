@@ -8,20 +8,28 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class ParticleEffectActor extends Actor {
 	ParticleEffect effect;
+	boolean scaled;
 
 	public ParticleEffectActor(String path, String dir, boolean scaled) {
 		effect = new ParticleEffect();
 		effect.load(Gdx.files.internal(path), Gdx.files.internal(dir));
-		ParticleEmitter emitter = effect.getEmitters().get(0);
+
+		this.scaled = scaled;
 
 		if (scaled) {
-			emitter.getScale().setHigh(emitter.getScale().getHighMax() * Constants.SCALE);
-			emitter.getVelocity().setHigh(emitter.getVelocity().getHighMin() * Constants.SCALE,
-					emitter.getVelocity().getHighMax() * Constants.SCALE);
+			scale();
 		}
+
 	}
-	
-	public ParticleEffectActor(ParticleEffect effect){
+
+	public void scale() {
+		ParticleEmitter emitter = effect.getEmitters().get(0);
+		emitter.getScale().setHigh(emitter.getScale().getHighMax() * Constants.SCALE);
+		emitter.getVelocity().setHigh(emitter.getVelocity().getHighMin() * Constants.SCALE,
+				emitter.getVelocity().getHighMax() * Constants.SCALE);
+	}
+
+	public ParticleEffectActor(ParticleEffect effect) {
 		this.effect = effect;
 	}
 
@@ -36,6 +44,11 @@ public class ParticleEffectActor extends Actor {
 	public void draw(Batch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
 
+		if (!scaled) {
+			effect.setPosition(getX() + 16, getY() + 16);
+		} else {
+			effect.setPosition(getX(), getY());
+		}
 		effect.draw(batch);
 
 	}

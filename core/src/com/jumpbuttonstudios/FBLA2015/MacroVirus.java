@@ -24,7 +24,7 @@ public class MacroVirus extends Boss {
 	public MacroVirus(float x, float y, World world) {
 		super(250, 2f, "Macro Virus");
 
-		virus = new Image(new Texture(Gdx.files.internal("level4/boss.png")));
+		virus = new Image(Textures.getTex("level4/boss.png"));
 		virus.setSize(virus.getWidth() * Constants.SCALE, virus.getHeight() * Constants.SCALE);
 		width = virus.getWidth();
 		height = virus.getHeight();

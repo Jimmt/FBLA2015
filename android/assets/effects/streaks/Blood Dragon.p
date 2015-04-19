@@ -114,11 +114,11 @@ active: false
 active: false
 - Tint - 
 colorsCount: 6
-colors0: 0.0
-colors1: 0.003921569
-colors2: 1.0
+colors0: 1.0
+colors1: 0.0
+colors2: 0.0
 colors3: 0.0
-colors4: 0.24313726
+colors4: 0.19607843
 colors5: 1.0
 timelineCount: 2
 timeline0: 0.0
@@ -146,4 +146,4 @@ aligned: false
 additive: true
 behind: false
 - Image Path -
-C:\Users\Austin\repos\FBLA2015\android\assets\ship.png
+C:\Users\Austin\repos\FBLA2015\android\effect\medium.png

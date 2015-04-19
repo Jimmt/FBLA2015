@@ -18,16 +18,16 @@ public class EscapeDialog extends Dialog {
 
 		this.game = game;
 
-		Image panel = new Image(new Texture(Gdx.files.internal("ui/levelcompletebg.png")));
+		Image panel = new Image(Textures.getTex("ui/escapebg.png"));
 		background(panel.getDrawable());
 
 		ImageButtonStyle style = new ImageButtonStyle();
-		style.up = new Image(new Texture(Gdx.files.internal("ui/button.png"))).getDrawable();
+		style.up = new Image(Textures.getTex("ui/button.png")).getDrawable();
 		TextImageButton yes = new TextImageButton("Yes", skin.getFont("default-font"), style);
 		yes.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				if (game instanceof GameScreen) {
+				if (game instanceof GameScreen || game instanceof StoryScreen) {
 					fbla.setScreen(new LevelSelectScreen(fbla));
 				}
 				if (game instanceof LevelSelectScreen || game instanceof MenuScreen) {

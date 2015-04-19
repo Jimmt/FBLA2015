@@ -19,8 +19,8 @@ public class CoinsBar extends Table {
 	public CoinsBar(int amount, Skin skin) {
 		super(skin);
 		this.amount = amount;
-		icon = new Image(new Texture(Gdx.files.internal("ui/coinicon.png")));
-		bar = new Image(new Texture(Gdx.files.internal("ui/coinbar.png")));
+		icon = new Image(Textures.getTex("ui/coinicon.png"));
+		bar = new Image(Textures.getTex("ui/coinbar.png"));
 		LabelStyle labelStyle = new LabelStyle();
 		BitmapFont font = new BitmapFont(Gdx.files.internal("skin/orbitron.fnt"));
 		labelStyle.font = font;

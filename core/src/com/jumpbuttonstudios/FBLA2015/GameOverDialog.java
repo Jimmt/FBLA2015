@@ -17,11 +17,11 @@ public class GameOverDialog extends Dialog {
 
 		game.pauseGame();
 
-		Image panel = new Image(new Texture(Gdx.files.internal("ui/comm/commbg.png")));
+		Image panel = new Image(Textures.getTex("ui/comm/commbg.png"));
 		background(panel.getDrawable());
 
 		ImageButtonStyle style = new ImageButtonStyle();
-		style.up = new Image(new Texture(Gdx.files.internal("ui/button.png"))).getDrawable();
+		style.up = new Image(Textures.getTex("ui/button.png")).getDrawable();
 		button = new TextImageButton("Back", skin.getFont("default-font"), style);
 		button.addListener(new ClickListener() {
 			@Override

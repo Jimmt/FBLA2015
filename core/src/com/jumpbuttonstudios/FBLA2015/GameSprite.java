@@ -24,7 +24,7 @@ public class GameSprite extends Image {
 
 	public GameSprite(String path, float x, float y, float angle, float scale, boolean circle,
 			BodyType type, World world) {
-		super(new Texture(Gdx.files.internal(path)));
+		super(Textures.getTex(path));
 
 		width = getWidth() * Constants.SCALE * scale;
 		height = getHeight() * Constants.SCALE * scale;
@@ -54,7 +54,7 @@ public class GameSprite extends Image {
 	}
 
 	public GameSprite(String path, float x, float y, float angle, BodyType type, World world) {
-		super(new Texture(Gdx.files.internal(path)));
+		super(Textures.getTex(path));
 
 		width = getWidth() * Constants.SCALE;
 		height = getHeight() * Constants.SCALE;

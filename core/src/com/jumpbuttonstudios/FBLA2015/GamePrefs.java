@@ -8,14 +8,17 @@ import com.badlogic.gdx.Preferences;
 public class GamePrefs {
 	public static Preferences prefs;
 
-	public static void initialize(int levelNum) {
+	public static void initialize() {
 		prefs = Gdx.app.getPreferences("settings");
 
-		if (!prefs.contains("1")) {
-
-			for (int i = 0; i < levelNum; i++) {
-				prefs.putBoolean(String.valueOf(i), false);
-			}
+		if (!prefs.contains("credits")) {
+			prefs.putInteger("credits", 0);
+		}
+		if (!prefs.contains("streak")) {
+			prefs.putInteger("streak", 0);
+		}
+		if (!prefs.contains("ship")) {
+			prefs.putInteger("ship", 0);
 		}
 		prefs.flush();
 	}

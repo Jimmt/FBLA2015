@@ -185,7 +185,7 @@ public class Map extends Actor {
 				if (!object.getProperties().containsKey("stats")) {
 					gs.createEnemy(
 							ItemStats.TUTORIAL_GUN,
-							-1,
+							4.5f,
 							"enemy/enemy.png",
 							object.getRectangle().x * Constants.SCALE,
 							object.getRectangle().y * Constants.SCALE,

@@ -34,7 +34,7 @@ public class Worm extends Boss {
 		float changeTime = 0, changeCap = 0.5f;
 
 		public WormSegment(String path, boolean first, float x, float y, World world) {
-			super(new Texture(Gdx.files.internal(path)));
+			super(Textures.getTex(path));
 
 			this.first = first;
 

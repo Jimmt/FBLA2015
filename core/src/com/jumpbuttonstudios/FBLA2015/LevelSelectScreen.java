@@ -1,10 +1,8 @@
 package com.jumpbuttonstudios.FBLA2015;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
@@ -19,9 +17,11 @@ import com.badlogic.gdx.utils.Array;
 public class LevelSelectScreen extends BaseScreen {
 	Array<ImageButton> buttons;
 	Array<Label> labels;
-	String[] levelNames = { "tutorial", "worms", "horses", "macro", "honeypot" };
+	String[] levelNames = { "introduction", "worms", "horses", "macro", "honeypot" };
 	ScrollPane scroller;
 	Table buttonTable;
+	CoinsBar coinsBar;
+	CustomizationDialog customsDialog;
 
 	public LevelSelectScreen(FBLA2015 game) {
 		super(game);
@@ -31,22 +31,24 @@ public class LevelSelectScreen extends BaseScreen {
 	public void show() {
 		super.show();
 
-		FileHandle levelFile = Gdx.files.internal("levels.txt");
+		GamePrefs.initialize();
+		PlayerProfile.initialize();
 
-		int num = Integer.valueOf(levelFile.readString());
-		GamePrefs.initialize(num);
+		hudStage = new Stage(hudViewport);
+		coinsBar = new CoinsBar(GamePrefs.prefs.getInteger("credits"), skin);
+		hudStage.addActor(coinsBar);
+		coinsBar.setPosition(coinsBar.bar.getWidth() / 2,
+				Constants.HEIGHT - coinsBar.bar.getHeight() / 2);
 
 		buttons = new Array<ImageButton>();
 
-		Image tablebg = new Image(new Texture(Gdx.files.internal("mainmenu/menubg.png")));
+		Image tablebg = new Image(Textures.getTex("mainmenu/menubg.png"));
 		table.setBackground(tablebg.getDrawable());
-
 		buttonTable = new Table(skin);
-
 		labels = new Array<Label>();
 
-		Image temp = new Image(new Texture(Gdx.files.internal("ui/levelbgs/tutorialbg.png")));
-		for (int i = 0; i < num; i++) {
+		Image temp = new Image(Textures.getTex("ui/levelbgs/introductionbg.png"));
+		for (int i = 0; i < levelNames.length; i++) {
 			LabelStyle style = new LabelStyle();
 			style.font = skin.getFont("default-font");
 			style.fontColor = Color.WHITE;
@@ -58,9 +60,9 @@ public class LevelSelectScreen extends BaseScreen {
 
 		buttonTable.row();
 
-		for (int i = 0; i < num; i++) {
+		for (int i = 0; i < levelNames.length; i++) {
 			ImageButtonStyle style = new ImageButtonStyle();
-			Image bg = new Image(new Texture(Gdx.files.internal("ui/levelbgs/" + levelNames[i] + "bg.png")));
+			Image bg = new Image(Textures.getTex("ui/levelbgs/" + levelNames[i] + "bg.png"));
 			style.up = bg.getDrawable();
 			ImageButton button = new ImageButton(style);
 
@@ -69,9 +71,10 @@ public class LevelSelectScreen extends BaseScreen {
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
 					GameScreen screen = null;
+					FBLA2015.soundManager.play("button", 0.5f);
 
 					if (index == 0) {
-						screen = new TutorialLevel(game);
+						game.setScreen(new StoryScreen(game));
 					}
 					if (index == 1) {
 						screen = new WormLevel(game);
@@ -85,8 +88,10 @@ public class LevelSelectScreen extends BaseScreen {
 					if (index == 4) {
 						screen = new HoneypotLevel(game);
 					}
-					game.setScreen(screen);
-					FBLA2015.soundManager.play("button", 0.5f);
+					if (screen != null) {
+						game.setScreen(screen);
+					}
+
 				}
 			});
 			buttons.add(button);
@@ -94,7 +99,7 @@ public class LevelSelectScreen extends BaseScreen {
 		}
 
 		ImageButtonStyle style = new ImageButtonStyle();
-		style.up = new Image(new Texture(Gdx.files.internal("ui/button.png"))).getDrawable();
+		style.up = new Image(Textures.getTex("ui/button.png")).getDrawable();
 		TextImageButton back = new TextImageButton("Back", skin.getFont("default-font"), style);
 		back.addListener(new ClickListener() {
 			@Override
@@ -104,10 +109,22 @@ public class LevelSelectScreen extends BaseScreen {
 			}
 		});
 
+		customsDialog = new CustomizationDialog(skin, game);
+
+		TextImageButton customize = new TextImageButton("Customize", skin.getFont("default-font"),
+				style);
+		customize.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				customsDialog.show(dialogStage);
+				FBLA2015.soundManager.play("button", 0.5f);
+			}
+		});
+
 		ScrollPaneStyle scrollStyle = new ScrollPaneStyle();
-		scrollStyle.hScroll = new Image(new Texture(Gdx.files.internal("ui/scrollbar/scrollbar.png")))
+		scrollStyle.hScroll = new Image(Textures.getTex("ui/scrollbar/scrollbar.png"))
 				.getDrawable();
-		scrollStyle.hScrollKnob = new Image(new Texture(Gdx.files.internal("ui/scrollbar/scrollknob.png")))
+		scrollStyle.hScrollKnob = new Image(Textures.getTex("ui/scrollbar/scrollknob.png"))
 				.getDrawable();
 		scroller = new ScrollPane(buttonTable, scrollStyle);
 		scroller.setFadeScrollBars(false);
@@ -116,12 +133,17 @@ public class LevelSelectScreen extends BaseScreen {
 		table.row();
 		table.add(scroller);
 		table.row();
-		table.add(back).padTop(100f);
+		table.add(customize).width(customize.textLabel.getWidth() + 20).padTop(25f);
+		table.row();
+		table.add(back).width(customize.textLabel.getWidth() + 20).padTop(25f);
 	}
 
 	@Override
 	public void render(float delta) {
 		super.render(delta);
+
+		hudStage.act(delta);
+		hudStage.draw();
 
 	}
 

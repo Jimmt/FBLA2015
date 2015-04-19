@@ -1,8 +1,13 @@
 package com.jumpbuttonstudios.FBLA2015;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 
 public class HudTable extends Table {
 	HealthBar healthBar;
@@ -22,6 +27,7 @@ public class HudTable extends Table {
 		coinsBar = new CoinsBar(0, skin);
 		add(coinsBar).expand().left().top();
 		healthBar = new HealthBar(player);
+		
 		add(healthBar).expand().right().top();
 		
 		
@@ -35,5 +41,7 @@ public class HudTable extends Table {
 		super.act(delta);
 		
 		coinsBar.amount = gs.byteCoins;
+		
+		
 	}
 }

@@ -15,10 +15,10 @@ public class CommDialog extends Dialog {
 	public CommDialog(Skin skin) {
 		super("", skin);
 
-		Image panel = new Image(new Texture(Gdx.files.internal("ui/comm/commbg.png")));
+		Image panel = new Image(Textures.getTex("ui/comm/commbg.png"));
 		setBackground(panel.getDrawable());
 		
-		Image subject = new Image(new Texture(Gdx.files.internal("ui/comm/antivirusicon.png")));
+		Image subject = new Image(Textures.getTex("ui/comm/antivirusicon.png"));
 		
 		LabelStyle labelStyle = new LabelStyle();
 		BitmapFont font = new BitmapFont(Gdx.files.internal("skin/orbitron.fnt"));

@@ -1,11 +1,14 @@
 package com.jumpbuttonstudios.FBLA2015;
 
+import java.util.Iterator;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.ObjectMap;
+import com.badlogic.gdx.utils.ObjectMap.Entries;
 
 public class CustomSoundManager {
 	ObjectMap<String, Sound> sounds;
@@ -40,7 +43,7 @@ public class CustomSoundManager {
 	}
 
 	public void playRandom(String name, float volume, float min, float max) {
-		if(play)
+		if (play)
 			((Sound) sounds.get(name)).play(volume, min + MathUtils.random(max - min), 0);
 	}
 
@@ -68,6 +71,13 @@ public class CustomSoundManager {
 
 	public void setPlay(boolean play) {
 		this.play = play;
+
+		Entries<String, Music> entries = musics.entries();
+		if (!play) {
+			while (entries.hasNext()) {
+				entries.next().value.pause();
+			}
+		}
 	}
 
 	public boolean getPlay() {

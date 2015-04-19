@@ -30,16 +30,14 @@ public class GameScreen extends BaseScreen {
 	Boss boss;
 	Map map;
 	Player player;
-	ConeLight coneLight;
-	PointLight pointLight;
+	String levelName;
 	GameContactListener contactListener;
 	StageComparator comparator;
 	CommDialog commDialog;
-	ShopDialog shopDialog;
 	boolean hitComm, gameOver, finished, completeDialogShown, hasBoss = true, musicStopped;
 	float vol, lastChange, changeCap = 0.1f, dv;
 	Image black;
-	int byteCoins, levelNum, objectiveCount, enemiesKilled;
+	int byteCoins = GamePrefs.prefs.getInteger("credits"), levelNum, objectiveCount, enemiesKilled;
 	AStar astar;
 	ShapeRenderer sr;
 	FBLA2015 game;
@@ -48,22 +46,20 @@ public class GameScreen extends BaseScreen {
 	BossHealthDialog hpDialog;
 	String explanationText;
 
-	public GameScreen(FBLA2015 game, String levelName) {
+	public GameScreen(FBLA2015 game, String levelName, boolean showStory) {
 		super(game);
 
 		vol = FBLA2015.soundManager.musics.get("menu").getVolume();
 		dv = vol / 10;
-
+		this.levelName = levelName;
 		this.game = game;
-
 		ItemStats.makeCache();
-
 		stage = new Stage(viewport);
 
 		rayHandler = new RayHandler(world);
 		rayHandler.setCombinedMatrix(stage.getCamera().combined);
 
-		player = new Player("ship.png", world);
+		player = new Player(world);
 		map = new Map("maps/" + levelName + ".tmx", this);
 		astar = new AStar(map.getMap().getProperties().get("width", Integer.class), map.getMap()
 				.getProperties().get("height", Integer.class)) {
@@ -92,20 +88,12 @@ public class GameScreen extends BaseScreen {
 
 		commDialog = new CommDialog(skin);
 		commDialog.show(hudStage);
-		commDialog.setPosition(Constants.WIDTH - commDialog.getWidth(), 0);
-		black = new Image(new Texture(Gdx.files.internal("ui/black.png")));
+		commDialog.setPosition(Constants.WIDTH - commDialog.getWidth() - 10, 10);
+		black = new Image(Textures.getTex("ui/black.png"));
 
 		InputMultiplexer multiplexer = new InputMultiplexer(dialogStage, player.controller,
 				hudStage, stage);
 		Gdx.input.setInputProcessor(multiplexer);
-
-// shopDialog = new ShopDialog("", hudStage, player, skin);
-// shopDialog.show(hudStage);
-// shopDialog.setPosition(Constants.WIDTH / 2 - shopDialog.getWidth() / 2,
-// Constants.HEIGHT
-// / 2 - shopDialog.getHeight() / 2);
-
-		sr = new ShapeRenderer();
 
 		ParticleEffect effect = new ParticleEffect();
 		effect.load(Gdx.files.internal("effects/explosion.p"), Gdx.files.internal(""));
@@ -115,6 +103,8 @@ public class GameScreen extends BaseScreen {
 				emitter.getVelocity().getHighMax() * Constants.SCALE);
 		pool = new ParticleEffectPool(effect, 3, 3);
 		effects = new Array<ParticleEffectActor>();
+
+		
 
 	}
 
@@ -139,6 +129,7 @@ public class GameScreen extends BaseScreen {
 	public void gameOver() {
 		if (!gameOver) {
 			gameOver = true;
+			GamePrefs.putInteger("credits", GamePrefs.prefs.getInteger("credits") + byteCoins);
 			GameOverDialog dialog = new GameOverDialog(this, game, skin);
 			dialog.show(dialogStage);
 		}
@@ -172,8 +163,8 @@ public class GameScreen extends BaseScreen {
 // }
 // sr.setColor(Color.CYAN);
 // sr.end();
-		
-		if(trigger != null && player.hitbox.overlaps(trigger)){
+
+		if (trigger != null && player.hitbox.overlaps(trigger)) {
 			boss.aggro = true;
 		}
 
@@ -181,6 +172,7 @@ public class GameScreen extends BaseScreen {
 			if (lastChange > changeCap) {
 				vol -= dv;
 				FBLA2015.soundManager.musics.get("menu").setVolume(vol);
+
 				lastChange = 0;
 
 				if (vol <= 0) {
@@ -212,7 +204,6 @@ public class GameScreen extends BaseScreen {
 
 		}
 
-		
 		if (boss != null) {
 			if (boss.aggro) {
 				if (hpDialog == null) {
@@ -246,6 +237,7 @@ public class GameScreen extends BaseScreen {
 
 			if (enemies.get(i).health <= 0) {
 				ParticleEffectActor effect = new ParticleEffectActor(pool.obtain());
+				effect.scaled = true;
 				effects.add(effect);
 				stage.addActor(effect);
 				effect.effect.start();
@@ -280,13 +272,13 @@ public class GameScreen extends BaseScreen {
 
 		if (FBLA2015.DEBUG) {
 			hudTable.debug();
+// storyDialog.debug();
 			Table.drawDebug(hudStage);
+			Table.drawDebug(dialogStage);
+			debugRenderer.render(world, stage.getCamera().combined);
 		}
 // rayHandler.updateAndRender();
 
-		if (FBLA2015.DEBUG) {
-			debugRenderer.render(world, stage.getCamera().combined);
-		}
 	}
 
 }

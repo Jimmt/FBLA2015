@@ -43,7 +43,7 @@ public class OptionsScreen extends BaseScreen {
 		table.add("Options").colspan(2);
 
 		ImageButtonStyle style = new ImageButtonStyle();
-		style.up = new Image(new Texture(Gdx.files.internal("ui/button.png"))).getDrawable();
+		style.up = new Image(Textures.getTex("ui/button.png")).getDrawable();
 		TextImageButton back = new TextImageButton("Back", skin.getFont("default-font"), style);
 		back.addListener(new ClickListener() {
 			@Override
@@ -69,6 +69,7 @@ public class OptionsScreen extends BaseScreen {
 				Prefs.putBoolean("sound", sound.isChecked());
 				FBLA2015.soundManager.play("button", 0.5f);
 				FBLA2015.soundManager.setPlay(sound.isChecked());
+				FBLA2015.soundManager.playMusic("menu", 0.09f);
 			}
 		});
 
