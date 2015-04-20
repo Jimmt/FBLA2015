@@ -3,7 +3,7 @@ package com.jumpbuttonstudios.FBLA2015;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public class PlayerProfile {
-	public static String[] streaks = { "Flood", "Incendiary", "Lime", "Uncle Sam", "Smoky",
+	public static String[] streaks = { "Flood", "Incendiary", "Lime", "Uncle Sam", "Sith Lord",
 			"Blood Dragon" };
 	public static String streak;
 

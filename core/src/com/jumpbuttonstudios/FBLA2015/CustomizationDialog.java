@@ -144,7 +144,7 @@ public class CustomizationDialog extends Dialog {
 			subtable.add(image1).padRight(5f).padBottom(2f);
 			subtable.add(health).padRight(5f).padBottom(2f).row();
 			Image image2 = new Image(Textures.getTex("ships/speedIcon.png"));
-			Label speed = new Label(String.valueOf((int) models[i].stats.getMoveSpeed()),
+			Label speed = new Label(String.valueOf((int) (models[i].stats.getMoveSpeed() * 10)),
 					labelStyle);
 			subtable.add(image2).padRight(5f).padBottom(2f);
 			subtable.add(speed).padRight(5f).padBottom(2f);

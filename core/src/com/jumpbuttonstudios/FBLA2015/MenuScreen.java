@@ -1,15 +1,16 @@
 package com.jumpbuttonstudios.FBLA2015;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
@@ -24,6 +25,7 @@ public class MenuScreen extends BaseScreen {
 	Texture tex = Textures.getTex("mainmenu/livetile.png");
 	Image circle;
 	Image[] arcs = new Image[4];
+	Image exit = new Image(Textures.getTex("ui/exit.png"));
 
 	public MenuScreen(FBLA2015 game) {
 		super(game);
@@ -41,7 +43,7 @@ public class MenuScreen extends BaseScreen {
 
 		Gdx.graphics.setDisplayMode(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),
 				Prefs.prefs.getBoolean("fullscreen"));
-		
+
 		FBLA2015.soundManager.setPlay(Prefs.prefs.getBoolean("sound"));
 
 		table.setFillParent(true);
@@ -101,8 +103,8 @@ public class MenuScreen extends BaseScreen {
 		controls.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				game.setScreen(new ControlsScreen(game));
 				FBLA2015.soundManager.play("button", 0.5f);
+				game.setScreen(new ControlsScreen(game));
 			}
 		});
 
@@ -111,8 +113,8 @@ public class MenuScreen extends BaseScreen {
 		options.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				game.setScreen(new OptionsScreen(game));
 				FBLA2015.soundManager.play("button", 0.5f);
+				game.setScreen(new OptionsScreen(game));
 			}
 		});
 
@@ -122,6 +124,21 @@ public class MenuScreen extends BaseScreen {
 		arcs[2].rotateBy(180);
 		arcs[3].rotateBy(270);
 
+		hudStage = new Stage(hudViewport);
+
+		InputMultiplexer multiplexer = new InputMultiplexer(dialogStage, hudStage, stage);
+		Gdx.input.setInputProcessor(multiplexer);
+
+		exit.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				FBLA2015.soundManager.play("button", 0.5f);
+				dialog.show(dialogStage);
+			}
+		});
+
+		hudStage.addActor(exit);
+
 	}
 
 	@Override
@@ -129,6 +146,10 @@ public class MenuScreen extends BaseScreen {
 		super.render(delta);
 
 		table.toFront();
+
+		hudStage.act(delta);
+		exit.setPosition(Constants.WIDTH - exit.getWidth() - 50, Constants.HEIGHT - exit.getHeight() - 50);
+		hudStage.draw();
 
 		circle.rotateBy(delta * 12f);
 

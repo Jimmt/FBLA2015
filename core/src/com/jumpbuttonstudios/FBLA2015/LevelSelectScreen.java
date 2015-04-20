@@ -22,6 +22,7 @@ public class LevelSelectScreen extends BaseScreen {
 	Table buttonTable;
 	CoinsBar coinsBar;
 	CustomizationDialog customsDialog;
+	UpgradeDialog upgradeDialog;
 
 	public LevelSelectScreen(FBLA2015 game) {
 		super(game);
@@ -121,6 +122,18 @@ public class LevelSelectScreen extends BaseScreen {
 			}
 		});
 
+		upgradeDialog = new UpgradeDialog(skin);
+
+		TextImageButton upgrade = new TextImageButton("Upgrade", skin.getFont("default-font"),
+				style);
+		upgrade.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				upgradeDialog.show(dialogStage);
+				FBLA2015.soundManager.play("button", 0.5f);
+			}
+		});
+
 		ScrollPaneStyle scrollStyle = new ScrollPaneStyle();
 		scrollStyle.hScroll = new Image(Textures.getTex("ui/scrollbar/scrollbar.png"))
 				.getDrawable();
@@ -129,13 +142,14 @@ public class LevelSelectScreen extends BaseScreen {
 		scroller = new ScrollPane(buttonTable, scrollStyle);
 		scroller.setFadeScrollBars(false);
 		scroller.setScrollingDisabled(false, true);
-		table.add("Level Select").padBottom(100f);
+		table.add("Level Select").padBottom(100f).colspan(2);
 		table.row();
-		table.add(scroller);
+		table.add(scroller).colspan(2);
 		table.row();
 		table.add(customize).width(customize.textLabel.getWidth() + 20).padTop(25f);
+		table.add(upgrade).width(customize.textLabel.getWidth() + 20).padTop(25f);
 		table.row();
-		table.add(back).width(customize.textLabel.getWidth() + 20).padTop(25f);
+		table.add(back).width(customize.textLabel.getWidth() + 20).padTop(25f).colspan(2);
 	}
 
 	@Override
