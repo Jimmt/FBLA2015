@@ -33,7 +33,7 @@ public class UpgradeDialog extends Dialog {
 		style.font = new BitmapFont(Gdx.files.internal("skin/orbitron.fnt"));
 		LabelStyle colorStyle = new LabelStyle();
 		colorStyle.font = new BitmapFont(Gdx.files.internal("skin/orbitron.fnt"));
-		colorStyle.fontColor = new Color(0.0f, 0.0f, 0.75f, 1.0f);
+		colorStyle.fontColor = new Color(0, 1.0f, 0, 1.0f);
 
 		getContentTable().add("Upgrades").colspan(6).padBottom(40f).row();
 		getContentTable().add(coinsBar).colspan(6).padBottom(20f).row();
@@ -160,8 +160,7 @@ public class UpgradeDialog extends Dialog {
 			getContentTable().add(label).padBottom(20f).row();
 			getContentTable().add(back);
 		}
-		
-		
+
 	}
 
 }

@@ -26,7 +26,7 @@ public class PlayerProfile {
 			model = ShipModel.HEAVY;
 			break;
 		}
-		System.out.println(model);
+		
 	}
 
 	public static void updateModel() {
