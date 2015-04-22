@@ -66,7 +66,7 @@ public class OptionsScreen extends BaseScreen {
 		sound.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				Prefs.putBoolean("sound", sound.isChecked());
+				GamePrefs.putBoolean("sound", sound.isChecked());
 				FBLA2015.soundManager.play("button", 0.5f);
 				FBLA2015.soundManager.setPlay(sound.isChecked());
 				FBLA2015.soundManager.playMusic("menu", 0.09f);
@@ -80,7 +80,7 @@ public class OptionsScreen extends BaseScreen {
 				Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 				Gdx.graphics.setDisplayMode((int) d.getWidth(), (int) d.getHeight(),
 						fullscreen.isChecked());
-				Prefs.putBoolean("fullscreen", fullscreen.isChecked());
+				GamePrefs.putBoolean("fullscreen", fullscreen.isChecked());
 				FBLA2015.soundManager.play("button", 0.5f);
 			}
 		});
@@ -94,12 +94,12 @@ public class OptionsScreen extends BaseScreen {
 		table.row();
 		table.add(sound).padBottom(15f).padTop(30f);
 		table.add(label).padLeft(20f).padBottom(15f).padTop(30f);
-		sound.setChecked(Prefs.prefs.getBoolean("sound"));
+		sound.setChecked(GamePrefs.prefs.getBoolean("sound"));
 
 		table.row();
 		table.add(fullscreen).padBottom(60f);
 		table.add(fullscreenLabel).padLeft(20f).padBottom(60f);
-		fullscreen.setChecked(Prefs.prefs.getBoolean("fullscreen"));
+		fullscreen.setChecked(GamePrefs.prefs.getBoolean("fullscreen"));
 
 		table.row();
 		table.add(back).colspan(2);

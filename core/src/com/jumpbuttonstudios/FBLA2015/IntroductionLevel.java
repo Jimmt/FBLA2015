@@ -6,7 +6,7 @@ public class IntroductionLevel extends GameScreen {
 		super(game, "introduction", false);
 
 		hasBoss = false;
-		explanationText = "Training complete.\n ";
+		explanationText = "Training complete. You can re-customize your ship, or upgrade your ship's abilities in the level select screen, using the bytecoins that you have earned by killing enemies.";
 	}
 
 	@Override

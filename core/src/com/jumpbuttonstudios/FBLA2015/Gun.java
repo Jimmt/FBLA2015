@@ -17,6 +17,7 @@ public class Gun extends Actor {
 	Body body;
 	Vector2 temp = new Vector2();
 	boolean bounce;
+	float bonusDamage = 0;
 
 	public Gun(World world, float bulletSpeed, ItemStats stats, Body body) {
 
@@ -42,7 +43,7 @@ public class Gun extends Actor {
 						+ MathUtils.sinDeg(direction.angle()) * radius);
 
 				Bullet bullet = new Bullet(stats.getBulletPath(), friendly, coords.x, coords.y,
-						direction.angle() * MathUtils.degRad, stats.getDamage(), world);
+						direction.angle() * MathUtils.degRad, stats.getDamage() + bonusDamage, world);
 				bullet.bounce = bounce;
 
 				Vector2 temp = body.getLinearVelocity();

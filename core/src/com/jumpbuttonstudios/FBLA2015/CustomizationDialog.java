@@ -117,7 +117,8 @@ public class CustomizationDialog extends Dialog {
 					for (int i = 0; i < ships.size; i++) {
 						ships.get(i).setDrawable(image.getDrawable());
 					}
-					GamePrefs.prefs.putInteger("ship", index);
+					GamePrefs.putInteger("ship", index);
+					PlayerProfile.updateModel();
 				}
 			});
 			groups2.add(previewGroup);
@@ -182,7 +183,7 @@ public class CustomizationDialog extends Dialog {
 				public void clicked(InputEvent event, float x, float y) {
 					PlayerProfile.streak = "effects/streaks/" + PlayerProfile.streaks[index] + ".p";
 					themeIndex = index;
-					GamePrefs.prefs.putInteger("streak", index);
+					GamePrefs.putInteger("streak", index);
 					FBLA2015.soundManager.play("button", 0.5f);
 				}
 			});

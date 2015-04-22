@@ -20,6 +20,15 @@ public class GamePrefs {
 		if (!prefs.contains("ship")) {
 			prefs.putInteger("ship", 0);
 		}
+		if(!prefs.contains("bonusDamage")){
+			prefs.putInteger("bonusDamage", 0);
+			prefs.putInteger("bonusHealth", 0);
+			prefs.putInteger("bonusSpeed", 0);
+		}
+		if (!prefs.contains("sound")) {
+			prefs.putBoolean("sound", true);
+			prefs.putBoolean("fullscreen", false);
+		}
 		prefs.flush();
 	}
 

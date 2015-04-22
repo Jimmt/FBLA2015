@@ -19,6 +19,9 @@ public class FBLA2015 extends Game {
 		soundManager.loadMusic("menu", Gdx.files.internal("sfx/menu.ogg"));
 
 		DEBUG = true;
+		
+		GamePrefs.initialize();
+		PlayerProfile.initialize();
 
 		if (DEBUG) {
 			setScreen(new MenuScreen(this));

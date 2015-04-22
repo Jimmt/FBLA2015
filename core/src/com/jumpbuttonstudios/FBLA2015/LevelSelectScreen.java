@@ -20,9 +20,9 @@ public class LevelSelectScreen extends BaseScreen {
 	String[] levelNames = { "introduction", "worms", "horses", "macro", "honeypot" };
 	ScrollPane scroller;
 	Table buttonTable;
-	CoinsBar coinsBar;
 	CustomizationDialog customsDialog;
 	UpgradeDialog upgradeDialog;
+	CoinsBar coinsBar;
 
 	public LevelSelectScreen(FBLA2015 game) {
 		super(game);
@@ -32,15 +32,9 @@ public class LevelSelectScreen extends BaseScreen {
 	public void show() {
 		super.show();
 
-		GamePrefs.initialize();
-		PlayerProfile.initialize();
-
 		hudStage = new Stage(hudViewport);
+		
 		coinsBar = new CoinsBar(GamePrefs.prefs.getInteger("credits"), skin);
-		hudStage.addActor(coinsBar);
-		coinsBar.setPosition(coinsBar.bar.getWidth() / 2,
-				Constants.HEIGHT - coinsBar.bar.getHeight() / 2);
-
 		buttons = new Array<ImageButton>();
 
 		Image tablebg = new Image(Textures.getTex("mainmenu/menubg.png"));
@@ -122,7 +116,7 @@ public class LevelSelectScreen extends BaseScreen {
 			}
 		});
 
-		upgradeDialog = new UpgradeDialog(skin);
+		upgradeDialog = new UpgradeDialog(skin, this);
 
 		TextImageButton upgrade = new TextImageButton("Upgrade", skin.getFont("default-font"),
 				style);
@@ -142,14 +136,15 @@ public class LevelSelectScreen extends BaseScreen {
 		scroller = new ScrollPane(buttonTable, scrollStyle);
 		scroller.setFadeScrollBars(false);
 		scroller.setScrollingDisabled(false, true);
-		table.add("Level Select").padBottom(100f).colspan(2);
+		table.add("Level Select").padBottom(100f).colspan(3);
 		table.row();
-		table.add(scroller).colspan(2);
+		table.add(scroller).colspan(3);
 		table.row();
 		table.add(customize).width(customize.textLabel.getWidth() + 20).padTop(25f);
+		table.add(coinsBar).padTop(25f);
 		table.add(upgrade).width(customize.textLabel.getWidth() + 20).padTop(25f);
 		table.row();
-		table.add(back).width(customize.textLabel.getWidth() + 20).padTop(25f).colspan(2);
+		table.add(back).width(customize.textLabel.getWidth() + 20).padTop(25f).colspan(3);
 	}
 
 	@Override
@@ -158,6 +153,8 @@ public class LevelSelectScreen extends BaseScreen {
 
 		hudStage.act(delta);
 		hudStage.draw();
+		
+		
 
 	}
 

@@ -31,12 +31,16 @@ public class Player extends GameSprite {
 		hitbox = new Rectangle(getX(), getY(), getWidth(), getHeight());
 		commHitbox = new Rectangle(getX() / Constants.SCALE, getY() / Constants.SCALE, getWidth()
 				/ Constants.SCALE, getHeight() / Constants.SCALE);
-		controller = new PlayerInputController(this, model.stats.getMoveSpeed(), 10);
+		controller = new PlayerInputController(this, model.stats.getMoveSpeed()
+				+ GamePrefs.prefs.getInteger("bonusSpeed"), 10);
+		System.out.println(model.stats.getMoveSpeed()
+				+ GamePrefs.prefs.getInteger("bonusSpeed"));
 		this.world = world;
 
 		gun = new Gun(world, 10f, model.getStats(), body);
-		
-		healthMax = model.getHealth();
+		gun.bonusDamage = GamePrefs.prefs.getInteger("bonusDamage");
+
+		healthMax = model.getHealth() + GamePrefs.prefs.getInteger("bonusHealth");
 		health = healthMax;
 
 		UserData userData = new UserData();

@@ -39,12 +39,11 @@ public class MenuScreen extends BaseScreen {
 			FBLA2015.soundManager.playMusic("menu", 0.09f);
 		}
 
-		Prefs.load();
 
 		Gdx.graphics.setDisplayMode(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),
-				Prefs.prefs.getBoolean("fullscreen"));
-
-		FBLA2015.soundManager.setPlay(Prefs.prefs.getBoolean("sound"));
+				GamePrefs.prefs.getBoolean("fullscreen"));
+		
+		FBLA2015.soundManager.setPlay(GamePrefs.prefs.getBoolean("sound"));
 
 		table.setFillParent(true);
 		title = new Label("Infection", new LabelStyle(skin.getFont("default-font"), Color.WHITE));
