@@ -11,8 +11,8 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entries;
 
 public class CustomSoundManager {
-	ObjectMap<String, Sound> sounds;
-	ObjectMap<String, Music> musics;
+	public ObjectMap<String, Sound> sounds;
+	public ObjectMap<String, Music> musics;
 
 	private boolean play = true;
 

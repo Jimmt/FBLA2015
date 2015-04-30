@@ -5,10 +5,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.jumpbuttonstudio.FBLA2015.screens.MenuScreen;
+import com.jumpbuttonstudio.FBLA2015.screens.SplashScreen;
+import com.jumpbuttonstudio.FBLA2015.sprite.PlayerProfile;
+import com.jumpbuttonstudio.FBLA2015.util.GamePrefs;
 
 public class FBLA2015 extends Game {
-	static CustomSoundManager soundManager;
-	static boolean DEBUG = false;
+	public static CustomSoundManager soundManager;
+	public static boolean DEBUG = false;
 
 	@Override
 	public void create() {
@@ -18,7 +22,7 @@ public class FBLA2015 extends Game {
 		soundManager.loadSound("enemydeath", Gdx.files.internal("sfx/enemydeath.wav"));
 		soundManager.loadMusic("menu", Gdx.files.internal("sfx/menu.ogg"));
 
-		DEBUG = true;
+//		DEBUG = true;
 		
 		GamePrefs.initialize();
 		PlayerProfile.initialize();

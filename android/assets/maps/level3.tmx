@@ -57,31 +57,31 @@
   </object>
   <object name="3_enemy" x="256" y="2304" width="32" height="32">
    <properties>
-    <property name="health" value="50"/>
+    <property name="health" value="40"/>
     <property name="objective" value="false"/>
    </properties>
   </object>
   <object name="3_enemy" x="352" y="2304" width="32" height="32">
    <properties>
-    <property name="health" value="50"/>
+    <property name="health" value="40"/>
     <property name="objective" value="false"/>
    </properties>
   </object>
   <object name="3_enemy" x="896" y="2400" width="32" height="32">
    <properties>
-    <property name="health" value="50"/>
+    <property name="health" value="25"/>
     <property name="objective" value="false"/>
    </properties>
   </object>
   <object name="3_enemy" x="672" y="2336" width="32" height="32">
    <properties>
-    <property name="health" value="50"/>
+    <property name="health" value="40"/>
     <property name="objective" value="false"/>
    </properties>
   </object>
   <object name="3_enemy" x="768" y="2368" width="32" height="32">
    <properties>
-    <property name="health" value="50"/>
+    <property name="health" value="25"/>
     <property name="objective" value="false"/>
    </properties>
   </object>
@@ -113,7 +113,7 @@
  <objectgroup name="customs" width="100" height="100">
   <object name="horse" x="2880" y="2560" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="box2D" width="100" height="100" visible="0">
+ <objectgroup name="box2D" width="100" height="100">
   <object name="level" type="object" x="352" y="3136">
    <polygon points="0,0 0,-320 -352,-320 -352,-832 -320,-832 -320,-864 -288,-864 -288,-896 -256,-896 -256,-928 -224,-928 -224,-960 -32,-960 0,-928 -192,-928 -192,-896 -224,-896 -224,-864 -256,-864 -256,-832 -288,-832 -288,-800 -320,-800 -320,-352 32,-352 32,-32 256,-32 256,-352 768,-352 768,-832 800,-864 800,-320 288,-320 288,0 160,0"/>
   </object>

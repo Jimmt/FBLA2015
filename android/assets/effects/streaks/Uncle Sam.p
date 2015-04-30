@@ -158,4 +158,4 @@ aligned: false
 additive: true
 behind: false
 - Image Path -
-C:\Users\Austin\repos\FBLA2015\android\effect\medium.png
+C:\Users\Austin\repos\FBLA2015\android\assets\ships\Medium.png
