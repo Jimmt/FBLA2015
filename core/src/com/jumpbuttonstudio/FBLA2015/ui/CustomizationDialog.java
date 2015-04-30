@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
+import com.jumpbuttonstudio.FBLA2015.FBLA2015;
 import com.jumpbuttonstudio.FBLA2015.levels.IntroductionLevel;
 import com.jumpbuttonstudio.FBLA2015.screens.StoryScreen;
 import com.jumpbuttonstudio.FBLA2015.sprite.PlayerProfile;
@@ -26,7 +27,6 @@ import com.jumpbuttonstudio.FBLA2015.sprite.PlayerProfile.ShipModel;
 import com.jumpbuttonstudio.FBLA2015.util.GamePrefs;
 import com.jumpbuttonstudio.FBLA2015.util.ParticleEffectActor;
 import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
-import com.jumpbuttonstudios.FBLA2015.FBLA2015;
 
 public class CustomizationDialog extends Dialog {
 	Array<Group> groups = new Array<Group>();

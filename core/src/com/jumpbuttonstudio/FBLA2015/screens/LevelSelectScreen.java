@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
+import com.jumpbuttonstudio.FBLA2015.FBLA2015;
 import com.jumpbuttonstudio.FBLA2015.levels.HoneypotLevel;
 import com.jumpbuttonstudio.FBLA2015.levels.HorseLevel;
 import com.jumpbuttonstudio.FBLA2015.levels.MacroLevel;
@@ -23,7 +24,6 @@ import com.jumpbuttonstudio.FBLA2015.ui.TextImageButton;
 import com.jumpbuttonstudio.FBLA2015.ui.UpgradeDialog;
 import com.jumpbuttonstudio.FBLA2015.util.GamePrefs;
 import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
-import com.jumpbuttonstudios.FBLA2015.FBLA2015;
 
 public class LevelSelectScreen extends BaseScreen {
 	public CoinsBar coinsBar;

@@ -3,9 +3,9 @@ package com.jumpbuttonstudio.FBLA2015.box2d;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.RayCastCallback;
+import com.jumpbuttonstudio.FBLA2015.boss.Boss;
 import com.jumpbuttonstudio.FBLA2015.sprite.Enemy;
 import com.jumpbuttonstudio.FBLA2015.weapon.Bullet;
-import com.jumpbuttonstudios.FBLA2015.boss.Boss;
 
 public class EnemyRaycastCallback implements RayCastCallback {
 	boolean hit;

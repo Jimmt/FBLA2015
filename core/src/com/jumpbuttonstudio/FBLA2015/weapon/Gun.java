@@ -7,7 +7,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
-import com.jumpbuttonstudios.FBLA2015.FBLA2015;
+import com.jumpbuttonstudio.FBLA2015.FBLA2015;
 
 public class Gun extends Actor {
 

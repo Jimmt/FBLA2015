@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.jumpbuttonstudios.FBLA2015.FBLA2015;
+import com.jumpbuttonstudio.FBLA2015.FBLA2015;
 
 public class FBLADesktopLauncher {
 	public static void main(String[] arg) {

@@ -1,7 +1,7 @@
 package com.jumpbuttonstudio.FBLA2015.levels;
 
+import com.jumpbuttonstudio.FBLA2015.FBLA2015;
 import com.jumpbuttonstudio.FBLA2015.screens.GameScreen;
-import com.jumpbuttonstudios.FBLA2015.FBLA2015;
 
 public class IntroductionLevel extends GameScreen {
 

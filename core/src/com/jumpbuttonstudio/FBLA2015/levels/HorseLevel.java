@@ -5,10 +5,10 @@ import java.util.Iterator;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.jumpbuttonstudio.FBLA2015.FBLA2015;
+import com.jumpbuttonstudio.FBLA2015.boss.TrojanHorse;
 import com.jumpbuttonstudio.FBLA2015.screens.GameScreen;
 import com.jumpbuttonstudio.FBLA2015.util.Constants;
-import com.jumpbuttonstudios.FBLA2015.FBLA2015;
-import com.jumpbuttonstudios.FBLA2015.boss.TrojanHorse;
 
 public class HorseLevel extends GameScreen {
 	TrojanHorse horse;

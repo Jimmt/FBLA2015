@@ -16,12 +16,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
+import com.jumpbuttonstudio.FBLA2015.FBLA2015;
 import com.jumpbuttonstudio.FBLA2015.ui.LiveTile;
 import com.jumpbuttonstudio.FBLA2015.ui.TextImageButton;
 import com.jumpbuttonstudio.FBLA2015.util.Constants;
 import com.jumpbuttonstudio.FBLA2015.util.GamePrefs;
 import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
-import com.jumpbuttonstudios.FBLA2015.FBLA2015;
 
 public class MenuScreen extends BaseScreen {
 	TextImageButton start;

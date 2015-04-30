@@ -4,13 +4,13 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.jumpbuttonstudio.FBLA2015.boss.Boss;
+import com.jumpbuttonstudio.FBLA2015.boss.TrojanHorse;
+import com.jumpbuttonstudio.FBLA2015.boss.Worm;
 import com.jumpbuttonstudio.FBLA2015.obstacle.Target;
 import com.jumpbuttonstudio.FBLA2015.sprite.Enemy;
 import com.jumpbuttonstudio.FBLA2015.sprite.Player;
 import com.jumpbuttonstudio.FBLA2015.weapon.Bullet;
-import com.jumpbuttonstudios.FBLA2015.boss.Boss;
-import com.jumpbuttonstudios.FBLA2015.boss.TrojanHorse;
-import com.jumpbuttonstudios.FBLA2015.boss.Worm;
 
 public class GameContactListener implements ContactListener {
 

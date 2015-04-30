@@ -1,4 +1,4 @@
-package com.jumpbuttonstudios.FBLA2015.boss;
+package com.jumpbuttonstudio.FBLA2015.boss;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;

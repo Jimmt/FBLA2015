@@ -1,4 +1,4 @@
-package com.jumpbuttonstudios.FBLA2015;
+package com.jumpbuttonstudio.FBLA2015;
 
 import java.util.Iterator;
 

@@ -1,4 +1,4 @@
-package com.jumpbuttonstudios.FBLA2015.boss;
+package com.jumpbuttonstudio.FBLA2015.boss;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.jumpbuttonstudio.FBLA2015.sprite.Player;

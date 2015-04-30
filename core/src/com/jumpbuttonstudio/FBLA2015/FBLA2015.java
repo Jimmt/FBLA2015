@@ -1,4 +1,4 @@
-package com.jumpbuttonstudios.FBLA2015;
+package com.jumpbuttonstudio.FBLA2015;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;

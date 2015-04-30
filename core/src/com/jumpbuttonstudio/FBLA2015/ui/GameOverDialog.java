@@ -8,10 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.jumpbuttonstudio.FBLA2015.FBLA2015;
 import com.jumpbuttonstudio.FBLA2015.screens.GameScreen;
 import com.jumpbuttonstudio.FBLA2015.screens.LevelSelectScreen;
 import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
-import com.jumpbuttonstudios.FBLA2015.FBLA2015;
 
 public class GameOverDialog extends Dialog {
 	TextImageButton button;

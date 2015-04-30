@@ -16,10 +16,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.jumpbuttonstudio.FBLA2015.FBLA2015;
 import com.jumpbuttonstudio.FBLA2015.ui.EscapeDialog;
 import com.jumpbuttonstudio.FBLA2015.ui.HudTable;
 import com.jumpbuttonstudio.FBLA2015.util.Constants;
-import com.jumpbuttonstudios.FBLA2015.FBLA2015;
 
 public class BaseScreen implements Screen {
 	public Stage stage;

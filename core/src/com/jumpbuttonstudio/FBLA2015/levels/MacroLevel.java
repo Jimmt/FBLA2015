@@ -10,11 +10,11 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
+import com.jumpbuttonstudio.FBLA2015.FBLA2015;
+import com.jumpbuttonstudio.FBLA2015.boss.MacroVirus;
 import com.jumpbuttonstudio.FBLA2015.screens.GameScreen;
 import com.jumpbuttonstudio.FBLA2015.util.Constants;
 import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
-import com.jumpbuttonstudios.FBLA2015.FBLA2015;
-import com.jumpbuttonstudios.FBLA2015.boss.MacroVirus;
 
 public class MacroLevel extends GameScreen {
 	MacroVirus virus;

@@ -9,11 +9,11 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Array;
+import com.jumpbuttonstudio.FBLA2015.FBLA2015;
 import com.jumpbuttonstudio.FBLA2015.screens.GameScreen;
 import com.jumpbuttonstudio.FBLA2015.ui.EnemiesKilledDialog;
 import com.jumpbuttonstudio.FBLA2015.util.Constants;
 import com.jumpbuttonstudio.FBLA2015.weapon.ItemStats;
-import com.jumpbuttonstudios.FBLA2015.FBLA2015;
 
 public class HoneypotLevel extends GameScreen {
 	Array<Vector2> spawnPoints = new Array<Vector2>();

@@ -8,10 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.jumpbuttonstudio.FBLA2015.boss.Boss;
 import com.jumpbuttonstudio.FBLA2015.sprite.Player;
 import com.jumpbuttonstudio.FBLA2015.util.Constants;
 import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
-import com.jumpbuttonstudios.FBLA2015.boss.Boss;
 
 public class HealthBar extends Actor {
 	Image background, bar;

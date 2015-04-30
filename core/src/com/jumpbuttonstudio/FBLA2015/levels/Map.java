@@ -20,6 +20,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
+import com.jumpbuttonstudio.FBLA2015.boss.Worm;
 import com.jumpbuttonstudio.FBLA2015.box2d.Bits;
 import com.jumpbuttonstudio.FBLA2015.box2d.UserData;
 import com.jumpbuttonstudio.FBLA2015.obstacle.Laser;
@@ -27,7 +28,6 @@ import com.jumpbuttonstudio.FBLA2015.obstacle.Target;
 import com.jumpbuttonstudio.FBLA2015.screens.GameScreen;
 import com.jumpbuttonstudio.FBLA2015.util.Constants;
 import com.jumpbuttonstudio.FBLA2015.weapon.ItemStats;
-import com.jumpbuttonstudios.FBLA2015.boss.Worm;
 
 public class Map extends Actor {
 	private TiledMap map;

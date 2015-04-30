@@ -20,6 +20,9 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
+import com.jumpbuttonstudio.FBLA2015.FBLA2015;
+import com.jumpbuttonstudio.FBLA2015.StageComparator;
+import com.jumpbuttonstudio.FBLA2015.boss.Boss;
 import com.jumpbuttonstudio.FBLA2015.box2d.GameContactListener;
 import com.jumpbuttonstudio.FBLA2015.levels.Map;
 import com.jumpbuttonstudio.FBLA2015.sprite.AStar;
@@ -36,9 +39,6 @@ import com.jumpbuttonstudio.FBLA2015.util.GamePrefs;
 import com.jumpbuttonstudio.FBLA2015.util.ParticleEffectActor;
 import com.jumpbuttonstudio.FBLA2015.weapon.ItemStats;
 import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
-import com.jumpbuttonstudios.FBLA2015.FBLA2015;
-import com.jumpbuttonstudios.FBLA2015.StageComparator;
-import com.jumpbuttonstudios.FBLA2015.boss.Boss;
 
 public class GameScreen extends BaseScreen {
 	public Player player;
