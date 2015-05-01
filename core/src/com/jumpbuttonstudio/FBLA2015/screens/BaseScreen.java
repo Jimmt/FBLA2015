@@ -14,8 +14,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.jumpbuttonstudio.FBLA2015.FBLA2015;
 import com.jumpbuttonstudio.FBLA2015.ui.EscapeDialog;
 import com.jumpbuttonstudio.FBLA2015.ui.HudTable;
@@ -37,13 +37,16 @@ public class BaseScreen implements Screen {
 	protected Batch batch;
 	protected FBLA2015 game;
 	protected EscapeDialog dialog;
-	protected StretchViewport hudViewport, viewport;
+	protected FillViewport hudViewport, viewport;
 	boolean paused;
 
 	public BaseScreen(FBLA2015 game) {
 		this.game = game;
 
-		stage = new Stage();
+		hudViewport = new FillViewport(Constants.WIDTH, Constants.HEIGHT);
+		viewport = new FillViewport(Constants.SCLWIDTH, Constants.SCLHEIGHT);
+		
+		stage = new Stage(hudViewport);
 		camera = (OrthographicCamera) stage.getCamera();
 
 		world = new World(new Vector2(0, 0f), false);
@@ -58,8 +61,7 @@ public class BaseScreen implements Screen {
 
 		batch = new SpriteBatch();
 
-		hudViewport = new StretchViewport(Constants.WIDTH, Constants.HEIGHT);
-		viewport = new StretchViewport(Constants.SCLWIDTH, Constants.SCLHEIGHT);
+		
 		dialogStage = new Stage(hudViewport);
 
 		InputMultiplexer multiplexer = new InputMultiplexer(dialogStage, stage);
@@ -98,8 +100,9 @@ public class BaseScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-		viewport.update(width, height);
+		viewport.update(width / 100, height / 100);
 		hudViewport.update(width, height);
+		
 
 	}
 

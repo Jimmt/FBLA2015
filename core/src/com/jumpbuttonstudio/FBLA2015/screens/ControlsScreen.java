@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.jumpbuttonstudio.FBLA2015.FBLA2015;
 import com.jumpbuttonstudio.FBLA2015.ui.TextImageButton;
+import com.jumpbuttonstudio.FBLA2015.util.Constants;
 import com.jumpbuttonstudio.FBLA2015.util.Textures;
 
 /**
@@ -48,7 +49,7 @@ public class ControlsScreen extends BaseScreen {
 			}
 		});
 
-		table.add(back);
+		table.add(back).padTop(Constants.HEIGHT / 12f);
 
 	}
 }

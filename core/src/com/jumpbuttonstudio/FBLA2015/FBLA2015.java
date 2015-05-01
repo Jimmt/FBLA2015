@@ -8,10 +8,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.jumpbuttonstudio.FBLA2015.screens.MenuScreen;
 import com.jumpbuttonstudio.FBLA2015.screens.SplashScreen;
 import com.jumpbuttonstudio.FBLA2015.sprite.PlayerProfile;
+import com.jumpbuttonstudio.FBLA2015.util.Constants;
 import com.jumpbuttonstudio.FBLA2015.util.GamePrefs;
 
 /**
- * Base game class. Not much is done here because it's mostly abstracted to the screen classes.
+ * Base game class. Not much is done here because it's mostly abstracted to the
+ * screen classes.
  *
  */
 public class FBLA2015 extends Game {
@@ -27,9 +29,15 @@ public class FBLA2015 extends Game {
 		soundManager.loadMusic("menu", Gdx.files.internal("sfx/menu.ogg"));
 
 		DEBUG = true;
-		
+
 		GamePrefs.initialize();
 		PlayerProfile.initialize();
+		
+		
+
+		Gdx.graphics.setDisplayMode(GamePrefs.prefs.getInteger("width"),
+				GamePrefs.prefs.getInteger("height"), false);
+		Constants.update();
 
 		if (DEBUG) {
 			setScreen(new MenuScreen(this));

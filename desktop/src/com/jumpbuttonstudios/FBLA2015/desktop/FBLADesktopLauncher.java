@@ -17,6 +17,7 @@ public class FBLADesktopLauncher {
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 
 // if(d.getWidth() < 1024){
+		
 		config.width = (int) d.getWidth();
 		config.x = 0;
 // } else {

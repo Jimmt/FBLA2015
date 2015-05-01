@@ -47,12 +47,13 @@ public class MenuScreen extends BaseScreen {
 
 		if (!FBLA2015.DEBUG) {
 			FBLA2015.soundManager.playMusic("menu", 0.09f);
+		} else {
+			
 		}
-
 
 		Gdx.graphics.setDisplayMode(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),
 				GamePrefs.prefs.getBoolean("fullscreen"));
-		
+
 		FBLA2015.soundManager.setPlay(GamePrefs.prefs.getBoolean("sound"));
 
 		table.setFillParent(true);
@@ -61,6 +62,7 @@ public class MenuScreen extends BaseScreen {
 		table.row();
 
 		Image background = new Image(Textures.getTex("mainmenu/menubg.png"));
+
 		background.setSize(Constants.WIDTH, Constants.HEIGHT);
 		Texture circTex = Textures.getTex("mainmenu/circle.png");
 		circTex.setFilter(TextureFilter.Linear, TextureFilter.Linear);
@@ -157,7 +159,8 @@ public class MenuScreen extends BaseScreen {
 		table.toFront();
 
 		hudStage.act(delta);
-		exit.setPosition(Constants.WIDTH - exit.getWidth() - 50, Constants.HEIGHT - exit.getHeight() - 50);
+		exit.setPosition(Constants.WIDTH - exit.getWidth() - 50,
+				Constants.HEIGHT - exit.getHeight() - 50);
 		hudStage.draw();
 
 		circle.rotateBy(delta * 12f);
@@ -216,7 +219,7 @@ public class MenuScreen extends BaseScreen {
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
+		super.resize(width, height);
 
 	}
 

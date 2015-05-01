@@ -30,7 +30,14 @@ public class GamePrefs {
 		}
 		if (!prefs.contains("sound")) {
 			prefs.putBoolean("sound", true);
-			prefs.putBoolean("fullscreen", false);
+		}
+		if(!prefs.contains("width")){
+			prefs.putInteger("width", Gdx.graphics.getWidth());
+			prefs.putInteger("height", Gdx.graphics.getHeight());
+		}
+		if(!prefs.contains("maxWidth")){
+			prefs.putInteger("maxWidth", Gdx.graphics.getWidth());
+			prefs.putInteger("maxHeight", Gdx.graphics.getHeight());
 		}
 		prefs.flush();
 	}
