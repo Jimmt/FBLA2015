@@ -11,8 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.jumpbuttonstudio.FBLA2015.FBLA2015;
 import com.jumpbuttonstudio.FBLA2015.screens.GameScreen;
 import com.jumpbuttonstudio.FBLA2015.screens.LevelSelectScreen;
-import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
+import com.jumpbuttonstudio.FBLA2015.util.Textures;
 
+/**
+ * Game over dialog, sends user back to level select screen.
+ */
 public class GameOverDialog extends Dialog {
 	TextImageButton button;
 

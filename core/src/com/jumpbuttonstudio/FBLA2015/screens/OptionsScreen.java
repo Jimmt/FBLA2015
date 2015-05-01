@@ -17,9 +17,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.jumpbuttonstudio.FBLA2015.FBLA2015;
 import com.jumpbuttonstudio.FBLA2015.ui.TextImageButton;
+import com.jumpbuttonstudio.FBLA2015.util.Fonts;
 import com.jumpbuttonstudio.FBLA2015.util.GamePrefs;
-import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
+import com.jumpbuttonstudio.FBLA2015.util.Textures;
 
+/**
+ * Basic options menu.
+ *
+ */
 public class OptionsScreen extends BaseScreen {
 
 	public OptionsScreen(FBLA2015 game) {
@@ -57,7 +62,7 @@ public class OptionsScreen extends BaseScreen {
 			}
 		});
 
-		BitmapFont font = new BitmapFont(Gdx.files.internal("skin/orbitron.fnt"));
+		BitmapFont font = Fonts.getFont("skin/orbitron.fnt");
 
 		CheckBoxStyle checkBoxStyle = new CheckBoxStyle();
 		checkBoxStyle.checkboxOn = new Image(new Texture(

@@ -4,6 +4,9 @@ import com.badlogic.gdx.utils.BinaryHeap;
 import com.badlogic.gdx.utils.BinaryHeap.Node;
 import com.badlogic.gdx.utils.IntArray;
 
+/**
+ * A* pathfinding algorithm
+ */
 public class AStar {
 	private final int width, height;
 	private final BinaryHeap<PathNode> open;
@@ -136,4 +139,3 @@ public class AStar {
 		}
 	}
 }
-

@@ -1,23 +1,24 @@
 package com.jumpbuttonstudio.FBLA2015.screens;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.jumpbuttonstudio.FBLA2015.FBLA2015;
 import com.jumpbuttonstudio.FBLA2015.ui.CustomizationDialog;
 import com.jumpbuttonstudio.FBLA2015.ui.TextImageButton;
 import com.jumpbuttonstudio.FBLA2015.util.Constants;
-import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
+import com.jumpbuttonstudio.FBLA2015.util.Fonts;
+import com.jumpbuttonstudio.FBLA2015.util.Textures;
 
+/**
+ * Story screen for the introduction level
+ *
+ */
 public class StoryScreen extends BaseScreen {
 	Label textLabel;
 	String text = "This data center has been infected from the bottom up. As a computer virus tracker, it's your job to traverse each level of the data center and clear any malware that you encounter. Let's begin with the customization of your anti-virus ship.";
@@ -30,7 +31,7 @@ public class StoryScreen extends BaseScreen {
 		table.setBackground(background.getDrawable());
 
 		LabelStyle textStyle = new LabelStyle();
-		textStyle.font = new BitmapFont(Gdx.files.internal("skin/geosanslight_white.fnt"));
+		textStyle.font = Fonts.getFont("skin/geosanslight_white.fnt");
 		textStyle.fontColor = Color.WHITE;
 		textLabel = new Label(text, textStyle);
 		textLabel.setAlignment(Align.center);

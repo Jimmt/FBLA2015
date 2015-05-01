@@ -5,8 +5,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
-import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
 
+/**
+ * Utility class for creating libgdx animations from a spritesheet.
+ */
 public class AnimationBuilder {
 
 	public static Animation fillAnimation(float frameTime, int width, int height, int[] removes, String path) {

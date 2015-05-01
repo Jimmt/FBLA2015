@@ -7,8 +7,12 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jumpbuttonstudio.FBLA2015.FBLA2015;
-import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
+import com.jumpbuttonstudio.FBLA2015.util.Textures;
 
+/**
+ * Lynbrook FBLA Splash Screen
+ *
+ */
 public class SplashScreen extends BaseScreen {
 
 	public SplashScreen(final FBLA2015 game) {

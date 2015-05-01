@@ -15,9 +15,12 @@ import com.jumpbuttonstudio.FBLA2015.sprite.PlayerProfile.ShipModel;
 import com.jumpbuttonstudio.FBLA2015.util.Constants;
 import com.jumpbuttonstudio.FBLA2015.util.GamePrefs;
 import com.jumpbuttonstudio.FBLA2015.util.ParticleEffectActor;
+import com.jumpbuttonstudio.FBLA2015.util.Textures;
 import com.jumpbuttonstudio.FBLA2015.weapon.Gun;
-import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
 
+/**
+ * Player class. Movement is abstracted to PlayerInputController, weapon is abstracted to Gun.
+ */
 public class Player extends GameSprite {
 	public Vector2 dir;
 	public float health;

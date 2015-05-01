@@ -3,6 +3,10 @@ package com.jumpbuttonstudio.FBLA2015.sprite;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+/**
+ * Custom libgdx Action for the player sprite.
+ *
+ */
 public class TurnAction extends Action {
 	Actor actor;
 	float finalAngle, startAngle, percent, inc = 999f, cap = 0.5f;

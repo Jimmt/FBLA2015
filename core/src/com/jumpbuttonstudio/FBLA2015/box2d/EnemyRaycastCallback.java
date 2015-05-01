@@ -7,6 +7,10 @@ import com.jumpbuttonstudio.FBLA2015.boss.Boss;
 import com.jumpbuttonstudio.FBLA2015.sprite.Enemy;
 import com.jumpbuttonstudio.FBLA2015.weapon.Bullet;
 
+/**
+ * Raycasting for enemy pathfinding
+ *
+ */
 public class EnemyRaycastCallback implements RayCastCallback {
 	boolean hit;
 

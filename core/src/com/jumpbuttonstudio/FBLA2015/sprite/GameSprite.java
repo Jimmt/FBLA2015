@@ -12,8 +12,11 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jumpbuttonstudio.FBLA2015.util.Constants;
-import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
+import com.jumpbuttonstudio.FBLA2015.util.Textures;
 
+/**
+ * Base sprite class centered around box2D body.
+ */
 public class GameSprite extends Image {
 	private World world;
 	PolygonShape shape;

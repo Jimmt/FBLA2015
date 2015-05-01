@@ -18,8 +18,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Array;
 import com.jumpbuttonstudio.FBLA2015.box2d.UserData;
 import com.jumpbuttonstudio.FBLA2015.util.Constants;
-import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
+import com.jumpbuttonstudio.FBLA2015.util.Textures;
 
+/**
+ * 
+ * Worm boss class, contains inner class WormSegment
+ *
+ */
 public class Worm extends Boss {
 	public Array<WormSegment> segments;
 	Array<RevoluteJoint> joints;

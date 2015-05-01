@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
+/**
+ * Damage and speed stats for player and enemy
+ */
 public enum ItemStats {
 	LIGHT("bullet.png", 0.3f, 6f, 7f, 2.5f), MEDIUM("bullet.png", 0.3f, 8f, 7f, 2f), HEAVY(
 			"bullet.png", 0.3f, 10f, 7f, 1.5f), TUTORIAL_GUN("bullet.png", 2.5f, 5f, 5f, 0.75f), LEVEL2_GUN(

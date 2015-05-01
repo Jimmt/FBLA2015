@@ -18,10 +18,14 @@ import com.badlogic.gdx.utils.Array;
 import com.jumpbuttonstudio.FBLA2015.box2d.EnemyRaycastCallback;
 import com.jumpbuttonstudio.FBLA2015.box2d.UserData;
 import com.jumpbuttonstudio.FBLA2015.util.Constants;
+import com.jumpbuttonstudio.FBLA2015.util.Textures;
 import com.jumpbuttonstudio.FBLA2015.weapon.ColorGun;
 import com.jumpbuttonstudio.FBLA2015.weapon.ItemStats;
-import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
 
+/**
+ * Trojan Horse boss class
+ *
+ */
 public class TrojanHorse extends Boss {
 	public Body body;
 	Image horse;

@@ -1,5 +1,9 @@
 package com.jumpbuttonstudio.FBLA2015.box2d;
 
+/**
+ * Small class for contactlistener data
+ *
+ */
 public class UserData {
 	public String tag;
 	public Object value;

@@ -4,6 +4,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
+/**
+ * Custom gun for the trojan horse level.
+ */
 public class ColorGun extends Gun {
 	Color color;
 

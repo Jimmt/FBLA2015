@@ -11,8 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.jumpbuttonstudio.FBLA2015.FBLA2015;
 import com.jumpbuttonstudio.FBLA2015.ui.TextImageButton;
-import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
+import com.jumpbuttonstudio.FBLA2015.util.Textures;
 
+/**
+ * Screen for displaying game controls
+ */
 public class ControlsScreen extends BaseScreen {
 
 	public ControlsScreen(FBLA2015 game) {
@@ -30,9 +33,8 @@ public class ControlsScreen extends BaseScreen {
 
 		table.add(pic).width(pic.getWidth() * 1.5f).height(pic.getHeight() * 1.5f);
 
-		pic.addAction(Actions.sequence(Actions.alpha(0.0f),
-				Actions.fadeIn(1.0f)));
-		
+		pic.addAction(Actions.sequence(Actions.alpha(0.0f), Actions.fadeIn(1.0f)));
+
 		table.row();
 
 		ImageButtonStyle style = new ImageButtonStyle();
@@ -45,7 +47,7 @@ public class ControlsScreen extends BaseScreen {
 				FBLA2015.soundManager.play("button", 0.5f);
 			}
 		});
-		
+
 		table.add(back);
 
 	}

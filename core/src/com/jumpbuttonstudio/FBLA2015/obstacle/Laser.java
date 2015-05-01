@@ -8,8 +8,11 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jumpbuttonstudio.FBLA2015.sprite.Player;
 import com.jumpbuttonstudio.FBLA2015.util.Constants;
-import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
+import com.jumpbuttonstudio.FBLA2015.util.Textures;
 
+/**
+ * Laser obstacle class
+ */
 public class Laser extends Image {
 	Image proj1, proj2;
 	float repeat, lastRepeat = 999f;

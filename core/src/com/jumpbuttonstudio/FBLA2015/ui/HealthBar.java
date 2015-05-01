@@ -11,8 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.jumpbuttonstudio.FBLA2015.boss.Boss;
 import com.jumpbuttonstudio.FBLA2015.sprite.Player;
 import com.jumpbuttonstudio.FBLA2015.util.Constants;
-import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
+import com.jumpbuttonstudio.FBLA2015.util.Textures;
 
+/**
+ * Health bar GUI for player and boss
+ */
 public class HealthBar extends Actor {
 	Image background, bar;
 	Player player;

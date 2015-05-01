@@ -17,8 +17,11 @@ import com.jumpbuttonstudio.FBLA2015.FBLA2015;
 import com.jumpbuttonstudio.FBLA2015.screens.LevelSelectScreen;
 import com.jumpbuttonstudio.FBLA2015.sprite.PlayerProfile;
 import com.jumpbuttonstudio.FBLA2015.util.GamePrefs;
-import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
+import com.jumpbuttonstudio.FBLA2015.util.Textures;
 
+/**
+ * Upgrade dialog accessible through level select.
+ */
 public class UpgradeDialog extends Dialog {
 	String[] names = { "Damage", "Health", "Speed" };
 	RejectDialog rejectDialog;

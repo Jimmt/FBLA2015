@@ -29,6 +29,11 @@ import com.jumpbuttonstudio.FBLA2015.screens.GameScreen;
 import com.jumpbuttonstudio.FBLA2015.util.Constants;
 import com.jumpbuttonstudio.FBLA2015.weapon.ItemStats;
 
+/**
+ * 
+ * Base map class - parses positions, box2d, collisions, lights
+ *
+ */
 public class Map extends Actor {
 	private TiledMap map;
 	private TmxMapLoader tmxL;

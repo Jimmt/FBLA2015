@@ -11,6 +11,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.jumpbuttonstudio.FBLA2015.screens.GameScreen;
 import com.jumpbuttonstudio.FBLA2015.sprite.Player;
 
+/**
+ * Libgdx Table for heads up display
+ */
 public class HudTable extends Table {
 	HealthBar healthBar;
 	Player player;

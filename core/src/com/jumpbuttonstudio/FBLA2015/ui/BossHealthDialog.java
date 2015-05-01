@@ -6,8 +6,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.jumpbuttonstudio.FBLA2015.boss.Boss;
-import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
+import com.jumpbuttonstudio.FBLA2015.util.Textures;
 
+/**
+ * Boss health popup
+ */
 public class BossHealthDialog extends Dialog {
 	Boss boss;
 	HealthBar healthBar;
@@ -23,7 +26,7 @@ public class BossHealthDialog extends Dialog {
 		healthBar = new HealthBar(boss);
 		getContentTable().row();
 		getContentTable().add(healthBar);
-		
+
 		this.boss = boss;
 	}
 

@@ -10,6 +10,10 @@ import com.jumpbuttonstudio.FBLA2015.screens.SplashScreen;
 import com.jumpbuttonstudio.FBLA2015.sprite.PlayerProfile;
 import com.jumpbuttonstudio.FBLA2015.util.GamePrefs;
 
+/**
+ * Base game class. Not much is done here because it's mostly abstracted to the screen classes.
+ *
+ */
 public class FBLA2015 extends Game {
 	public static CustomSoundManager soundManager;
 	public static boolean DEBUG = false;
@@ -22,7 +26,7 @@ public class FBLA2015 extends Game {
 		soundManager.loadSound("enemydeath", Gdx.files.internal("sfx/enemydeath.wav"));
 		soundManager.loadMusic("menu", Gdx.files.internal("sfx/menu.ogg"));
 
-//		DEBUG = true;
+		DEBUG = true;
 		
 		GamePrefs.initialize();
 		PlayerProfile.initialize();

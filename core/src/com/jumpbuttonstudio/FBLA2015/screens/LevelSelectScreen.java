@@ -23,8 +23,12 @@ import com.jumpbuttonstudio.FBLA2015.ui.CustomizationDialog;
 import com.jumpbuttonstudio.FBLA2015.ui.TextImageButton;
 import com.jumpbuttonstudio.FBLA2015.ui.UpgradeDialog;
 import com.jumpbuttonstudio.FBLA2015.util.GamePrefs;
-import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
+import com.jumpbuttonstudio.FBLA2015.util.Textures;
 
+/**
+ * Screen to select level, upgrade ship, and customize ship.
+ *
+ */
 public class LevelSelectScreen extends BaseScreen {
 	public CoinsBar coinsBar;
 	Array<ImageButton> buttons;

@@ -15,6 +15,10 @@ import com.jumpbuttonstudio.FBLA2015.ui.EnemiesKilledDialog;
 import com.jumpbuttonstudio.FBLA2015.util.Constants;
 import com.jumpbuttonstudio.FBLA2015.weapon.ItemStats;
 
+/**
+ * Honeypot Level (level 5)
+ *
+ */
 public class HoneypotLevel extends GameScreen {
 	Array<Vector2> spawnPoints = new Array<Vector2>();
 	float lastSpawnTime = 999f, spawnCap = 3f;

@@ -8,6 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jumpbuttonstudio.FBLA2015.util.Constants;
 
+/**
+ * Moving tile with trail
+ */
 public class LiveTile extends Image {
 	public Vector2 direction = new Vector2();
 	float lastTurnTime = 0, turnCap = 0.5f;
@@ -46,13 +49,12 @@ public class LiveTile extends Image {
 		}
 
 		addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(0.5f)));
-		
+
 	}
 
 	@Override
 	public void act(float delta) {
 		super.act(delta);
-
 
 		setX(getX() + direction.x);
 		setY(getY() + direction.y);

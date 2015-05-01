@@ -3,6 +3,10 @@ package com.jumpbuttonstudio.FBLA2015.boss;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.jumpbuttonstudio.FBLA2015.sprite.Player;
 
+/**
+ * Base boss class
+ *
+ */
 public class Boss extends Actor {
 	public float healthMax;
 	public float health;

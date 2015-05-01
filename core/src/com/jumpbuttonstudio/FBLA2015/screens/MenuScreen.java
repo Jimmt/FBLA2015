@@ -21,8 +21,12 @@ import com.jumpbuttonstudio.FBLA2015.ui.LiveTile;
 import com.jumpbuttonstudio.FBLA2015.ui.TextImageButton;
 import com.jumpbuttonstudio.FBLA2015.util.Constants;
 import com.jumpbuttonstudio.FBLA2015.util.GamePrefs;
-import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
+import com.jumpbuttonstudio.FBLA2015.util.Textures;
 
+/**
+ * Starting screen (after splash) with live background.
+ *
+ */
 public class MenuScreen extends BaseScreen {
 	TextImageButton start;
 	Label title;

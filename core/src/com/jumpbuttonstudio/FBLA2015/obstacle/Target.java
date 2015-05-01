@@ -7,6 +7,11 @@ import com.jumpbuttonstudio.FBLA2015.box2d.UserData;
 import com.jumpbuttonstudio.FBLA2015.sprite.GameSprite;
 import com.jumpbuttonstudio.FBLA2015.util.ParticleEffectActor;
 
+/**
+ * 
+ * Target class for introduction level
+ *
+ */
 public class Target extends GameSprite {
 	ParticleEffectActor effect;
 	float effectX, effectY;

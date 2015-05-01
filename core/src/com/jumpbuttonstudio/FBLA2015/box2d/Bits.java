@@ -1,5 +1,9 @@
 package com.jumpbuttonstudio.FBLA2015.box2d;
 
+/**
+ * Masking bits for collision filtering
+ *
+ */
 public class Bits {
 	public static short MAP = 0x001;
 	public static short BULLET_PLAYER = 0x002;

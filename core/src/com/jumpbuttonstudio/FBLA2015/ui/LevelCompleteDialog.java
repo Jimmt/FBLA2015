@@ -1,8 +1,6 @@
 package com.jumpbuttonstudio.FBLA2015.ui;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
@@ -17,9 +15,13 @@ import com.jumpbuttonstudio.FBLA2015.FBLA2015;
 import com.jumpbuttonstudio.FBLA2015.screens.GameScreen;
 import com.jumpbuttonstudio.FBLA2015.screens.LevelSelectScreen;
 import com.jumpbuttonstudio.FBLA2015.util.Constants;
+import com.jumpbuttonstudio.FBLA2015.util.Fonts;
 import com.jumpbuttonstudio.FBLA2015.util.GamePrefs;
-import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
+import com.jumpbuttonstudio.FBLA2015.util.Textures;
 
+/**
+ * Level complete dialog, sends user back to level select screen.
+ */
 public class LevelCompleteDialog extends Dialog {
 	Label explanation;
 
@@ -45,7 +47,7 @@ public class LevelCompleteDialog extends Dialog {
 		});
 
 		LabelStyle lstyle = new LabelStyle();
-		BitmapFont font = new BitmapFont(Gdx.files.internal("skin/geosanslight_white.fnt"));
+		BitmapFont font = Fonts.getFont("skin/geosanslight_white.fnt");
 		lstyle.font = font;
 		lstyle.fontColor = Color.WHITE;
 		explanation = new Label(game.explanationText, lstyle);

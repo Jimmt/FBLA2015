@@ -4,6 +4,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jumpbuttonstudio.FBLA2015.util.GamePrefs;
 import com.jumpbuttonstudio.FBLA2015.weapon.ItemStats;
 
+/**
+ * Save/array data for ship models and streaks.
+ */
 public class PlayerProfile {
 	public static String[] streaks = { "Flood", "Incendiary", "Lime", "Uncle Sam", "Sith Lord",
 			"Blood Dragon" };

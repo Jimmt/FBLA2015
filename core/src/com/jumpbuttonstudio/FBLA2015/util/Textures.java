@@ -1,4 +1,4 @@
-package com.jumpbuttonstudio.FBLA2015.weapon;
+package com.jumpbuttonstudio.FBLA2015.util;
 
 import java.util.HashMap;
 
@@ -6,6 +6,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 
+/**
+ * Utility class for caching textures
+ */
 public class Textures {
 	static HashMap<String, Texture> cache = new HashMap<String, Texture>();
 

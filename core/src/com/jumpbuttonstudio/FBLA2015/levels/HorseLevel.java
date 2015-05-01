@@ -10,6 +10,10 @@ import com.jumpbuttonstudio.FBLA2015.boss.TrojanHorse;
 import com.jumpbuttonstudio.FBLA2015.screens.GameScreen;
 import com.jumpbuttonstudio.FBLA2015.util.Constants;
 
+/**
+ * Horse Level (level 3)
+ *
+ */
 public class HorseLevel extends GameScreen {
 	TrojanHorse horse;
 

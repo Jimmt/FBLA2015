@@ -37,9 +37,12 @@ import com.jumpbuttonstudio.FBLA2015.ui.LevelCompleteDialog;
 import com.jumpbuttonstudio.FBLA2015.util.Constants;
 import com.jumpbuttonstudio.FBLA2015.util.GamePrefs;
 import com.jumpbuttonstudio.FBLA2015.util.ParticleEffectActor;
+import com.jumpbuttonstudio.FBLA2015.util.Textures;
 import com.jumpbuttonstudio.FBLA2015.weapon.ItemStats;
-import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
 
+/**
+ * Base class for each level, contains enemy and player code.
+ */
 public class GameScreen extends BaseScreen {
 	public Player player;
 	public Array<RectangleMapObject> comms = new Array<RectangleMapObject>();

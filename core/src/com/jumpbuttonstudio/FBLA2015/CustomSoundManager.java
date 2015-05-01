@@ -10,6 +10,10 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entries;
 
+/**
+ * Sound manager for loading and playing com.badlogic.gdx.Sound and com.badlogic.gdx.audio.Music
+ *
+ */
 public class CustomSoundManager {
 	public ObjectMap<String, Sound> sounds;
 	public ObjectMap<String, Music> musics;

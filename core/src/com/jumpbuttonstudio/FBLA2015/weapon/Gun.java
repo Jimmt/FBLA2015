@@ -9,6 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import com.jumpbuttonstudio.FBLA2015.FBLA2015;
 
+/**
+ * Base class for timing shots, whether in range to shoot 
+ */
 public class Gun extends Actor {
 
 	public Array<Bullet> bullets;

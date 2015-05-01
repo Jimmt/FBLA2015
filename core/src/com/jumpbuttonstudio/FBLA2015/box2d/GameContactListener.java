@@ -12,6 +12,11 @@ import com.jumpbuttonstudio.FBLA2015.sprite.Enemy;
 import com.jumpbuttonstudio.FBLA2015.sprite.Player;
 import com.jumpbuttonstudio.FBLA2015.weapon.Bullet;
 
+/**
+ * 
+ * Contact listener to determine bullet hits
+ *
+ */
 public class GameContactListener implements ContactListener {
 
 	@Override

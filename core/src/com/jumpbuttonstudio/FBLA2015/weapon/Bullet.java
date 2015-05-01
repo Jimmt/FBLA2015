@@ -8,6 +8,9 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.jumpbuttonstudio.FBLA2015.box2d.UserData;
 import com.jumpbuttonstudio.FBLA2015.sprite.GameSprite;
 
+/**
+ * Basic bullet sprite 
+ */
 public class Bullet extends GameSprite {
 	public boolean delete;
 	public boolean friendly;

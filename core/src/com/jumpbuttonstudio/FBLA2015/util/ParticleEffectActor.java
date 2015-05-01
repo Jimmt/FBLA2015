@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.ParticleEmitter;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+/**
+ * Actor wrapper around libgdx's ParticleEffect
+ */
 public class ParticleEffectActor extends Actor {
 	public ParticleEffect effect;
 	public boolean scaled;

@@ -4,6 +4,11 @@ import java.util.Comparator;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+/**
+ * 
+ * Comparing actors
+ *
+ */
 public class StageComparator implements Comparator<Actor> {
 
 	@Override

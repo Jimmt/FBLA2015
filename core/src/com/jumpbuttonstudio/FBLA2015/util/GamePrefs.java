@@ -5,6 +5,9 @@ import java.util.HashMap;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
+/**
+ * Utility class for libgdx's Preferences
+ */
 public class GamePrefs {
 	public static Preferences prefs;
 

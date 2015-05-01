@@ -23,11 +23,14 @@ import com.jumpbuttonstudio.FBLA2015.FBLA2015;
 import com.jumpbuttonstudio.FBLA2015.levels.IntroductionLevel;
 import com.jumpbuttonstudio.FBLA2015.screens.StoryScreen;
 import com.jumpbuttonstudio.FBLA2015.sprite.PlayerProfile;
-import com.jumpbuttonstudio.FBLA2015.sprite.PlayerProfile.ShipModel;
+import com.jumpbuttonstudio.FBLA2015.util.Fonts;
 import com.jumpbuttonstudio.FBLA2015.util.GamePrefs;
 import com.jumpbuttonstudio.FBLA2015.util.ParticleEffectActor;
-import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
+import com.jumpbuttonstudio.FBLA2015.util.Textures;
 
+/**
+ * Customization dialog accessible on level select screen or in introduction level.
+ */
 public class CustomizationDialog extends Dialog {
 	Array<Group> groups = new Array<Group>();
 	Array<Group> groups2 = new Array<Group>();
@@ -48,7 +51,7 @@ public class CustomizationDialog extends Dialog {
 		Image background = new Image(Textures.getTex("ui/customsbg.png"));
 		background(background.getDrawable());
 
-		geosans = new BitmapFont(Gdx.files.internal("skin/geosanslight_white.fnt"));
+		geosans = Fonts.getFont("skin/geosanslight_white.fnt");
 		orbitron = new BitmapFont(Gdx.files.internal("skin/orbitron.fnt"));
 
 		ImageButtonStyle style = new ImageButtonStyle();

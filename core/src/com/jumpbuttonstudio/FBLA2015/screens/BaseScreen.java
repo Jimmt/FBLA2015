@@ -21,6 +21,9 @@ import com.jumpbuttonstudio.FBLA2015.ui.EscapeDialog;
 import com.jumpbuttonstudio.FBLA2015.ui.HudTable;
 import com.jumpbuttonstudio.FBLA2015.util.Constants;
 
+/**
+ * Base screen class - stages, ui
+ */
 public class BaseScreen implements Screen {
 	public Stage stage;
 	public World world;

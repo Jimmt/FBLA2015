@@ -18,6 +18,9 @@ import com.jumpbuttonstudio.FBLA2015.util.Constants;
 import com.jumpbuttonstudio.FBLA2015.weapon.Gun;
 import com.jumpbuttonstudio.FBLA2015.weapon.ItemStats;
 
+/**
+ * Base enemy class
+ */
 public class Enemy extends GameSprite  {
 	float healthMax;
 	public float health;

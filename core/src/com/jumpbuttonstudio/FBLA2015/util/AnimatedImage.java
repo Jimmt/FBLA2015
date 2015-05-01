@@ -10,6 +10,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+/**
+ * Actor wrapper around dermetfan's AnimatedSprite
+ */
 public class AnimatedImage extends Actor {
 	AnimatedSprite animatedSprite;
 

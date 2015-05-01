@@ -15,8 +15,11 @@ import com.jumpbuttonstudio.FBLA2015.screens.GameScreen;
 import com.jumpbuttonstudio.FBLA2015.screens.LevelSelectScreen;
 import com.jumpbuttonstudio.FBLA2015.screens.MenuScreen;
 import com.jumpbuttonstudio.FBLA2015.screens.StoryScreen;
-import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
+import com.jumpbuttonstudio.FBLA2015.util.Textures;
 
+/**
+ * Dialog confirming user exit of screen or game.
+ */
 public class EscapeDialog extends Dialog {
 	BaseScreen game;
 

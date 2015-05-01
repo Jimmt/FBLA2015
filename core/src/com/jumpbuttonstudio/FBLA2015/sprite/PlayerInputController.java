@@ -7,6 +7,9 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
+/**
+ * Handles movement, rotation, etc. of player sprite.
+ */
 public class PlayerInputController implements InputProcessor {
 	Player parent;
 	float at, dt, wt, st;

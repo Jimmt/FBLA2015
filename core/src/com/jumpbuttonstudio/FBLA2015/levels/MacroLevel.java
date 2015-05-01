@@ -14,8 +14,12 @@ import com.jumpbuttonstudio.FBLA2015.FBLA2015;
 import com.jumpbuttonstudio.FBLA2015.boss.MacroVirus;
 import com.jumpbuttonstudio.FBLA2015.screens.GameScreen;
 import com.jumpbuttonstudio.FBLA2015.util.Constants;
-import com.jumpbuttonstudio.FBLA2015.weapon.Textures;
+import com.jumpbuttonstudio.FBLA2015.util.Textures;
 
+/**
+ * Macro Level (level 4)
+ *
+ */
 public class MacroLevel extends GameScreen {
 	MacroVirus virus;
 	Array<Image> pages = new Array<Image>();

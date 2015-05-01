@@ -10,6 +10,10 @@ import com.jumpbuttonstudio.FBLA2015.boss.Worm;
 import com.jumpbuttonstudio.FBLA2015.screens.GameScreen;
 import com.jumpbuttonstudio.FBLA2015.util.Constants;
 
+/**
+ * Worm Level (level 2)
+ *
+ */
 public class WormLevel extends GameScreen {
 	Hole hole;
 	Worm worm;
