@@ -78,7 +78,7 @@ public class GameScreen extends BaseScreen {
 
 	public GameScreen(FBLA2015 game, String levelName, boolean showStory) {
 		super(game);
-
+		FBLA2015.soundManager.playMusic("ingame", 0.0f);
 		vol = FBLA2015.soundManager.musics.get("menu").getVolume();
 		dv = vol / 10;
 		this.levelName = levelName;
@@ -134,8 +134,11 @@ public class GameScreen extends BaseScreen {
 		pool = new ParticleEffectPool(effect, 3, 3);
 		effects = new Array<ParticleEffectActor>();
 
-		
+	}
 
+	@Override
+	public void hide() {
+		FBLA2015.soundManager.playMusic("menu", 0.09f);
 	}
 
 	public void createBoss(Boss boss) {
@@ -202,12 +205,14 @@ public class GameScreen extends BaseScreen {
 			if (lastChange > changeCap) {
 				vol -= dv;
 				FBLA2015.soundManager.musics.get("menu").setVolume(vol);
+				FBLA2015.soundManager.musics.get("ingame").setVolume(0.5f - vol);
 
 				lastChange = 0;
 
 				if (vol <= 0) {
 					musicStopped = true;
 					FBLA2015.soundManager.stopMusic("menu");
+
 				}
 			} else {
 				lastChange += delta;
@@ -267,12 +272,12 @@ public class GameScreen extends BaseScreen {
 
 			if (enemies.get(i).health <= 0) {
 				ParticleEffectActor effect = new ParticleEffectActor(pool.obtain());
-				effect.scaled = true;
+// effect.scaled = true;
 				effects.add(effect);
 				stage.addActor(effect);
 				effect.effect.start();
 				effect.effect.setPosition(enemies.get(i).getX(), enemies.get(i).getY());
-
+				
 				stage.getActors().removeValue(enemies.get(i), false);
 				world.destroyBody(enemies.get(i).body);
 

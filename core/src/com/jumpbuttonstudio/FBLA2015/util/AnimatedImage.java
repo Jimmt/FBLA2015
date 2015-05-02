@@ -1,7 +1,6 @@
 package com.jumpbuttonstudio.FBLA2015.util;
 
-import net.dermetfan.gdx.graphics.g2d.AnimatedSprite;
-
+import net.dermetfan.utils.libgdx.graphics.AnimatedSprite;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;

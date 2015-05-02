@@ -27,8 +27,10 @@ public class FBLA2015 extends Game {
 		soundManager.loadSound("button", Gdx.files.internal("sfx/buttonpress.wav"));
 		soundManager.loadSound("enemydeath", Gdx.files.internal("sfx/enemydeath.wav"));
 		soundManager.loadMusic("menu", Gdx.files.internal("sfx/menu.ogg"));
-
-		DEBUG = true;
+		soundManager.loadMusic("ingame", Gdx.files.internal("sfx/gamemusic.ogg"));
+		soundManager.musics.get("menu").setLooping(true);
+		soundManager.musics.get("ingame").setLooping(true);
+//		DEBUG = true;
 
 		GamePrefs.initialize();
 		PlayerProfile.initialize();

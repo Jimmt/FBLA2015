@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  */
 public class ParticleEffectActor extends Actor {
 	public ParticleEffect effect;
-	public boolean scaled;
+	public boolean scaled, pooled;
 
 	public ParticleEffectActor(String path, String dir, boolean scaled) {
 		effect = new ParticleEffect();
@@ -34,6 +34,7 @@ public class ParticleEffectActor extends Actor {
 
 	public ParticleEffectActor(ParticleEffect effect) {
 		this.effect = effect;
+		pooled = true;
 	}
 
 	@Override
@@ -47,10 +48,12 @@ public class ParticleEffectActor extends Actor {
 	public void draw(Batch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
 
-		if (!scaled) {
-			effect.setPosition(getX() + 16, getY() + 16);
-		} else {
-			effect.setPosition(getX(), getY());
+		if (!pooled) {
+			if (!scaled) {
+				effect.setPosition(getX() + 16, getY() + 16);
+			} else {
+				effect.setPosition(getX(), getY());
+			}
 		}
 		effect.draw(batch);
 

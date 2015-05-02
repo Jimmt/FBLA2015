@@ -38,7 +38,7 @@ public class CustomSoundManager {
 
 	public void stopMusic(String name) {
 		if (play)
-			((Music) musics.get(name)).stop();
+			((Music) musics.get(name)).pause();
 	}
 
 	public void play(String name, float volume) {

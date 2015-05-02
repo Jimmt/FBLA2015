@@ -111,7 +111,7 @@ public class PlayerInputController implements InputProcessor {
 		}
 
 		if (left) {
-			parent.gun.fire(0.4f, 0, 1, true, parent.dir);
+			parent.gun.fire(0.4f, 0, 0.5f, true, parent.dir);
 		}
 
 		if (!w && !s) {

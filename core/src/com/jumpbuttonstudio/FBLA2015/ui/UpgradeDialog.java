@@ -26,7 +26,7 @@ public class UpgradeDialog extends Dialog {
 	String[] names = { "Damage", "Health", "Speed" };
 	RejectDialog rejectDialog;
 	int[] increments = { 1, 25, 1 };
-	int[] costs = { 1, 10, 8 };
+	int[] costs = { 5, 10, 10 };
 	CoinsBar coinsBar;
 
 	public UpgradeDialog(Skin skin, final LevelSelectScreen screen) {
@@ -54,7 +54,8 @@ public class UpgradeDialog extends Dialog {
 			Label baseStat = null;
 			switch (i) {
 			case 0:
-				baseStat = new Label(String.valueOf(PlayerProfile.model.getStats().getDamage()), style);
+				baseStat = new Label(String.valueOf(PlayerProfile.model.getStats().getDamage()),
+						style);
 				break;
 			case 1:
 				baseStat = new Label(String.valueOf(PlayerProfile.model.getHealth()), style);
@@ -64,8 +65,8 @@ public class UpgradeDialog extends Dialog {
 						style);
 				break;
 			}
-			final Label bonusStat = new Label(" + " + GamePrefs.prefs.getInteger("bonus" + names[i]),
-					colorStyle);
+			final Label bonusStat = new Label(" + "
+					+ GamePrefs.prefs.getInteger("bonus" + names[i]), colorStyle);
 			Table statTable = new Table();
 			statTable.add(baseStat);
 			statTable.add(bonusStat);
@@ -82,7 +83,8 @@ public class UpgradeDialog extends Dialog {
 								GamePrefs.prefs.getInteger("bonus" + names[index])
 										+ increments[index]);
 
-						bonusStat.setText(" + " + GamePrefs.prefs.getInteger("bonus" + names[index]));
+						bonusStat.setText(" + "
+								+ GamePrefs.prefs.getInteger("bonus" + names[index]));
 					} else {
 						rejectDialog.label.setText("Not enough bytecoins");
 						rejectDialog.show(getStage());
@@ -102,7 +104,8 @@ public class UpgradeDialog extends Dialog {
 								GamePrefs.prefs.getInteger("bonus" + names[index])
 										- increments[index]);
 
-						bonusStat.setText(" + " + GamePrefs.prefs.getInteger("bonus" + names[index]));
+						bonusStat.setText(" + "
+								+ GamePrefs.prefs.getInteger("bonus" + names[index]));
 					} else {
 						rejectDialog.label.setText("Nothing to refund");
 						rejectDialog.show(getStage());

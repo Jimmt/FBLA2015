@@ -47,8 +47,6 @@ public class Player extends GameSprite {
 				/ Constants.SCALE, getHeight() / Constants.SCALE);
 		controller = new PlayerInputController(this, model.getStats().getMoveSpeed()
 				+ GamePrefs.prefs.getInteger("bonusSpeed"), 10);
-		System.out.println(model.getStats().getMoveSpeed()
-				+ GamePrefs.prefs.getInteger("bonusSpeed"));
 		this.world = world;
 
 		gun = new Gun(world, 10f, model.getStats(), body);

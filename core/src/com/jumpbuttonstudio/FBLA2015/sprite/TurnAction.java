@@ -19,11 +19,9 @@ public class TurnAction extends Action {
 		if (finalAngle - startAngle > 91) {
 			while (finalAngle - startAngle > 91) {
 				finalAngle -= 360;
-				System.out.println(finalAngle);
 			}
 		} else if (finalAngle - startAngle < 91) {
 			while (finalAngle - startAngle < 91) {
-				System.out.println(finalAngle);
 				finalAngle += 360;
 			}
 		}

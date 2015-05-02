@@ -27,7 +27,7 @@ public class FBLADesktopLauncher {
 		Insets scnMax = Toolkit.getDefaultToolkit().getScreenInsets(
 				new JFrame().getGraphicsConfiguration());
 		int taskbarSize = scnMax.bottom;
-
+ 
 		config.height = (int) d.getHeight() - taskbarSize * 2;
 		config.y = 0;
 // } else {

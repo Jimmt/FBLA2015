@@ -55,12 +55,6 @@
     <property name="objective" value="false"/>
    </properties>
   </object>
-  <object name="3_enemy" x="256" y="2304" width="32" height="32">
-   <properties>
-    <property name="health" value="40"/>
-    <property name="objective" value="false"/>
-   </properties>
-  </object>
   <object name="3_enemy" x="352" y="2304" width="32" height="32">
    <properties>
     <property name="health" value="40"/>
@@ -76,12 +70,6 @@
   <object name="3_enemy" x="672" y="2336" width="32" height="32">
    <properties>
     <property name="health" value="40"/>
-    <property name="objective" value="false"/>
-   </properties>
-  </object>
-  <object name="3_enemy" x="768" y="2368" width="32" height="32">
-   <properties>
-    <property name="health" value="25"/>
     <property name="objective" value="false"/>
    </properties>
   </object>

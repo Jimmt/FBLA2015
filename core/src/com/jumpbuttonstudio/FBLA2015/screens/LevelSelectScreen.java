@@ -38,7 +38,6 @@ public class LevelSelectScreen extends BaseScreen {
 	Table buttonTable;
 	CustomizationDialog customsDialog;
 	UpgradeDialog upgradeDialog;
-	
 
 	public LevelSelectScreen(FBLA2015 game) {
 		super(game);
@@ -48,8 +47,10 @@ public class LevelSelectScreen extends BaseScreen {
 	public void show() {
 		super.show();
 
+		FBLA2015.soundManager.stopMusic("ingame");
+
 		hudStage = new Stage(hudViewport);
-		
+
 		coinsBar = new CoinsBar(GamePrefs.prefs.getInteger("credits"), skin);
 		buttons = new Array<ImageButton>();
 
@@ -169,8 +170,6 @@ public class LevelSelectScreen extends BaseScreen {
 
 		hudStage.act(delta);
 		hudStage.draw();
-		
-		
 
 	}
 
