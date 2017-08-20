@@ -307,8 +307,8 @@ public class GameScreen extends BaseScreen {
 		if (FBLA2015.DEBUG) {
 			hudTable.debug();
 // storyDialog.debug();
-			Table.drawDebug(hudStage);
-			Table.drawDebug(dialogStage);
+//			Table.drawDebug(hudStage);
+//			Table.drawDebug(dialogStage);
 			debugRenderer.render(world, stage.getCamera().combined);
 		}
 // rayHandler.updateAndRender();

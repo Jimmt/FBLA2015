@@ -2,7 +2,7 @@ package com.jumpbuttonstudio.FBLA2015.levels;
 
 import java.util.Iterator;
 
-import net.dermetfan.utils.libgdx.box2d.Box2DMapObjectParser;
+import net.dermetfan.gdx.physics.box2d.Box2DMapObjectParser;
 import box2dLight.ConeLight;
 import box2dLight.DirectionalLight;
 import box2dLight.PointLight;

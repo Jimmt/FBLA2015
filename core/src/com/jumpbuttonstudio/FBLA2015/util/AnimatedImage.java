@@ -1,6 +1,6 @@
 package com.jumpbuttonstudio.FBLA2015.util;
 
-import net.dermetfan.utils.libgdx.graphics.AnimatedSprite;
+//import net.dermetfan.utils.libgdx.graphics.AnimatedSprite;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  * Actor wrapper around dermetfan's AnimatedSprite
  */
 public class AnimatedImage extends Actor {
-	AnimatedSprite animatedSprite;
+	net.dermetfan.gdx.graphics.g2d.AnimatedSprite animatedSprite;
 
 	public AnimatedImage(String path, float frameTime, int width, int height, int...removeFrames) {
 		super();
@@ -22,7 +22,7 @@ public class AnimatedImage extends Actor {
 				removeFrames, path);
 		animation.setPlayMode(PlayMode.LOOP);
 
-		animatedSprite = new AnimatedSprite(animation);
+		animatedSprite = new net.dermetfan.gdx.graphics.g2d.AnimatedSprite(animation);
 		animatedSprite.play();
 		animatedSprite.setSize(width * Constants.SCALE, height * Constants.SCALE);
 
